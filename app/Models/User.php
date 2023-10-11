@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Roles::class, 'roles');
     }
+
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'customer_id');
+    }
 }

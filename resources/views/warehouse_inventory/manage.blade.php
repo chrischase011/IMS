@@ -102,7 +102,6 @@
                                 @if ($warehouse->type == 2)
                                     <td>{{ $stockIn->transaction_operation }}</td>
                                 @endif
-                                <!-- Add safety stock, stock status, and actions columns here -->
                             </tr>
                         @endforeach
                     </tbody>
@@ -155,7 +154,6 @@
                                 @if ($warehouse->type == 2)
                                     <td>{{ $stockOut->transaction_operation }}</td>
                                 @endif
-                                <!-- Add safety stock, stock status, and actions columns here -->
                             </tr>
                         @endforeach
                     </tbody>
@@ -197,7 +195,6 @@
                                         <span class="badge badge-lg bg-success">Sufficient Stocks</span>
                                     @endif
                                 </td>
-                                <!-- Add safety stock, stock status, and actions columns here -->
                             </tr>
                         @endforeach
                     </tbody>
@@ -239,7 +236,6 @@
                                             <span class="badge badge-lg bg-success">Sufficient Stocks</span>
                                         @endif
                                     </td>
-                                    <!-- Add safety stock, stock status, and actions columns here -->
                                 </tr>
                             @endforeach
                         </tbody>
