@@ -1,0 +1,58 @@
+.navbar-brand
+{
+    font-size: 2rem;
+    color: rosybrown;
+}
+
+.navbar-brand:hover
+{
+    color: rosybrown;
+}
+
+.nav-link.active {
+    color: saddlebrown !important;
+}
+
+.nav-link{
+    color: sandybrown !important
+}
+
+.nav-item{
+    margin-left: 30px;
+}
+
+.welcome {
+    font-size: 1.5rem;
+    color: rosybrown;
+}
+
+.btn-auth {
+    background-color: #4CAF50;
+    border-color: black;
+    padding: 10px 30px;
+    font-size: 12px;
+    border-radius: 8px;
+    color: white;
+    height: 39.6px;
+}
+.btn-auth:hover
+{
+    background-color: #3bab3f;
+    color: white;
+}
+
+.btn-auth2 {
+    background-color: #6c757d;
+    border-color: black;
+    padding: 10px 30px;
+    font-size: 12px;
+    border-radius: 8px;
+    color: white;
+    height: 39.6px;
+}
+
+.btn-auth2:hover
+{
+    background-color: #6c757d;
+    color: white;
+}
