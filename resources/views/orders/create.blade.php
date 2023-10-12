@@ -143,12 +143,17 @@
             <div class="col-12">
                 <div class="row">
                     <div class="col-6">
-                        <select class="form-control" name="printing_services">
+                        <select class="form-control" id="printing_services" name="printing_services">
                             <option value="0">No Design</option>
                             <option value="1">Minimal</option>
                             <option value="2">Half Box</option>
                             <option value="3">Full Box</option>
                         </select>
+
+                        <p>Cost: <span id="printing_cost">0.00</span></p>
+
+
+
                     </div>
                 </div>
             </div>
@@ -186,31 +191,40 @@
                         <input type="number" name="total_amount" id="total_amount" class="form-control" readonly>
                     </div>
                 </div>
+
+                <div class="row my-3">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-success">Submit Order</button>
+                    </div>
+                </div>
             </div>
 
             <script>
-                $(() => {
+                var totalSum = 0;
+                var vat = 0;
+                var totalAmount = 0;
 
-
-                    $(document).on('change input', '.quantity', () => {
-                        var totalSum = 0;
-                        var vat = 0;
-                        var totalAmount = 0;
-                        $(".total_price").each(function() {
-                            var price = parseFloat($(this).val());
-                            totalSum += price
-                            console.log(price);
-                        });
-
-                        vat = totalSum * .12;
-                        totalAmount = totalAmount + vat;
-                        console.log("nice");
-
-                        $("#gross_amount").val(totalSum);
-                        $("#vat").val(vat);
-                        $("#total_amount").val(totalAmount);
+                function calculate() {
+                    totalSum = 0; // Reset totalSum before recalculating
+                    $(".total_price").each(function() {
+                        var price = parseFloat($(this).val());
+                        totalSum += price;
                     });
 
+                    totalSum += printing_cost;
+
+                    vat = totalSum * 0.12;
+                    totalAmount = totalSum + vat;
+
+                    $("#gross_amount").val(totalSum.toFixed(2));
+                    $("#vat").val(vat.toFixed(2));
+                    $("#total_amount").val(totalAmount.toFixed(2));
+                }
+
+                $(() => {
+                    $(document).on('change input', '.quantity', () => {
+                        calculate();
+                    });
                 });
             </script>
 
@@ -222,6 +236,8 @@
         var products = @json($products);
         var selectedProducts = [];
 
+        // Add product
+        var productIndex = 2;
 
         $(() => {
             $.ajaxSetup({
@@ -250,9 +266,6 @@
             populateSelect(products);
 
 
-            // Add product
-            var productIndex = 2;
-
             function calculateTotalPrice(productDiv) {
                 var quantity = parseFloat(productDiv.find('.quantity').val()) || 0;
                 var price = parseFloat(productDiv.find('.price').val()) || 0;
@@ -270,38 +283,50 @@
             }
 
             // Handle the "Add Product" button click
-
-            // Handle the "Add Product" button click
             $('.addProduct').click(function() {
-                var productDiv = $('#productContainer .row').first();
+                var productDiv = $('#productContainer .row').last();
                 var productsDropdown = productDiv.find('.products');
                 var quantityInput = productDiv.find('.quantity');
                 var selectedProductId = productsDropdown.val();
 
                 if (products.length == selectedProducts.length) {
                     Swal.fire({
-                        title: 'All products has been selected',
+                        title: 'All products have been selected',
                         icon: 'error'
                     });
                     return;
                 }
 
                 // Check if both product and quantity are selected/entered
+                console.log(productsDropdown.val());
 
                 if (productsDropdown.val() && quantityInput.val()) {
+
+                    if (!selectedProducts.includes(selectedProductId)) {
+                        selectedProducts.push(selectedProductId);
+                    }
+
+                    if (products.length == selectedProducts.length) {
+                        Swal.fire({
+                            title: 'All products have been selected',
+                            icon: 'info'
+                        });
+                    }
                     var newProductDiv = productDiv.clone();
                     newProductDiv.attr('id', 'product-' + productIndex);
 
+                    // Clear input values for the new row
+                    newProductDiv.find('.products').val('');
+                    newProductDiv.find('.quantity').val('');
+
                     // Update input names to use array notation
                     newProductDiv.find('.products').attr('name', 'products[' + productIndex + ']');
-                    newProductDiv.find('.quantity').attr('name', 'quantity[' + productIndex + ']')
-                        .val("");
-                    newProductDiv.find('.stock_quantity').attr('name', 'stock_quantity[' +
-                        productIndex + ']').val("");
-                    newProductDiv.find('.price').attr('name', 'price[' + productIndex + ']').val(
-                        "");
-                    newProductDiv.find('.total_price').attr('name', 'total_price[' + productIndex +
-                        ']').val("0");
+                    newProductDiv.find('.quantity').attr('name', 'quantity[' + productIndex + ']');
+                    newProductDiv.find('.stock_quantity').attr('name', 'stock_quantity[' + productIndex +
+                        ']').val('');
+                    newProductDiv.find('.price').attr('name', 'price[' + productIndex + ']').val('');
+                    newProductDiv.find('.total_price').attr('name', 'total_price[' + productIndex + ']')
+                        .val('0');
 
                     // Append the new product
                     $('#productContainer').append(newProductDiv);
@@ -311,11 +336,6 @@
                     attachChangeListeners(newProductDiv);
 
 
-                    if (!selectedProducts.includes(selectedProductId)) {
-                        selectedProducts.push(selectedProductId);
-                    }
-
-                    console.log(selectedProducts);
 
                     productIndex++;
                 } else {
@@ -400,6 +420,7 @@
                 // Check if there is at least one item
                 if ($('#productContainer .row').length > 1) {
                     productDiv.remove();
+                    calculate();
                 } else {
                     Swal.fire({
                         title: 'You must have at least one item in the list.',
@@ -451,6 +472,34 @@
                 }
             });
 
+
+            $("#productContainer").on('change input', '.quantity', function() {
+                var productDiv = $(this).closest('.row');
+                var productQuantity = productDiv.find('.quantity');
+                var productStock = productDiv.find('.stock_quantity');
+
+                var quantity = parseInt(productQuantity.val());
+                var stock = parseInt(productStock.val());
+
+                if (quantity < 0) {
+                    Swal.fire({
+                        title: 'Invalid value',
+                        icon: 'error'
+                    });
+                    productQuantity.val("");
+                }
+
+                if (quantity > stock) {
+                    Swal.fire({
+                        title: 'Not enough stock',
+                        icon: 'error'
+                    });
+
+                    productQuantity.val(stock);
+                }
+
+            });
+
             /////////////////////////////////////
 
             // Get customer info
@@ -483,9 +532,91 @@
                     dataType: 'json',
                     success: (data) => {
                         products = data;
+                        $("#productContainer").html("");
+                        var html = `
+                        <div class="row my-3">
+                        <div class="col-4">
+                            <label class="fw-bold">Product</label>
+                            <select class="form-control products" name="products[1]">
+
+                            </select>
+                        </div>
+                        <div class="col-1">
+                            <label class="fw-bold">Qty</label>
+                            <input type="number" class="form-control quantity" name="quantity[1]">
+                        </div>
+                        <div class="col-1">
+                            <label class="fw-bold">Stock Qty</label>
+                            <input type="number" class="form-control stock_quantity" disabled>
+                        </div>
+                        <div class="col-2">
+                            <label class="fw-bold">Price</label>
+                            <input type="number" class="form-control price" disabled>
+                        </div>
+                        <div class="col-2">
+                            <label class="fw-bold">Total Price</label>
+                            <input type="number" class="form-control total_price" disabled>
+                        </div>
+                        <div class="col-2">
+                            <label class="fw-bold">Action</label><br>
+                            <button type="button" class="btn btn-danger me-3 removeProduct"><i
+                                    class="fa fa-x"></i></button>
+                        </div>
+                    </div>
+                        `;
+
+                        $("#productContainer").append(html);
+                        populateSelect(products);
+                        selectedProducts = [];
                         console.log(products);
                     }
                 });
+            });
+        });
+
+        var printing_cost = 0;
+        var previous_printing_cost = 0; // Variable to store the previous printing_cost
+
+        $(() => {
+            $("#printing_services").on('change', function() {
+                var p = $(this).val();
+
+                // Subtract the previous printing_cost
+                totalSum -= previous_printing_cost;
+
+                switch (p) {
+                    case "0":
+                        $("#printing_cost").text("0.00");
+                        printing_cost = 0;
+                        break;
+
+                    case "1":
+                        $("#printing_cost").text("80.00");
+                        printing_cost = 80;
+                        break;
+
+                    case "2":
+                        $("#printing_cost").text("120.00");
+                        printing_cost = 120;
+                        break;
+
+                    case "3":
+                        $("#printing_cost").text("200.00");
+                        printing_cost = 200;
+                        break;
+                }
+
+                // Update the previous_printing_cost
+                previous_printing_cost = printing_cost;
+
+                // Update totalSum, vat, and totalAmount
+                totalSum += printing_cost;
+                vat = totalSum * 0.12;
+                totalAmount = totalSum + vat;
+
+                $("#gross_amount").val(totalSum;toFixed(2));
+                $("#vat").val(vat.toFixed(2));
+                $("#total_amount").val(totalAmount.toFixed(2));
             });
         });
     </script>
