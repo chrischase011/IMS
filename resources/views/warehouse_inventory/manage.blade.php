@@ -47,7 +47,7 @@
                         Raw Materials</a>
                 @endif
                 @if ($warehouse->type == 2)
-                    <a href="{{ route('warehouse_inventory.inventory', ['slug' => $slug]) }}" class="btn btn-warning">Manage
+                    <a href="{{ route('orders.index', ['slug' => $slug]) }}" class="btn btn-warning">Manage
                         Orders</a>
                 @endif
 
@@ -79,26 +79,26 @@
                             <tr>
                                 <td>{{ date('m/d/Y', strtotime($stockIn->transaction_date)) }}</td>
                                 <td>
-                                    @if($stockIn->product)
-                                        {{ $stockIn->product->name  }}
+                                    @if ($stockIn->product)
+                                        {{ $stockIn->product->name }}
                                     @elseif($stockIn->rawMaterial)
-                                        {{ $stockIn->rawMaterial->name  }}
-                                    @else 
+                                        {{ $stockIn->rawMaterial->name }}
+                                    @else
                                         Deleted Item
                                     @endif
 
-                                    
+
                                 </td>
                                 <td>
-                                    @if($stockIn->product)
+                                    @if ($stockIn->product)
                                         Product
                                     @elseif($stockIn->rawMaterial)
                                         Raw Material
-                                    @else 
+                                    @else
                                         Undefined Type
                                     @endif
                                 </td>
-                                <td>{{ abs($stockIn->quantity_in)  }}</td>
+                                <td>{{ abs($stockIn->quantity_in) }}</td>
                                 @if ($warehouse->type == 2)
                                     <td>{{ $stockIn->transaction_operation }}</td>
                                 @endif
@@ -133,22 +133,22 @@
                             <tr>
                                 <td>{{ date('m/d/Y', strtotime($stockIn->transaction_date)) }}</td>
                                 <td>
-                                    @if($stockOut->product)
-                                        {{ $stockOut->product->name  }}
+                                    @if ($stockOut->product)
+                                        {{ $stockOut->product->name }}
                                     @elseif($stockOut->rawMaterial)
-                                        {{ $stockOut->rawMaterial->name  }}
-                                    @else 
+                                        {{ $stockOut->rawMaterial->name }}
+                                    @else
                                         Deleted Item
-                                    @endif    
+                                    @endif
                                 </td>
                                 <td>
-                                    @if($stockOut->product)
+                                    @if ($stockOut->product)
                                         Product
                                     @elseif($stockOut->rawMaterial)
                                         Raw Materials
-                                    @else 
+                                    @else
                                         Undefined Type
-                                    @endif  
+                                    @endif
                                 </td>
                                 <td>{{ abs($stockOut->quantity_out) }}</td>
                                 @if ($warehouse->type == 2)
@@ -256,6 +256,10 @@
                 language: {
                     loadingRecords: "Fetching Data... Please Wait!"
                 },
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
             });
         });
     </script>

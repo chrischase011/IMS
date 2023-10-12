@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProduceController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\PurchaseController;
@@ -99,6 +100,15 @@ Route::group(['middleware' => 'noCustomer'], function(){
         Route::post('inventory/deleteInventory', [WarehouseInventoryController::class, 'deleteInventory'])->name('warehouse_inventory.deleteInventory');
         Route::post('inventory/moveToLogisticWarehouse', [WarehouseInventoryController::class, 'moveToLogisticWarehouse'])->name('warehouse_inventory.moveToLogisticWarehouse');
     });
+
+    // For Orders
+    Route::group(['prefix' => 'orders'], function(){ 
+        Route::get('/{slug?}', [OrdersController::class, 'index'])->name('orders.index');
+        Route::get('/create/{slug?}', [OrdersController::class, 'createOrder'])->name('orders.create');
+        Route::post('/getCustomer', [OrdersController::class, 'getCustomer'])->name('orders.getCustomer');
+        Route::post('/getProductsByWarehouse', [OrdersController::class, 'getProductsByWarehouse'])->name('orders.getProductsByWarehouse');
+    });
+
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

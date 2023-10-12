@@ -19,6 +19,11 @@ class Orders extends Model
         'updated_at'
     ];
 
+    public function customers()
+    {
+        return $this->hasMany(User::class);
+    }
+
     public function orderDetails()
     {
         return $this->hasMany(OrderDetails::class);
