@@ -21,12 +21,12 @@
             </div>
         </div>
 
-        <form action="#" method="post">
+        <form id="form-order" action="{{ route('orders.submitOrder') }}" method="post">
             <div class="row my-3">
                 <div class="col-6">
                     <div class="row">
                         <label class="col-12">Customer Name</label>
-                        <select id="customer_id" name="customer_id" class="form-control" required>
+                        <select id="customer_id" name="customer_id" class="form-control">
                             <option value="">-- Select Customer -- </option>
                             @foreach ($customers as $customer)
                                 <option value="{{ $customer->id }}">{{ $customer->firstname . ' ' . $customer->lastname }}
@@ -47,13 +47,13 @@
                     <div class="row my-3">
                         <label class="col-12">Customer Phone Number</label>
                         <div class="col-12">
-                            <input type="text" name="customer_phone" class="form-control" id="customer_phone" readonly>
+                            <input type="text" name="customer_phone" id="customer_phone" class="form-control">
                         </div>
                     </div>
                     <div class="row my-3">
                         <label class="col-12">Customer Email</label>
                         <div class="col-12">
-                            <input type="email" name="customer_email" class="form-control" id="customer_email" required>
+                            <input type="email" name="customer_email" id="customer_email" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -61,20 +61,20 @@
                     <div class="row">
                         <label class="col-12">Date: </label>
                         <div class="col-12">
-                            <input type="text" class="form-control" name="order_date" required readonly
+                            <input type="text" class="form-control" name="order_date" readonly
                                 value="{{ date('m/d/Y') }}">
                         </div>
                     </div>
                     <div class="row my-3">
                         <label class="col-12">Shipping Address</label>
                         <div class="col-12">
-                            <textarea name="shipping_address" class="form-control" required style="resize: none" id="shipping_address"></textarea>
+                            <textarea name="shipping_address" id="shipping_address" class="form-control" style="resize: none" id="shipping_address"></textarea>
                         </div>
                     </div>
 
                     <div class="row my-3">
                         <label class="col-12">Warehouse</label>
-                        <select id="warehouse_id" name="warehouse_id" class="form-control" required>
+                        <select id="warehouse_id" name="warehouse_id" class="form-control">
                             <option value="">-- Select Warehouse -- </option>
                             @foreach ($warehouses as $_warehouse)
                                 <option value="{{ $_warehouse->id }}" {{ $_warehouse->slug == $slug ? 'selected' : '' }}>
@@ -106,25 +106,25 @@
                         <div class="row my-3">
                             <div class="col-4">
                                 <label class="fw-bold">Product</label>
-                                <select class="form-control products" name="products[1]" required>
+                                <select class="form-control products" name="products[]">
 
                                 </select>
                             </div>
                             <div class="col-1">
                                 <label class="fw-bold">Qty</label>
-                                <input type="number" class="form-control quantity" name="quantity[1]" required>
+                                <input type="number" class="form-control quantity" name="quantity[]">
                             </div>
                             <div class="col-1">
                                 <label class="fw-bold">Stock Qty</label>
-                                <input type="number" class="form-control stock_quantity" disabled>
+                                <input type="number" class="form-control stock_quantity" readonly>
                             </div>
                             <div class="col-2">
                                 <label class="fw-bold">Price</label>
-                                <input type="number" class="form-control price" disabled>
+                                <input type="number" name="price[]" class="form-control price" readonly>
                             </div>
                             <div class="col-2">
                                 <label class="fw-bold">Total Price</label>
-                                <input type="number" class="form-control total_price" disabled>
+                                <input type="number" class="form-control total_price" readonly>
                             </div>
                             <div class="col-2">
                                 <label class="fw-bold">Action</label><br>
@@ -170,14 +170,19 @@
                     <div class="row">
                         <div class="col-12">
                             <label>Gross Amount</label>
-                            <input type="number" name="gross_amount" id="gross_amount" class="form-control" readonly
-                                required>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">₱</span><input type="number" name="gross_amount"
+                                    id="gross_amount" class="form-control" readonly>
+                            </div>
                         </div>
                     </div>
                     <div class="row my-3">
                         <div class="col-12">
                             <label>Vat (12%)</label>
-                            <input type="number" name="vat" id="vat" class="form-control" readonly required>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">₱</span>
+                                <input type="number" name="vat" id="vat" class="form-control" readonly>
+                            </div>
                         </div>
                     </div>
                     {{-- <div class="row my-3">
@@ -189,8 +194,11 @@
                     <div class="row my-3">
                         <div class="col-12">
                             <label>Total Amount</label>
-                            <input type="number" name="total_amount" id="total_amount" class="form-control" readonly
-                                required>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">₱</span>
+                                <input type="number" name="total_amount" id="total_amount" class="form-control"
+                                    readonly>
+                            </div>
                         </div>
                     </div>
 
@@ -256,11 +264,11 @@
             function populateSelect(items) {
                 var select = $('.products');
                 select.empty();
-                select.append(`<option>-- Select Product -- </option>`);
+                select.append(`<option value=''>-- Select Product -- </option>`);
                 $.each(items, function(index, product) {
-                    if (!selectedProducts.includes(product.id)) {
+                    if (!selectedProducts.includes(product.product_id)) {
                         select.append($('<option>', {
-                            value: product.id,
+                            value: product.product_id,
                             text: product.product.name
                         }));
                     }
@@ -325,12 +333,11 @@
                     newProductDiv.find('.quantity').val('');
 
                     // Update input names to use array notation
-                    newProductDiv.find('.products').attr('name', 'products[' + productIndex + ']');
-                    newProductDiv.find('.quantity').attr('name', 'quantity[' + productIndex + ']');
-                    newProductDiv.find('.stock_quantity').attr('name', 'stock_quantity[' + productIndex +
-                        ']').val('');
-                    newProductDiv.find('.price').attr('name', 'price[' + productIndex + ']').val('');
-                    newProductDiv.find('.total_price').attr('name', 'total_price[' + productIndex + ']')
+                    newProductDiv.find('.products').attr('name', 'products[]');
+                    newProductDiv.find('.quantity').attr('name', 'quantity[]').val('');
+                    newProductDiv.find('.stock_quantity').attr('name', 'stock_quantity[]').val('');
+                    newProductDiv.find('.price').attr('name', 'price[]').val('');
+                    newProductDiv.find('.total_price').attr('name', 'total_price[]')
                         .val('0');
 
                     // Append the new product
@@ -355,11 +362,11 @@
 
             function populateSelectProduct(items, selectElement) {
                 selectElement.empty();
-                selectElement.append(`<option>-- Select Product --</option>`);
+                selectElement.append(`<option value=''>-- Select Product --</option>`);
                 $.each(items, function(index, product) {
-                    if (!selectedProducts.includes(product.id)) {
+                    if (!selectedProducts.includes(product.product_id)) {
                         selectElement.append($('<option>', {
-                            value: product.id,
+                            value: product.product_id,
                             text: product.product.name
                         }));
                     }
@@ -444,10 +451,12 @@
 
             // Function to populate price and current_quantity
             function populatePriceAndQuantity(selectedProductId, productDiv) {
-                var selectedProduct = products.find(product => product.id === selectedProductId);
+                var selectedProduct = products.find(product => product.product_id === selectedProductId);
                 if (selectedProduct) {
                     var priceInput = productDiv.find('.price');
                     var stockQuantityInput = productDiv.find('.stock_quantity');
+                    var quantity = productDiv.find('.quantity');
+                    quantity.val('');
                     priceInput.val(selectedProduct.product.price);
                     stockQuantityInput.val(selectedProduct.current_quantity);
                 }
@@ -542,25 +551,25 @@
                         <div class="row my-3">
                         <div class="col-4">
                             <label class="fw-bold">Product</label>
-                            <select class="form-control products" name="products[1]" required>
+                            <select class="form-control products" name="products[]">
 
                             </select>
                         </div>
                         <div class="col-1">
                             <label class="fw-bold">Qty</label>
-                            <input type="number" class="form-control quantity" name="quantity[1]" required>
+                            <input type="number" class="form-control quantity" name="quantity[]">
                         </div>
                         <div class="col-1">
                             <label class="fw-bold">Stock Qty</label>
-                            <input type="number" class="form-control stock_quantity" disabled>
+                            <input type="number" class="form-control stock_quantity" readonly>
                         </div>
                         <div class="col-2">
                             <label class="fw-bold">Price</label>
-                            <input type="number" class="form-control price" disabled>
+                            <input type="number" class="form-control price" name="price[]" readonly>
                         </div>
                         <div class="col-2">
                             <label class="fw-bold">Total Price</label>
-                            <input type="number" class="form-control total_price" disabled>
+                            <input type="number" class="form-control total_price" readonly>
                         </div>
                         <div class="col-2">
                             <label class="fw-bold">Action</label><br>
@@ -623,6 +632,44 @@
                 $("#vat").val(vat.toFixed(2));
                 $("#total_amount").val(totalAmount.toFixed(2));
             });
+
+
+            $('#form-order').on('submit', function(event) {
+
+                if ($('#gross_amount').val() === '' || $('#vat').val() === '' || $('#total_amount')
+                    .val() === '' || $("#customer_id").val === '' || $("#customer_phone").val === '' || $(
+                        "#customer_email").val === '' || $("#shipping_address").val === '' || $(
+                        "#warehouse_id").val === '' || $(".products").val === '' || $(".quantity").val ===
+                    '') {
+                    event.preventDefault();
+                    Swal.fire({
+                        title: 'Please fill in all the fields.',
+                        icon: 'error'
+                    });
+                }
+
+                $('.products').each(function() {
+                    if ($(this).val() === '') {
+                        event.preventDefault();
+                        Swal.fire({
+                            title: 'Please fill in all the fields.',
+                            icon: 'error'
+                        });
+                    }
+                });
+
+                $('.quantity').each(function() {
+                    if ($(this).val() === '') {
+                        event.preventDefault();
+                        Swal.fire({
+                            title: 'Please fill in all the fields.',
+                            icon: 'error'
+                        });
+                    }
+                });
+
+            });
+
         });
     </script>
 @endsection

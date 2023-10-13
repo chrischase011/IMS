@@ -67,26 +67,13 @@ class ProduceController extends Controller
             $inventoryRecord->product_id = $product->id;
             $inventoryRecord->price = $product->price;
             $inventoryRecord->current_quantity = $quantityToProduce;
-            $inventoryRecord->reorder_level = 0; 
+            $inventoryRecord->reorder_level = 0;
             $inventoryRecord->warehouse_id = $warehouse;
             $inventoryRecord->save();
         }
 
         HandleStockTransaction::writeStockTransaction($product->id, 'product', $quantityToProduce, null, Carbon::now(), 'stock-in', null, $warehouse);
 
-        // $label = HandleLabelling::generateProdLabel($warehouse);
-
-        // // Add to Warehouse inventory
-        // WarehouseInventory::create([
-        //     'label' => $label,
-        //     'product_id' => $product->id,
-        //     'warehouse_id' => $warehouse,
-        //     'quantity' => $quantityToProduce,
-        //     'status' => 1,
-        //     'operation' => 'produce',
-        //     'operations_details' => "Production of $quantityToProduce $product->name",
-        //     'reorder_level' => 0
-        // ]);
 
         // deduction
         $messageDeduction = "<br>";

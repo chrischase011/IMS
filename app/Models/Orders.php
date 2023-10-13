@@ -21,12 +21,12 @@ class Orders extends Model
 
     public function customers()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'customer_id');
     }
 
     public function orderDetails()
     {
-        return $this->hasMany(OrderDetails::class);
+        return $this->hasMany(OrderDetails::class, 'order_id');
     }
 
     public function products()
@@ -35,5 +35,5 @@ class Orders extends Model
             ->withPivot('quantity', 'unit_price', 'total_price');
     }
 
-    
+
 }

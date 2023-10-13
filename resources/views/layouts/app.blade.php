@@ -43,6 +43,9 @@
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
 
+    {{-- Print This --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js" integrity="sha512-d5Jr3NflEZmFDdFHZtxeJtBzk0eB+kkRXWFQqEc1EKmolXjHm2IKCA7kTvXBNjIYzjXfD5XzIjaaErpkZHCkBg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -118,7 +121,7 @@
                                         </li>
                                     @endif
 
-                                    <li class="d-none nav-item dropdown">
+                                    <li class="d-none nav-item dropdown d-none">
                                         <a class="nav-link dropdown-toggle" href="#realTimeCommunication" role="button"
                                             data-bs-toggle="dropdown" aria-expanded="false" id="navbarDropdown">
                                             <span class="fa fa-user mr-2" aria-hidden="true"></span>
@@ -179,7 +182,7 @@
 
                                             <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
                                                 <li class="">
-                                                    <a class="dropdown-item" href="{{ route('purchase.index') }}">
+                                                    <a class="dropdown-item d-none" href="{{ route('purchase.index') }}">
                                                         <span class="fa fa-cart-shopping"></span>
                                                         <span class="ml-2">Purchase</span>
                                                     </a>
