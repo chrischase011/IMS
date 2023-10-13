@@ -63,27 +63,26 @@
                     url: "{{ route('warehouse.getWarehouses') }}",
                     type: 'post',
                 },
-                columns: [
-                    {
+                columns: [{
                         data: "name"
                     },
                     {
                         data: 'type',
                         render: (e) => {
-                            switch(e){
+                            switch (e) {
                                 case 1:
                                     return "Production";
-                                break
+                                    break
 
                                 case 2:
                                     return "Logistics";
-                                break
+                                    break
                             }
                         }
                     },
                     {
                         data: "status",
-                        render: (e) =>{
+                        render: (e) => {
                             switch (e) {
                                 case '1':
                                     return `<span class='badge bg-success'>Active</span>`;
@@ -104,17 +103,21 @@
                         }
                     },
                     {
-                        data: {'id':'id', 'slug':'slug', 'status':'status'},
+                        data: {
+                            'id': 'id',
+                            'slug': 'slug',
+                            'status': 'status'
+                        },
                         render: (e) => {
                             var status = "";
 
-                            if(e.status == '2')
+                            if (e.status == '2')
                                 status = 'disabled'
 
                             return `
-                            <a href="warehouse-inventory/manage/${e.slug}" class='btn btn-success ${status}'>Manage</a> 
-                            <button type='button' onclick="viewEdit(${e.id})" class='btn btn-info'>Edit</button> 
-                            <button type='button' onclick="deleteRaw(${e.id})" class='btn btn-danger'>Delete</button>`;
+                            <a href="warehouse-inventory/manage/${e.slug}" class='btn btn-success ${status}'>Manage</a>
+                            <button type='button' onclick="viewEdit(${e.id})" class='btn btn-info'>Edit</button>
+                            <button type='button' onclick="deleteWarehouse(${e.id})" class='btn btn-danger'>Delete</button>`;
                         },
                         orderable: false
                     }
@@ -122,10 +125,53 @@
             });
 
 
-            $("#btnAdd").on('click', ()=>{
+            $("#btnAdd").on('click', () => {
                 $("#mdlAdd").modal('show');
             });
         });
+
+
+        var viewEdit = (id) => {
+            $.ajax({
+                url: "{{ route('warehouse.getWarehouse') }}",
+                type: 'post',
+                data: {
+                    id: id
+                },
+                dataType: 'json',
+                success: (data) => {
+                    $("#editID").val(id);
+                    $("#editName").val(data.name);
+                    $("#editType").val(data.type);
+                    $("#editStatus").val(data.status);
+                    $("#mdlEdit").modal('show');
+                }
+            });
+        }
+
+        var deleteWarehouse = (id) => {
+            Swal.fire({
+                title: "Delete?",
+                text: "Are you sure you want to delete?",
+                icon: 'question',
+                showCancelButton: true
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('warehouse.deleteWarehouse') }}",
+                        type: 'post',
+                        data: {
+                            id: id
+                        },
+                        dataType: 'html',
+                        success: (data) => {
+                            table.ajax.reload(null, false);
+                        }
+                    });
+                }
+            });
+
+        }
     </script>
 
 
@@ -183,8 +229,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="{{ route('warehouse.store') }}" method="post">
+                <form action="{{ route('warehouse.update') }}" method="post">
                     @csrf
+                    <input type="hidden" name="id" id="editID">
                     <div class="modal-body">
                         <div class="row">
                             <label class="col-12">Warehouse Name</label>
@@ -195,7 +242,7 @@
                         <div class="row my-3">
                             <label class="col-12">Warehouse Type</label>
                             <div class="col-12">
-                                <select name="type" id="type" class="form-select" required>
+                                <select name="type" id="editType" class="form-select" required>
                                     <option value="1">Production</option>
                                     <option value="2">Logistics</option>
                                 </select>
@@ -213,7 +260,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success float-end">Add</button>
+                        <button type="submit" class="btn btn-success float-end">Save Changes</button>
                     </div>
                 </form>
             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use MediaCloud\Vendor\Google\Cloud\Storage\Connection\Rest;
 
 class WarehouseController extends Controller
 {
@@ -40,5 +41,40 @@ class WarehouseController extends Controller
         ];
 
         return response()->json($data);
+    }
+
+    public function getWarehouse(Request $request)
+    {
+        $id = $request->id;
+
+        $data = Warehouse::find($id);
+
+        return response()->json($data);
+
+    }
+
+    public function update(Request $request)
+    {
+        $id = $request->id;
+
+        $data = Warehouse::find($id);
+        $data->name = $request->name;
+        $data->type = $request->type;
+        $data->status = $request->status;
+        $data->save();
+
+        return back()->with('success', "Warehouse has been updated.");
+    }
+
+    public function deleteWarehouse(Request $request)
+    {
+        $id = $request->id;
+
+        $data = Warehouse::find($id);
+
+        $data->delete();
+
+        return response()->json($data);
+
     }
 }

@@ -11,6 +11,7 @@ use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\WarehouseInventoryController;
 use App\Models\Suppliers;
 use App\Models\User;
+use App\Models\Warehouse;
 use App\Models\WarehouseInventory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -86,7 +87,10 @@ Route::group(['middleware' => 'noCustomer'], function(){
     Route::group(['prefix' => 'warehouse'], function(){
         Route::get('/', [WarehouseController::class, 'index'])->name('warehouse.index');
         Route::post('store', [WarehouseController::class, 'store'])->name('warehouse.store');
+        Route::post('update', [WarehouseController::class, 'update'])->name('warehouse.update');
         Route::post('getWarehouses', [WarehouseController::class, 'getWarehouses'])->name('warehouse.getWarehouses');
+        Route::post('getWarehouse', [WarehouseController::class, 'getWarehouse'])->name('warehouse.getWarehouse');
+        Route::post('deleteWarehouse', [WarehouseController::class, 'deleteWarehouse'])->name('warehouse.deleteWarehouse');
     });
 
     // For Warehouse Inventory

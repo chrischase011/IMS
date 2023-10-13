@@ -194,7 +194,7 @@
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a class="dropdown-item" href="sell">
+                                                    <a class="dropdown-item d-none" href="sell">
                                                         <span class="fa fa-dollar-sign"></span>
                                                         <span class="ml-2">Sell</span>
                                                     </a>
@@ -202,28 +202,11 @@
                                             </ul>
 
                                         </li>
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                                                aria-expanded="false" href="#reports" id="navbarDropdown">
-                                                <span class="fa fa-chart-line"></span>
-                                                <span class="ml-2">Reports</span>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('raw.index') }}">
+                                                <span class="fa-solid fa-chart-line mr-2" aria-hidden="true"></span>
+                                                Reports
                                             </a>
-
-                                            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-                                                <li class="">
-                                                    <a class="dropdown-item" href="inventoryreport">
-                                                        <span class="fa fa-warehouse"></span>
-                                                        <span class="">Inventory Transactions</span>
-                                                    </a>
-                                                </li>
-                                                <li class="">
-                                                    <a class="dropdown-item" href="productreport">
-                                                        <span class="fa fa-money-bill"></span>
-                                                        <span class="">Product Transactions</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-
                                         </li>
                                     @endif
 

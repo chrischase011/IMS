@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('stock_transaction', function(Blueprint $table){
             $table->unsignedBigInteger('warehouse_id')->nullable();
 
-            $table->foreign('warehouse_id')->on('warehouse')->references('id');
+            $table->foreign('warehouse_id')->on('warehouse')->references('id')->onDelete('set null');
         });
     }
 
