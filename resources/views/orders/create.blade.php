@@ -20,215 +20,220 @@
                 <a href="{{ url()->previous() }}" class="btn btn-secondary me-3" title="Back to Previous URL">Back</a>
             </div>
         </div>
-        <div class="row my-3">
-            <div class="col-6">
-                <div class="row">
-                    <label class="col-12">Customer Name</label>
-                    <select id="customer_id" name="customer_id" class="form-control">
-                        <option value="">-- Select Customer -- </option>
-                        @foreach ($customers as $customer)
-                            <option value="{{ $customer->id }}">{{ $customer->firstname . ' ' . $customer->lastname }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <script>
-                        $(() => {
-                            const choices = new Choices("#customer_id", {
-                                searchEnabled: true,
-                                searchResultLimit: 5,
-                                renderChoiceLimit: 5
-                            });
-                        });
-                    </script>
-                </div>
 
-                <div class="row my-3">
-                    <label class="col-12">Customer Phone Number</label>
-                    <div class="col-12">
-                        <input type="text" name="customer_phone" class="form-control" id="customer_phone">
-                    </div>
-                </div>
-                <div class="row my-3">
-                    <label class="col-12">Customer Email</label>
-                    <div class="col-12">
-                        <input type="email" name="customer_email" class="form-control" id="customer_email">
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="row">
-                    <label class="col-12">Date: </label>
-                    <div class="col-12">
-                        <input type="text" class="form-control" readonly value="{{ date('m/d/Y') }}">
-                    </div>
-                </div>
-                <div class="row my-3">
-                    <label class="col-12">Shipping Address</label>
-                    <div class="col-12">
-                        <textarea name="shipping_address" class="form-control" style="resize: none" id="shipping_address"></textarea>
-                    </div>
-                </div>
-
-                <div class="row my-3">
-                    <label class="col-12">Warehouse</label>
-                    <select id="warehouse_id" name="warehouse_id" class="form-control">
-                        <option value="">-- Select Warehouse -- </option>
-                        @foreach ($warehouses as $_warehouse)
-                            <option value="{{ $_warehouse->id }}" {{ $_warehouse->slug == $slug ? 'selected' : '' }}>
-                                {{ $_warehouse->name }}</option>
-                        @endforeach
-                    </select>
-                    <script>
-                        $(() => {
-                            const choices = new Choices("#warehouse_id", {
-                                searchEnabled: true,
-                                searchResultLimit: 5,
-                                renderChoiceLimit: 5
-                            });
-                        });
-                    </script>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="row my-3">
-            <div class="col-12">
-                <h5 class="fw-bold mb-3">Add Product</h5>
-                <button type="button" id="addProduct" class="addProduct btn btn-primary float-end me-3"><i
-                        class="fa fa-plus"></i></button>
-            </div>
-
-            <div class="col-12 my-3">
-                <div id="productContainer" class="productContainer">
-                    <div class="row my-3">
-                        <div class="col-4">
-                            <label class="fw-bold">Product</label>
-                            <select class="form-control products" name="products[1]">
-
-                            </select>
-                        </div>
-                        <div class="col-1">
-                            <label class="fw-bold">Qty</label>
-                            <input type="number" class="form-control quantity" name="quantity[1]">
-                        </div>
-                        <div class="col-1">
-                            <label class="fw-bold">Stock Qty</label>
-                            <input type="number" class="form-control stock_quantity" disabled>
-                        </div>
-                        <div class="col-2">
-                            <label class="fw-bold">Price</label>
-                            <input type="number" class="form-control price" disabled>
-                        </div>
-                        <div class="col-2">
-                            <label class="fw-bold">Total Price</label>
-                            <input type="number" class="form-control total_price" disabled>
-                        </div>
-                        <div class="col-2">
-                            <label class="fw-bold">Action</label><br>
-                            <button type="button" class="btn btn-danger me-3 removeProduct"><i
-                                    class="fa fa-x"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <hr>
-        <div class="row my-3">
-            <div class="col-12">
-                <h5 class="fw-bold mb-3">Printing Service</h5>
-            </div>
-
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-6">
-                        <select class="form-control" id="printing_services" name="printing_services">
-                            <option value="0">No Design</option>
-                            <option value="1">Minimal</option>
-                            <option value="2">Half Box</option>
-                            <option value="3">Full Box</option>
+        <form action="#" method="post">
+            <div class="row my-3">
+                <div class="col-6">
+                    <div class="row">
+                        <label class="col-12">Customer Name</label>
+                        <select id="customer_id" name="customer_id" class="form-control" required>
+                            <option value="">-- Select Customer -- </option>
+                            @foreach ($customers as $customer)
+                                <option value="{{ $customer->id }}">{{ $customer->firstname . ' ' . $customer->lastname }}
+                                </option>
+                            @endforeach
                         </select>
+                        <script>
+                            $(() => {
+                                const choices = new Choices("#customer_id", {
+                                    searchEnabled: true,
+                                    searchResultLimit: 5,
+                                    renderChoiceLimit: 5
+                                });
+                            });
+                        </script>
+                    </div>
+                    @csrf
+                    <div class="row my-3">
+                        <label class="col-12">Customer Phone Number</label>
+                        <div class="col-12">
+                            <input type="text" name="customer_phone" class="form-control" id="customer_phone" readonly>
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <label class="col-12">Customer Email</label>
+                        <div class="col-12">
+                            <input type="email" name="customer_email" class="form-control" id="customer_email" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <label class="col-12">Date: </label>
+                        <div class="col-12">
+                            <input type="text" class="form-control" name="order_date" required readonly
+                                value="{{ date('m/d/Y') }}">
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <label class="col-12">Shipping Address</label>
+                        <div class="col-12">
+                            <textarea name="shipping_address" class="form-control" required style="resize: none" id="shipping_address"></textarea>
+                        </div>
+                    </div>
 
-                        <p>Cost: <span id="printing_cost">0.00</span></p>
-
-
-
+                    <div class="row my-3">
+                        <label class="col-12">Warehouse</label>
+                        <select id="warehouse_id" name="warehouse_id" class="form-control" required>
+                            <option value="">-- Select Warehouse -- </option>
+                            @foreach ($warehouses as $_warehouse)
+                                <option value="{{ $_warehouse->id }}" {{ $_warehouse->slug == $slug ? 'selected' : '' }}>
+                                    {{ $_warehouse->name }}</option>
+                            @endforeach
+                        </select>
+                        <script>
+                            $(() => {
+                                const choices = new Choices("#warehouse_id", {
+                                    searchEnabled: true,
+                                    searchResultLimit: 5,
+                                    renderChoiceLimit: 5
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
+            <hr>
+            <div class="row my-3">
+                <div class="col-12">
+                    <h5 class="fw-bold mb-3">Add Product</h5>
+                    <button type="button" id="addProduct" class="addProduct btn btn-primary float-end me-3"><i
+                            class="fa fa-plus"></i></button>
+                </div>
 
-        </div>
+                <div class="col-12 my-3">
+                    <div id="productContainer" class="productContainer">
+                        <div class="row my-3">
+                            <div class="col-4">
+                                <label class="fw-bold">Product</label>
+                                <select class="form-control products" name="products[1]" required>
 
-        <hr>
-        <div class="row my-3 justify-content-center">
-            <div class="col-12">
-                <h5 class="fw-bold mb-3">Payment</h5>
+                                </select>
+                            </div>
+                            <div class="col-1">
+                                <label class="fw-bold">Qty</label>
+                                <input type="number" class="form-control quantity" name="quantity[1]" required>
+                            </div>
+                            <div class="col-1">
+                                <label class="fw-bold">Stock Qty</label>
+                                <input type="number" class="form-control stock_quantity" disabled>
+                            </div>
+                            <div class="col-2">
+                                <label class="fw-bold">Price</label>
+                                <input type="number" class="form-control price" disabled>
+                            </div>
+                            <div class="col-2">
+                                <label class="fw-bold">Total Price</label>
+                                <input type="number" class="form-control total_price" disabled>
+                            </div>
+                            <div class="col-2">
+                                <label class="fw-bold">Action</label><br>
+                                <button type="button" class="btn btn-danger me-3 removeProduct"><i
+                                        class="fa fa-x"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
-            <div class="col-6">
-                <div class="row">
-                    <div class="col-12">
-                        <label>Gross Amount</label>
-                        <input type="number" name="gross_amount" id="gross_amount" class="form-control" readonly>
+            <hr>
+            <div class="row my-3">
+                <div class="col-12">
+                    <h5 class="fw-bold mb-3">Printing Service</h5>
+                </div>
+
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <select class="form-control" id="printing_services" name="printing_services">
+                                <option value="0">No Design</option>
+                                <option value="1">Minimal</option>
+                                <option value="2">Half Box</option>
+                                <option value="3">Full Box</option>
+                            </select>
+
+                            <p>Cost: <span id="printing_cost">0.00</span></p>
+                        </div>
                     </div>
                 </div>
-                <div class="row my-3">
-                    <div class="col-12">
-                        <label>Vat (12%)</label>
-                        <input type="number" name="vat" id="vat" class="form-control" readonly>
-                    </div>
+
+            </div>
+
+            <hr>
+            <div class="row my-3 justify-content-center">
+                <div class="col-12">
+                    <h5 class="fw-bold mb-3">Payment</h5>
                 </div>
-                {{-- <div class="row my-3">
+
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-12">
+                            <label>Gross Amount</label>
+                            <input type="number" name="gross_amount" id="gross_amount" class="form-control" readonly
+                                required>
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col-12">
+                            <label>Vat (12%)</label>
+                            <input type="number" name="vat" id="vat" class="form-control" readonly required>
+                        </div>
+                    </div>
+                    {{-- <div class="row my-3">
                     <div class="col-12">
                         <label>Discount</label>
                         <input type="number" name="discount" id="discount" class="form-control">
                     </div>
                 </div> --}}
-                <div class="row my-3">
-                    <div class="col-12">
-                        <label>Total Amount</label>
-                        <input type="number" name="total_amount" id="total_amount" class="form-control" readonly>
+                    <div class="row my-3">
+                        <div class="col-12">
+                            <label>Total Amount</label>
+                            <input type="number" name="total_amount" id="total_amount" class="form-control" readonly
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="row my-3">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-success">Submit Order</button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row my-3">
-                    <div class="col-12">
-                        <button type="button" class="btn btn-success">Submit Order</button>
-                    </div>
-                </div>
+                <script>
+                    var totalSum = 0;
+                    var vat = 0;
+                    var totalAmount = 0;
+
+                    function calculate() {
+                        totalSum = 0; // Reset totalSum before recalculating
+                        $(".total_price").each(function() {
+                            var price = parseFloat($(this).val());
+                            totalSum += price;
+                        });
+
+                        totalSum += printing_cost;
+
+                        vat = totalSum * 0.12;
+                        totalAmount = totalSum + vat;
+
+                        $("#gross_amount").val(totalSum.toFixed(2));
+                        $("#vat").val(vat.toFixed(2));
+                        $("#total_amount").val(totalAmount.toFixed(2));
+                    }
+
+                    $(() => {
+                        $(document).on('change input', '.quantity', () => {
+                            calculate();
+                        });
+                    });
+                </script>
+
+
+
             </div>
-
-            <script>
-                var totalSum = 0;
-                var vat = 0;
-                var totalAmount = 0;
-
-                function calculate() {
-                    totalSum = 0; // Reset totalSum before recalculating
-                    $(".total_price").each(function() {
-                        var price = parseFloat($(this).val());
-                        totalSum += price;
-                    });
-
-                    totalSum += printing_cost;
-
-                    vat = totalSum * 0.12;
-                    totalAmount = totalSum + vat;
-
-                    $("#gross_amount").val(totalSum.toFixed(2));
-                    $("#vat").val(vat.toFixed(2));
-                    $("#total_amount").val(totalAmount.toFixed(2));
-                }
-
-                $(() => {
-                    $(document).on('change input', '.quantity', () => {
-                        calculate();
-                    });
-                });
-            </script>
-
-        </div>
+        </form>
 
     </div>
 
@@ -537,13 +542,13 @@
                         <div class="row my-3">
                         <div class="col-4">
                             <label class="fw-bold">Product</label>
-                            <select class="form-control products" name="products[1]">
+                            <select class="form-control products" name="products[1]" required>
 
                             </select>
                         </div>
                         <div class="col-1">
                             <label class="fw-bold">Qty</label>
-                            <input type="number" class="form-control quantity" name="quantity[1]">
+                            <input type="number" class="form-control quantity" name="quantity[1]" required>
                         </div>
                         <div class="col-1">
                             <label class="fw-bold">Stock Qty</label>
@@ -614,7 +619,7 @@
                 vat = totalSum * 0.12;
                 totalAmount = totalSum + vat;
 
-                $("#gross_amount").val(totalSum;toFixed(2));
+                $("#gross_amount").val(totalSum.toFixed(2));
                 $("#vat").val(vat.toFixed(2));
                 $("#total_amount").val(totalAmount.toFixed(2));
             });
