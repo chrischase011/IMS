@@ -6,6 +6,7 @@ use App\Http\Controllers\ProduceController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RawMaterialsController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\WarehouseInventoryController;
@@ -117,6 +118,10 @@ Route::group(['middleware' => 'noCustomer'], function(){
         Route::post('manageOrder', [OrdersController::class, 'manageOrder'])->name('orders.manageOrder');
     });
 
+    // For Reports
+    Route::group(['prefix' => 'reports'], function(){
+        Route::get('/', [ReportsController::class, 'index'])->name('reports.index');
+    });
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
