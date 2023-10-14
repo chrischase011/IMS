@@ -78,7 +78,7 @@
                             <div class="col-4 d-flex flex-columns align-items-xenter justify-content-end">
                                 @guest
                                     <a href="{{ route('login') }}" type="button" class="btn btn-auth mx-5">Login</a>
-                                    <a href="{{ route('login') }}" type="button" class="btn btn-auth2">Register</a>
+                                    <a href="{{ route('register') }}" type="button" class="btn btn-auth2">Register</a>
                                 @else
                                     <span class="welcome">Welcome {{ Auth::user()->lastname }}!</span>
                                     <a class="btn btn-auth mx-5" href="{{ route('logout') }}"
