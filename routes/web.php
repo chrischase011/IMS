@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\OrdersController;
@@ -33,6 +34,9 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('in
 
 Auth::routes();
 
+Route::post('/registerUser', [RegisterController::class, 'registerUser'])->name("auth.registerUser");
+
+Route::get('verify/{email}/{token}', [ManagementController::class, 'verifyEmail'])->name('management.verifyEmail');
 
 Route::group(['middleware' => 'noCustomer'], function(){
 
@@ -127,6 +131,7 @@ Route::group(['middleware' => 'noCustomer'], function(){
     // For Management
     Route::group(['prefix' => 'management'], function(){
         Route::get('user', [ManagementController::class, 'index'])->name('management.index');
+        Route::post('store', [ManagementController::class, 'store'])->name('management.store');
     });
 });
 

@@ -133,7 +133,26 @@
                 },
             });
 
+            $("#btnAddUser").on('click', ()=>{
+                $("#mdlAdd").modal('show');
+            });
 
+
+            $("#form_add").on('submit', function(e){
+                var password = $("#frmPassword").val();
+                var confirmPass = $("#frmPasswordConfirm").val();
+
+                if(confirmPass !== password)
+                {
+                    e.preventDefault();
+
+                    Swal.fire({
+                        title: "Password did not match.",
+                        icon: 'error'
+                    });
+                }
+
+            });
 
         });
     </script>
@@ -146,55 +165,55 @@
                     <h5 class="modal-title">Add User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="#" method="post">
+                <form id="form_add" action="{{ route('management.store') }}" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
                             <label class="col-12">First Name</label>
                             <div class="col-12">
-                                <input type="text" name="firstname" class="form-control">
+                                <input type="text" name="firstname" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="row my-3">
                             <label class="col-12">Last Name</label>
                             <div class="col-12">
-                                <input type="text" name="lastname" class="form-control">
+                                <input type="text" name="lastname" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="row my-3">
                             <label class="col-12">Email</label>
                             <div class="col-12">
-                                <input type="email" name="email" class="form-control">
+                                <input type="email" name="email" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="row my-3">
                             <label class="col-12">Password</label>
                             <div class="col-12">
-                                <input type="password" name="password" class="form-control">
+                                <input type="password" name="password" id="frmPassword" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="row my-3">
                             <label class="col-12">Confirm Password</label>
                             <div class="col-12">
-                                <input type="password" name="password_confirmation" class="form-control">
+                                <input type="password" name="password_confirmation" id="frmPasswordConfirm" class="form-control">
                             </div>
                         </div>
 
                         <div class="row my-3">
                             <label class="col-12">Phone</label>
                             <div class="col-12">
-                                <input type="text" name="phone" class="form-control">
+                                <input type="text" name="phone" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="row my-3">
                             <label class="col-12">Role</label>
                             <div class="col-12">
-                                <select name="role" class="form-select">
+                                <select name="role" class="form-select" required>
                                     <option value="1">Admin</option>
                                     <option value="2">Employee</option>
                                     <option value="3">Customer</option>
