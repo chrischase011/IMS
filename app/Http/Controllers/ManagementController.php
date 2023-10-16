@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ManagementController extends Controller
 {
     public function index()
     {
-        $admins = User::where('roles', 1)->orderBy('lastname', 'asc')->get();
-        $employees = User::where('roles', 2)->orderBy('lastname', 'asc')->get();
+        $id = Auth::id();
+        $admins = User::where('roles', 1)->orderByRaw("id = $id DESC, lastname ASC")->get();
+        $employees = User::where('roles', 2)->orderByRaw("id = $id DESC, lastname ASC")->get();
         $customers = User::where('roles', 3)->orderBy('lastname', 'asc')->get();
 
         return view('management.index', ['admins' => $admins, 'employees' => $employees, 'customers' => $customers]);
@@ -26,7 +28,8 @@ class ManagementController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
-            'roles' => $request->role
+            'roles' => $request->role,
+            'email_verified_at' => Carbon::now(),
         ]);
 
         if($user)
@@ -48,5 +51,45 @@ class ManagementController extends Controller
 
         return redirect()->route('login')->with('success', 'Email has been confirmed. You may now login.');
 
+    }
+
+    public function getUser(Request $request)
+    {
+        $id = $request->id;
+
+        $data = User::find($id);
+
+        return response()->json($data);
+    }
+
+    public function update(Request $request)
+    {
+        $id = $request->id;
+
+        $user = User::find($id);
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->phone = $request->phone;
+        $user->roles = $request->role;
+
+        if($request->password !== "")
+        {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return back()->with('success', 'User account has been updated.');
+
+    }
+
+    public function deleteUser(Request $request)
+    {
+        $id = $request->id;
+
+        $user = User::find($id);
+        $user->delete();
+
+        return 1;
     }
 }

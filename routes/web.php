@@ -132,6 +132,9 @@ Route::group(['middleware' => 'noCustomer'], function(){
     Route::group(['prefix' => 'management'], function(){
         Route::get('user', [ManagementController::class, 'index'])->name('management.index');
         Route::post('store', [ManagementController::class, 'store'])->name('management.store');
+        Route::post('getUser', [ManagementController::class, 'getUser'])->name('management.getUser');
+        Route::post('update', [ManagementController::class, 'update'])->name('management.update');
+        Route::post('deleteUser', [ManagementController::class, 'deleteUser'])->name('management.deleteUser');
     });
 });
 
