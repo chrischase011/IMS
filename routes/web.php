@@ -38,6 +38,16 @@ Route::post('/registerUser', [RegisterController::class, 'registerUser'])->name(
 
 Route::get('verify/{email}/{token}', [ManagementController::class, 'verifyEmail'])->name('management.verifyEmail');
 
+// For Products
+Route::group(['prefix' => 'products'], function(){
+    Route::get('/', [ProductsController::class, 'index'])->name('products.index');
+    Route::post('store', [ProductsController::class, 'store'])->name('products.store');
+    Route::post('getProducts', [ProductsController::class, 'getProducts'])->name('products.getProducts');
+    Route::post('getProduct', [ProductsController::class, 'getProduct'])->name('products.getProduct');
+    Route::post('update', [ProductsController::class, 'update'])->name('products.update');
+    Route::post('delete', [ProductsController::class, 'deleteProduct'])->name('products.delete');
+});
+
 Route::group(['middleware' => 'noCustomer'], function(){
 
     // For Raw Materials
@@ -50,15 +60,7 @@ Route::group(['middleware' => 'noCustomer'], function(){
         Route::post('/delete', [RawMaterialsController::class, 'delete'])->name('raw.delete');
     });
 
-    // For Products
-    Route::group(['prefix' => 'products'], function(){
-        Route::get('/', [ProductsController::class, 'index'])->name('products.index');
-        Route::post('store', [ProductsController::class, 'store'])->name('products.store');
-        Route::post('getProducts', [ProductsController::class, 'getProducts'])->name('products.getProducts');
-        Route::post('getProduct', [ProductsController::class, 'getProduct'])->name('products.getProduct');
-        Route::post('update', [ProductsController::class, 'update'])->name('products.update');
-        Route::post('delete', [ProductsController::class, 'deleteProduct'])->name('products.delete');
-    });
+
 
 
     // For Suppliers
