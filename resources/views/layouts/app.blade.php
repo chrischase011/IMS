@@ -234,7 +234,7 @@
                                             <ul class="dropdown-menu " aria-labelledby="navbarDropdown"
                                                 aria-expanded="false">
                                                 <li class="">
-                                                    <a class="dropdown-item" href="inventory">
+                                                    <a class="dropdown-item" href="{{ route('management.index') }}">
                                                         <span class="fa fa-users mr-2" aria-hidden="true"></span>
                                                         Users
                                                     </a>

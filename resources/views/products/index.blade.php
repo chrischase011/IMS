@@ -97,8 +97,17 @@
                     {
                         data: 'id',
                         render: (e) => {
-                            return `<button type='button' onclick="viewEdit(${e})" class='btn btn-info'>Edit</button> 
-                            <button type='button' onclick="deleteProduct(${e})" class='btn btn-danger mx-1'>Delete</button>`;
+                            var role = '{{ Auth::user()->roles }}';
+
+                            if(role != '3')
+                            {
+                                return `<button type='button' onclick="viewEdit(${e})" class='btn btn-info'>Edit</button>
+                                <button type='button' onclick="deleteProduct(${e})" class='btn btn-danger mx-1'>Delete</button>`;
+                            }
+                            else{
+                                return '';
+                            }
+
                         },
                         orderable: false
                     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProduceController;
 use App\Http\Controllers\ProductsController;
@@ -121,6 +122,11 @@ Route::group(['middleware' => 'noCustomer'], function(){
     // For Reports
     Route::group(['prefix' => 'reports'], function(){
         Route::get('/', [ReportsController::class, 'index'])->name('reports.index');
+    });
+
+    // For Management
+    Route::group(['prefix' => 'management'], function(){
+        Route::get('user', [ManagementController::class, 'index'])->name('management.index');
     });
 });
 
