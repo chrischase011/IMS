@@ -43,7 +43,7 @@
             <div class="col-12 d-flex justify-content-end">
 
                 @if ($warehouse->type == 1)
-                    <a href="{{ route('warehouse_inventory.inventory', ['slug' => $slug]) }}" class="btn btn-warning">Purchase
+                    <a href="{{ route('raw.index') }}" class="btn btn-warning">Purchase
                         Raw Materials</a>
                 @endif
                 @if ($warehouse->type == 2)
