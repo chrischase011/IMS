@@ -49,6 +49,21 @@
                                 <td>₱{{ $order->total_amount }}</td>
                                 <td>{{ date('F d, Y', strtotime($order->created_at)) }}</td>
 
+
+                                <td>
+                                    @switch($order->is_paid)
+                                        @case(0)
+                                            <span class="badge bg-danger">Not Paid</span>
+                                        @break
+
+                                        @case(1)
+                                            <span class="badge bg-success">Paid</span>
+                                        @break
+
+                                        @default
+                                    @endswitch
+
+                                </td>
                                 <td>
                                     @switch($order->order_status)
                                         @case(0)
@@ -73,20 +88,6 @@
 
                                         @default
                                     @endswitch
-                                </td>
-                                <td>
-                                    @switch($order->is_paid)
-                                        @case(0)
-                                            <span class="badge bg-danger">Not Paid</span>
-                                        @break
-
-                                        @case(1)
-                                            <span class="badge bg-success">Paid</span>
-                                        @break
-
-                                        @default
-                                    @endswitch
-
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-primary btn-sm"
