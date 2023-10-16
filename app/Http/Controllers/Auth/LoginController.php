@@ -42,7 +42,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if($user->email_verified_at === null)
+        if($user->roles == 3 && $user->email_verified_at === null)
         {
             Auth::logout();
             return back()->with('error', "Please verify your email to login.");
