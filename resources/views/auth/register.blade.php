@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Register') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('auth.registerUser') }}">
+                        <form id="form_register" method="POST" action="{{ route('auth.registerUser') }}">
                             @csrf
 
                             <div class="row mb-3">
@@ -98,7 +98,8 @@
                             </div>
 
                             <div class="row mb-3" id="password_notice">
-                                <div class="col-6 bg-info">
+                                <label class="col-4"></label>
+                                <div class="col-6 alert alert-info p-3">
                                     Password must contain:
                                     <ul>
                                         <li>At least one uppercase letter.</li>
@@ -133,4 +134,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(()=>{
+            $("#form_register").on('submit', (e)=>{
+                var password = $("#password").val();
+                var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@+/.]).{8,}$/;
+
+                if(!pattern.test(password))
+                {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: "Password does not meet the requirements.",
+                        icon: 'error'
+                    });
+                }
+
+            });
+        });
+    </script>
 @endsection
