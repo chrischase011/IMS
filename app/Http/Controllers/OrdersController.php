@@ -147,7 +147,6 @@ class OrdersController extends Controller
 
 
         return view("orders.invoice", ['order' => $order, 'invoice_number' => $invoice_number]);
-
     }
 
     public function manageOrder(Request $request)
@@ -156,7 +155,30 @@ class OrdersController extends Controller
 
         $order = Orders::find($id);
         $order->is_paid = $request->is_paid;
+
+        $lastOrderStatus = $order->order_status;
         $order->order_status = $request->order_status;
+
+        if ($order->order_status == 4) {
+            $orderDetails = OrderDetails::where('order_id', $order->id)->get();
+
+            foreach ($orderDetails as $orderDetail) {
+                $inventory = Inventory::where('product_id', $orderDetail->product_id)->first();
+                $inventory->current_quantity += $orderDetail->quantity;
+                $inventory->save();
+            }
+        }
+
+        if ($lastOrderStatus == 4 && $request->order_status != 4) {
+            $orderDetails = OrderDetails::where('order_id', $order->id)->get();
+            foreach ($orderDetails as $orderDetail) {
+                $inventory = Inventory::where('product_id', $orderDetail->product_id)->first();
+                $inventory->current_quantity -= $orderDetail->quantity;
+                $inventory->save();
+            }
+        }
+
+
         $order->save();
 
         return back()->with('success', "Order Number <strong>$order->order_number</strong> has been updated successfully.");
@@ -164,10 +186,10 @@ class OrdersController extends Controller
 
     public function ordersList()
     {
-        if(!Auth::check())
+        if (!Auth::check())
             return redirect('/');
 
-        if(Auth::check() && Auth::user()->roles != 3)
+        if (Auth::check() && Auth::user()->roles != 3)
             return redirect('/');
 
         $orders = Orders::where('customer_id', Auth::id())->orderBy('id', 'desc')->get();
