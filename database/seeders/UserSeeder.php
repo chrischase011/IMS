@@ -15,34 +15,6 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         //
-
-        User::updateOrCreate([
-            'firstname' => 'Christopher Robin',
-            'lastname' => 'Chase',
-            'email' => 'christopherchase011@gmail.com',
-            'password' => Hash::make('chasechase'),
-            'phone' => '091234567890',
-            'roles' => 1
-        ]);
-
-        User::updateOrCreate([
-            'firstname' => 'Christopher Robin',
-            'lastname' => 'Chase',
-            'email' => 'christopherchase011+emp@gmail.com',
-            'password' => Hash::make('chasechase'),
-            'phone' => '091234567890',
-            'roles' => 2
-        ]);
-
-        User::updateOrCreate([
-            'firstname' => 'Christopher Robin',
-            'lastname' => 'Chase',
-            'email' => 'christopherchase011+cus@gmail.com',
-            'password' => Hash::make('chasechase'),
-            'phone' => '091234567890',
-            'roles' => 3
-        ]);
-
         User::updateOrCreate([
             'firstname' => 'Admin',
             'lastname' => 'Admin',
@@ -67,6 +39,7 @@ class UserSeeder extends Seeder
             'email' => 'customer@gmail.com',
             'password' => Hash::make('customer'),
             'phone' => '091234567890',
+            'email_verified_at' => now(),
             'roles' => 3
         ]);
     }

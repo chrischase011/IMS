@@ -93,15 +93,15 @@
                     </div>
                     <div class="col-5">
                         <div class="pic-ctn">
-                            <img src="https://smmarkets.ph/media/catalog/product/2/0/20532583_decs_assorted_2pcs_pork_shrimp_siomai_2pcs_hakaw_2pcs_sharksfin_6pcs.jpg?optimize=low&bg-color=255,255,255&fit=bounds&height=&width="
+                            <img src="{{ URL::asset('assets/images/image-removebg-preview (18).png') }}" 
                                 alt="" class="pic">
-                            <img src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/319489656/original/ef60a5e7b8b47a1a20e48cd6f082ab634d9a0cce/creative-unique-pizza-box-design-for-your-restaurant-with-high-product-packaging.png"
+                            <img src="{{ URL::asset('assets/images/image-removebg-preview (19).png') }}" 
                                 alt="" class="pic">
-                            <img src="https://ilovetaguig.files.wordpress.com/2012/01/tipas-hopia_3.jpg" alt=""
+                            <img src="{{ URL::asset('assets/images/image-removebg-preview (20).png') }}"  alt=""
                                 class="pic">
-                            <img src="https://img.ws.mms.shopee.ph/c817072747d990b0317060a43b4a5f8c" alt=""
+                            <img src="{{ URL::asset('assets/images/image-removebg-preview (21).png') }}"  alt=""
                                 class="pic">
-                            <img src="https://megaqmart.com/cdn/shop/products/800000000002_d64197a5-3b1b-45f9-bb00-96f1508e126b_800x.png?v=1645603028"
+                            <img src="{{ URL::asset('assets/images/image-removebg-preview (22).png') }}" 
                                 alt="" class="pic">
                         </div>
                     </div>
