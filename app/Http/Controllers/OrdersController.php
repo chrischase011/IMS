@@ -170,7 +170,7 @@ class OrdersController extends Controller
         if(Auth::check() && Auth::user()->roles != 3)
             return redirect('/');
 
-        $orders = Orders::where('customer_id', Auth::id())->get();
+        $orders = Orders::where('customer_id', Auth::id())->orderBy('id', 'desc')->get();
 
         return view('orders.orders', ['orders' => $orders]);
     }
