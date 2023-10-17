@@ -62,7 +62,7 @@
                     <div class="row my-3 d-none qp">
                         <label class="col-12">Quantity of Product to Produce</label>
                         <div class="col-12">
-                            <input type="number" name="quantity" class="form-control" id="quantity" required>
+                            <input type="number" name="quantity" class="form-control" min="1" id="quantity" required>
                         </div>
                     </div>
 

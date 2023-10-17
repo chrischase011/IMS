@@ -129,7 +129,7 @@
                     {
                         data: 'id',
                         render: (e) => {
-                            return `<button type='button' onclick="viewEdit(${e})" class='btn btn-info'>Edit</button> 
+                            return `<button type='button' onclick="viewEdit(${e})" class='btn btn-info'>Edit</button>
                             <button type='button' onclick="deleteRaw(${e})" class='btn btn-danger mx-1'>Delete</button>`;
                         },
                         orderable: false
@@ -147,7 +147,7 @@
                 $("#mdlRaw").modal('show');
             });
 
-            // 
+            //
         });
 
 
@@ -222,14 +222,14 @@
                         <div class="row my-3">
                             <label class="col-12">Quantity</label>
                             <div class="col-12">
-                                <input type="number" name="quantity" id="quantity" class="form-control" required>
+                                <input type="number" name="quantity" id="quantity" min="1" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="row my-3">
                             <label class="col-12">Price</label>
                             <div class="col-12">
-                                <input type="number" name="price" id="price" class="form-control" required>
+                                <input type="number" name="price" id="price" min="1" class="form-control" required>
                             </div>
                         </div>
 
@@ -312,14 +312,14 @@
                         <div class="row my-3">
                             <label class="col-12">Quantity</label>
                             <div class="col-12">
-                                <input type="number" name="quantity" id="editQuantity" class="form-control" required>
+                                <input type="number" name="quantity" id="editQuantity" min="1" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="row my-3">
                             <label class="col-12">Price</label>
                             <div class="col-12">
-                                <input type="number" name="price" id="editPrice" class="form-control" required>
+                                <input type="number" name="price" id="editPrice" min="1" class="form-control" required>
                             </div>
                         </div>
 
