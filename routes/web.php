@@ -48,6 +48,13 @@ Route::group(['prefix' => 'products'], function(){
     Route::post('delete', [ProductsController::class, 'deleteProduct'])->name('products.delete');
 });
 
+Route::group(['prefix' => 'orders'], function(){
+    Route::get('/orders/list', [OrdersController::class, 'ordersList'])->name('orders.orders');
+    Route::post("viewOrder", [OrdersController::class, 'viewOrder'])->name('orders.viewOrder');
+    Route::post('manageOrder', [OrdersController::class, 'manageOrder'])->name('orders.manageOrder');
+    Route::post('received', [OrdersController::class, 'orderReceived'])->name('orders.received');
+});
+
 Route::group(['middleware' => 'noCustomer'], function(){
 
     // For Raw Materials
@@ -120,9 +127,9 @@ Route::group(['middleware' => 'noCustomer'], function(){
         Route::post('/getCustomer', [OrdersController::class, 'getCustomer'])->name('orders.getCustomer');
         Route::post('/getProductsByWarehouse', [OrdersController::class, 'getProductsByWarehouse'])->name('orders.getProductsByWarehouse');
         Route::post('/submitOrder', [OrdersController::class, "submitOrder"])->name('orders.submitOrder');
-        Route::post("viewOrder", [OrdersController::class, 'viewOrder'])->name('orders.viewOrder');
+
         Route::get('generate/invoice/{orderID}', [OrdersController::class, 'generateInvoice'])->name('orders.generateInvoice');
-        Route::post('manageOrder', [OrdersController::class, 'manageOrder'])->name('orders.manageOrder');
+
     });
 
     // For Reports

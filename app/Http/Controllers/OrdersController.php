@@ -12,6 +12,7 @@ use App\Models\Roles;
 use App\Models\User;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrdersController extends Controller
 {
@@ -161,4 +162,29 @@ class OrdersController extends Controller
         return back()->with('success', "Order Number <strong>$order->order_number</strong> has been updated successfully.");
     }
 
+    public function ordersList()
+    {
+        if(!Auth::check())
+            return redirect('/');
+
+        if(Auth::check() && Auth::user()->roles != 3)
+            return redirect('/');
+
+        $orders = Orders::where('customer_id', Auth::id())->get();
+
+        return view('orders.orders', ['orders' => $orders]);
+    }
+
+
+    public function orderReceived(Request $request)
+    {
+        $id = $request->id;
+
+        $order = Orders::find($id);
+
+        $order->order_status = 3;
+        $order->save();
+
+        return 1;
+    }
 }

@@ -122,6 +122,14 @@
                                             Products
                                         </a>
                                     </li>
+                                    @if (Auth::user()->roles === 3)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('orders.orders') }}">
+                                            <span class="fa fa-cart-shopping mr-2" aria-hidden="true"></span>
+                                            My Orders
+                                        </a>
+                                    </li>
+                                    @endif
                                     @if (Auth::user()->roles !== 3)
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('inventory.index') }}">
