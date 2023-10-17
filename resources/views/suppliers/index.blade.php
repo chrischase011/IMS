@@ -543,7 +543,7 @@
                         <div class="row my-3">
                             <label class="col-12">Country</label>
                             <div class="col-12">
-                                <select id="country" name="country" class="form-control" required>
+                                <select id="editCountry" name="country" class="form-control" required>
                                     <option value="Philippines">Philippines</option>
                                     <option value="Afghanistan">Afghanistan</option>
                                     <option value="Åland Islands">Åland Islands</option>
