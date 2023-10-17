@@ -86,7 +86,7 @@ class ProductsController extends Controller
         $desc = $request->description ? $request->description : "No Description";
 
         $product = Products::find($id);
-        
+
         $product->name = $request->name;
         $product->price = $request->price;
         $product->description = $desc;
@@ -96,13 +96,13 @@ class ProductsController extends Controller
 
         $existingProductRequirements = $product->productRequirements;
 
-       
+
         foreach ($existingProductRequirements as $requirement) {
             if (!in_array($requirement->raw_material_id, $rawIDs) || !in_array($requirement->id, $prodReqIDs)) {
                 $requirement->delete();
             } else {
 
-                $newQuantity = $request->input("editQuantity$requirement->id");
+                $newQuantity = $request->input("editQuantity$requirement->raw_material_id");
                 if ($newQuantity !== $requirement->quantity) {
                     $requirement->quantity = $newQuantity;
                     $requirement->save();
@@ -114,7 +114,7 @@ class ProductsController extends Controller
             if (!in_array($rawMaterialId, $prodReqIDs)) {
                 // Check if a product requirement with this raw_material_id already exists.
                 $existingRequirement = $existingProductRequirements->where('raw_material_id', $rawMaterialId)->first();
-    
+
                 if (!$existingRequirement) {
                     // Create a new product requirement if it doesn't exist.
                     ProductRequirements::create([

@@ -353,7 +353,7 @@
                                             }
 
                                             var appendToList = `
-                                            <label id="editLabel${selectedValue}">${selectedText} <input type="number" name='editQuantity${selectedValue}' required> <button type="button" class="btn btn-transparent" onclick="editDeleteRequirement(${selectedValue}, '${selectedText}')"><i class='fa fa-x'></i></button><br></label>
+                                            <label id="editLabel${selectedValue}">${selectedText} <input type="number" name='editQuantity${selectedValue}' min="1" required> <button type="button" class="btn btn-transparent" onclick="editDeleteRequirement(${selectedValue}, '${selectedText}')"><i class='fa fa-x'></i></button><br></label>
                                         `;
                                             $("#edit-list-raw").append(appendToList);
 
@@ -452,7 +452,7 @@
                             $("#editProductReqIDs").val(pRIDs + "," + e.id);
                         }
                         appendToList += `
-                                            <label id="editLabel${e.raw_material_id}">${e.raw_material.name} <input type="number" name='editQuantity${e.raw_material_id}' value='${e.quantity}' required> <button type="button" class="btn btn-transparent" onclick="editDeleteRequirement(${e.raw_material_id}, '${e.raw_material.name}')"><i class='fa fa-x'></i></button><br></label>
+                                            <label id="editLabel${e.raw_material_id}">${e.raw_material.name} <input type="number" name='editQuantity${e.raw_material_id}' min="1" value='${e.quantity}' required> <button type="button" class="btn btn-transparent" onclick="editDeleteRequirement(${e.raw_material_id}, '${e.raw_material.name}')"><i class='fa fa-x'></i></button><br></label>
                                         `;
                     });
 
