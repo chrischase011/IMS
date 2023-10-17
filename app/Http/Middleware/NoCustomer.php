@@ -18,6 +18,6 @@ class NoCustomer
     {
         if(Auth::check() && in_array(Auth::user()->role->slug, ['admin', 'employee']))
             return $next($request);
-        return abort(403);
+        return redirect('/');
     }
 }
