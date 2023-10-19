@@ -27,12 +27,12 @@ class WarehouseInventoryController extends Controller
         $stockIn = StockTransaction::with(['product', 'rawMaterial'])->where(function ($query) use ($warehouse) {
             $query->where('transaction_type', 'stock-in')
                 ->where('warehouse_id', $warehouse->id);
-        })->orderBy('created_at', 'desc')->get();
+        })->orderBy('transaction_date', 'desc')->get();
 
         $stockOut = StockTransaction::with(['product', 'rawMaterial'])->where(function ($query) use ($warehouse) {
             $query->where('transaction_type', 'stock-out')
                 ->where('warehouse_id', $warehouse->id);
-        })->orderBy('created_at', 'desc')->get();
+        })->orderBy('transaction_date', 'desc')->get();
 
 
         $products = Inventory::with('product')->where('warehouse_id', $warehouse->id)->get();

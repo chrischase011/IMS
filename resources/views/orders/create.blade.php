@@ -146,14 +146,28 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="col-6">
-                            <select class="form-control" id="printing_services" name="printing_services">
+                            {{-- <select class="form-control" id="printing_services" name="printing_services">
                                 <option value="0">No Design</option>
                                 <option value="1">Minimal</option>
                                 <option value="2">Half Box</option>
                                 <option value="3">Full Box</option>
-                            </select>
-
-                            <p>Cost: <span id="printing_cost">0.00</span></p>
+                            </select> --}}
+                            <input type="number" class="form-control" min="0" id="printing_services"
+                                name="printing_services" value="0" placeholder="Cost"><br>
+                            <input type="file" name="printing_image" id="printing_image">
+                            <p class="alert alert-info mt-2">
+                               <span class="fw-bold">Printing Service:</span><br>
+                                1 to 5 colors: 50 pesos<br>
+                                6 to 10 colors: 100 pesos<br>
+                                11+: 200 pesos<br>
+                                Dark Colors: 30 pesos<br>
+                                Light Colors: 40 pesos<br>
+                                Combination: 35 pesos<br>
+                                Full Box: 200 pesos<br>
+                                Half Box: 100 pesos<br>
+                                Minimal: 50 pesos<br>
+                                No design<br>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -364,12 +378,16 @@
                 selectElement.empty();
                 selectElement.append(`<option value=''>-- Select Product --</option>`);
                 $.each(items, function(index, product) {
-                    if (!selectedProducts.includes(product.product_id)) {
-                        selectElement.append($('<option>', {
-                            value: product.product_id,
-                            text: product.product.name
-                        }));
+                    var option = $('<option>', {
+                        value: product.product_id,
+                        text: product.product.name
+                    });
+
+                    if (selectedProducts.includes(product.product_id.toString())) {
+                        option.attr('disabled', true);
                     }
+
+                    selectElement.append(option);
                 });
             }
 
@@ -592,33 +610,37 @@
         var previous_printing_cost = 0; // Variable to store the previous printing_cost
 
         $(() => {
-            $("#printing_services").on('change', function() {
+            $("#printing_services").on('change input', function() {
                 var p = $(this).val();
+                if (p == "")
+                    p = 0;
 
                 // Subtract the previous printing_cost
                 totalSum -= previous_printing_cost;
 
-                switch (p) {
-                    case "0":
-                        $("#printing_cost").text("0.00");
-                        printing_cost = 0;
-                        break;
+                printing_cost = parseFloat(p);
 
-                    case "1":
-                        $("#printing_cost").text("80.00");
-                        printing_cost = 80;
-                        break;
+                // switch (p) {
+                //     case "0":
+                //         $("#printing_cost").text("0.00");
+                //         printing_cost = 0;
+                //         break;
 
-                    case "2":
-                        $("#printing_cost").text("120.00");
-                        printing_cost = 120;
-                        break;
+                //     case "1":
+                //         $("#printing_cost").text("80.00");
+                //         printing_cost = 80;
+                //         break;
 
-                    case "3":
-                        $("#printing_cost").text("200.00");
-                        printing_cost = 200;
-                        break;
-                }
+                //     case "2":
+                //         $("#printing_cost").text("120.00");
+                //         printing_cost = 120;
+                //         break;
+
+                //     case "3":
+                //         $("#printing_cost").text("200.00");
+                //         printing_cost = 200;
+                //         break;
+                // }
 
                 // Update the previous_printing_cost
                 previous_printing_cost = printing_cost;
