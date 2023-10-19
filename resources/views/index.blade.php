@@ -93,12 +93,12 @@
                     </div>
                     <div class="col-5">
                         <div class="pic-ctn">
-                            <img src="{{ URL::asset('assets/images/image-removebg-preview (25).png') }}" 
-                                alt="" class="pic">
-                            <img src="{{ URL::asset('assets/images/image-removebg-preview (21).png') }}" 
-                                alt="" class="pic">
-                            <img src="{{ URL::asset('assets/images/image-removebg-preview (19).png') }}"  alt=""
+                        <img src="{{ URL::asset('assets/images/image-removebg-preview (19).png') }}"  alt=""
                                 class="pic">
+                                <img src="{{ URL::asset('assets/images/image-removebg-preview (21).png') }}" 
+                                alt="" class="pic">
+                            <img src="{{ URL::asset('assets/images/image-removebg-preview (25).png') }}" 
+                                alt="" class="pic">                                    
                             <img src="{{ URL::asset('assets/images/image-removebg-preview (23).png') }}"  alt=""
                                 class="pic">
                             <img src="{{ URL::asset('assets/images/image-removebg-preview (24).png') }}" 
