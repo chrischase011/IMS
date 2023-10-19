@@ -219,7 +219,7 @@
 
                     <div class="row my-3">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-success">Submit Order</button>
+                            <button type="submit" class="btn btn-success">Add Order</button>
                         </div>
                     </div>
                 </div>
