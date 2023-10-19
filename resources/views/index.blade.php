@@ -97,12 +97,12 @@
                                 class="pic">
                                 <img src="{{ URL::asset('assets/images/image-removebg-preview (21).png') }}" 
                                 alt="" class="pic">
+                                <img src="{{ URL::asset('assets/images/image-removebg-preview (23).png') }}"  alt=""
+                                class="pic">
+                                <img src="{{ URL::asset('assets/images/image-removebg-preview (24).png') }}" 
+                                alt="" class="pic">
                             <img src="{{ URL::asset('assets/images/image-removebg-preview (25).png') }}" 
                                 alt="" class="pic">                                    
-                            <img src="{{ URL::asset('assets/images/image-removebg-preview (23).png') }}"  alt=""
-                                class="pic">
-                            <img src="{{ URL::asset('assets/images/image-removebg-preview (24).png') }}" 
-                                alt="" class="pic">
                                 <img src="{{ URL::asset('assets/images/image-removebg-preview (26).png') }}" 
                                 alt="" class="pic">
                                 <img src="{{ URL::asset('assets/images/image-removebg-preview (27).png') }}" 
