@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <form id="form-order" action="{{ route('orders.submitOrder') }}" method="post">
+        <form id="form-order" action="{{ route('orders.submitOrder') }}" method="post" enctype="multipart/form-data">
             <div class="row my-3">
                 <div class="col-6">
                     <div class="row">
@@ -155,6 +155,7 @@
                             <input type="number" class="form-control" min="0" id="printing_services"
                                 name="printing_services" value="0" placeholder="Cost"><br>
                             <input type="file" name="printing_image" id="printing_image">
+                            <textarea class="form-control my-2" placeholder="Notes" name="printing_notes" id="printing_notes" rows="3" style="resize: none"></textarea>
                             <p class="alert alert-info mt-2">
                                <span class="fw-bold">Printing Service:</span><br>
                                 1 to 5 colors: 50 pesos<br>

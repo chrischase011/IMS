@@ -87,6 +87,15 @@ class OrdersController extends Controller
     {
         $orderNumber = HandleOrderNumber::generate();
         $warehouse = Warehouse::find($request->warehouse_id);
+
+        if($request->hasFile('printing_image'))
+        {
+            $printing_image = $request->file('printing_image');
+            $data = file_get_contents($printing_image);
+            $base64 = base64_encode($data);
+        }
+
+
         $order = Orders::create([
             'order_number' => $orderNumber,
             'order_date' => $request->order_date,
@@ -96,7 +105,8 @@ class OrdersController extends Controller
             'printing_service' => $request->printing_services,
             'gross_amount' => $request->gross_amount,
             'vat' => $request->vat,
-            'total_amount' => $request->total_amount
+            'total_amount' => $request->total_amount,
+            'printing_image' => $base64,
         ]);
 
         $lastOrder = $order->id;
