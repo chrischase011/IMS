@@ -144,6 +144,7 @@ Route::group(['middleware' => 'noCustomer'], function(){
         Route::post('getUser', [ManagementController::class, 'getUser'])->name('management.getUser');
         Route::post('update', [ManagementController::class, 'update'])->name('management.update');
         Route::post('deleteUser', [ManagementController::class, 'deleteUser'])->name('management.deleteUser');
+        Route::get('customers', [ManagementController::class, 'customerIndex'])->name('management.customers');
     });
 });
 

@@ -123,12 +123,12 @@
                                         </a>
                                     </li>
                                     @if (Auth::user()->roles === 3)
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('orders.orders') }}">
-                                            <span class="fa fa-cart-shopping mr-2" aria-hidden="true"></span>
-                                            My Orders
-                                        </a>
-                                    </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('orders.orders') }}">
+                                                <span class="fa fa-cart-shopping mr-2" aria-hidden="true"></span>
+                                                My Orders
+                                            </a>
+                                        </li>
                                     @endif
                                     @if (Auth::user()->roles !== 3)
                                         <li class="nav-item">
@@ -249,9 +249,37 @@
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a class="dropdown-item" href="{{ route('suppliers.index') }}">
-                                                        <span class="fa fa-box mr-2" aria-hidden="true"></span>
+                                                    <a class="dropdown-item" href="{{ route('management.index') }}">
+                                                        <span class="fa fa-users mr-2" aria-hidden="true"></span>
+                                                        User Log
+                                                    </a>
+                                                </li>
+                                            </ul>
+
+                                        </li>
+
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                                                aria-expanded="false" href="#business-partners" id="navbarDropdown">
+                                                <span class="fa fa-user-group"></span>
+                                                <span class="ml-2">Business Partners</span>
+                                            </a>
+
+                                            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                                <li class="">
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('suppliers.index') }}">
+                                                        <span class="fa fa-box mr-2"
+                                                            aria-hidden="true"></span>
                                                         Suppliers
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('management.customers') }}">
+                                                        <span class="fa fa-user mr-2"
+                                                            aria-hidden="true"></span>
+                                                        Customers
                                                     </a>
                                                 </li>
                                             </ul>

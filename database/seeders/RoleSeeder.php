@@ -13,10 +13,12 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        Roles::insert([
-            ['name' => 'Admin', 'slug' => 'admin'],
-            ['name' => 'Employee', 'slug' => 'employee'],
-            ['name' => 'Customer', 'slug' => 'customer'],
-        ]);
+        Roles::updateOrCreate(['slug' => 'admin'], ['name' => 'Admin']);
+        Roles::updateOrCreate(['slug' => 'employee'], ['name' => 'Employee']);
+        Roles::updateOrCreate(['slug' => 'customer'], ['name' => 'Customer']);
+
+        // Add the two new roles
+        Roles::updateOrCreate(['slug' => 'sales-employee'], ['name' => 'Sales Employee']);
+        Roles::updateOrCreate(['slug' => 'purchase-employee'], ['name' => 'Purchase Employee']);
     }
 }

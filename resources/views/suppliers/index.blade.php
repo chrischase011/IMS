@@ -28,6 +28,7 @@
                 <table class="table table-light table-bordered table-striped" id="table">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Contact Name</th>
                             <th>Contact Email</th>
@@ -70,7 +71,11 @@
                     url: "{{ route('suppliers.getSuppliers') }}",
                     type: 'post',
                 },
-                columns: [{
+                columns: [
+                    {
+                        data:'id'
+                    },
+                    {
                         data: 'name',
                     },
                     {

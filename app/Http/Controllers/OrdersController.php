@@ -107,6 +107,7 @@ class OrdersController extends Controller
             'vat' => $request->vat,
             'total_amount' => $request->total_amount,
             'printing_image' => $base64,
+            'printing_notes' => $request->printing_notes,
         ]);
 
         $lastOrder = $order->id;

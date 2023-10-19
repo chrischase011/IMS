@@ -56,3 +56,12 @@
     background-color: #6c757d;
     color: white;
 }
+
+
+.drp-menu{
+    margin-left: 40px;
+}
+
+.drp-down:hover .drp-menu{
+    display: block;
+}
