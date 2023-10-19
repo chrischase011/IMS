@@ -123,6 +123,7 @@
                 language: {
                     loadingRecords: "Fetching Data... Please Wait!"
                 },
+                order: [[0, 'desc']],
                 columnDefs: [{
                     orderable: false,
                     target: 6
@@ -146,6 +147,7 @@
                     $("#customer_phone").val(data.customers.phone);
                     $("#order_date").val(moment(data.order_date).format('MMM. D, YYYY'));
                     $("#shipping_address").val(data.shipping_address);
+                    $("#warehouse").val(data.warehouses.name);
 
                     var html = "";
                     $("#productContainer").html();
@@ -265,7 +267,12 @@
                             <div class="row my-3">
                                 <label class="col-12">Warehouse</label>
                                 <div class="col-12">
-                                    <input type="text" value="{{ $warehouse->name }}" class="form-control" readonly>
+                                    <input type="text" value="" id="warehouse" class="form-control" readonly>
+                                    {{-- <select name="warehouse" id="warehouse" class="form-select" required>
+                                        @foreach($warehouses as $warehouse)
+                                            <option></option>
+                                        @endforeach
+                                    </select> --}}
                                 </div>
                             </div>
                         </div>

@@ -36,4 +36,10 @@ class Orders extends Model
     }
 
 
+    public function warehouses()
+    {
+        return $this->belongsTo(Warehouse::class, 'warehouse_id');
+    }
+
+
 }

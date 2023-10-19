@@ -10,6 +10,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RawMaterialsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SuppliersController;
+use App\Http\Controllers\UserLogController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\WarehouseInventoryController;
 use App\Models\Suppliers;
@@ -65,6 +66,7 @@ Route::group(['middleware' => 'noCustomer'], function(){
         Route::post('/getRawMaterial', [RawMaterialsController::class, 'getRawMaterial'])->name('raw.getRawMaterial');
         Route::post('/update', [RawMaterialsController::class, 'update'])->name('raw.update');
         Route::post('/delete', [RawMaterialsController::class, 'delete'])->name('raw.delete');
+        Route::get('/create', [RawMaterialsController::class, 'create'])->name('raw.create');
     });
 
 
@@ -145,6 +147,11 @@ Route::group(['middleware' => 'noCustomer'], function(){
         Route::post('update', [ManagementController::class, 'update'])->name('management.update');
         Route::post('deleteUser', [ManagementController::class, 'deleteUser'])->name('management.deleteUser');
         Route::get('customers', [ManagementController::class, 'customerIndex'])->name('management.customers');
+    });
+
+    // For Logs
+    Route::group(['prefix' => 'user-log'], function(){
+        Route::get('/', [UserLogController::class, 'index'])->name('user_log.index');
     });
 });
 

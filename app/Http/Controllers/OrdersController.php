@@ -18,19 +18,19 @@ class OrdersController extends Controller
 {
     public function index($slug = null)
     {
-        if ($slug == null)
-            return view('orders.index', ['slug' => $slug]);
+        // if ($slug == null)
+        //     return view('orders.index', ['slug' => $slug]);
 
-        $warehouse = Warehouse::where('slug', $slug)->first();
+        $warehouses = Warehouse::all();
+        $orders = Orders::with('customers')->orderBy('id', 'desc')->get();
+        // if ($warehouse) {
+        //     $orders = Orders::with('customers')->where('warehouse_id', $warehouse->id)->orderBy('id', 'desc')->get();
+        // } else {
 
-        if ($warehouse) {
-            $orders = Orders::with('customers')->where('warehouse_id', $warehouse->id)->orderBy('id', 'desc')->get();
-        } else {
+        //     return abort(404);
+        // }
 
-            return abort(404);
-        }
-
-        return view('orders.index', ['orders' => $orders, 'slug' => $slug, 'warehouse' => $warehouse]);
+        return view('orders.index', ['orders' => $orders, 'slug' => $slug, 'warehouses' => $warehouses]);
     }
 
     public function createOrder($slug = '0')
@@ -144,7 +144,7 @@ class OrdersController extends Controller
     {
         $id = $request->id;
 
-        $orders = Orders::with(['customers', 'orderDetails', 'products'])->find($id);
+        $orders = Orders::with(['customers', 'orderDetails', 'products', 'warehouses'])->find($id);
 
         return response()->json($orders);
     }

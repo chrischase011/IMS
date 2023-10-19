@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\HandleLoginActivity;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -42,11 +43,15 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+
         if($user->roles == 3 && $user->email_verified_at === null)
         {
+            HandleLoginActivity::storeActivity($user->email, $request->ip(), $request->userAgent(), 'Email not verified.');
             Auth::logout();
             return back()->with('error', "Please verify your email to login.");
         }
+
+        HandleLoginActivity::storeActivity($user->email, $request->ip(), $request->userAgent(), 'Successful Login');
         return redirect($this->redirectTo);
     }
 }

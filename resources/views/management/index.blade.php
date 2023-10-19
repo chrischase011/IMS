@@ -91,7 +91,7 @@
             </div>
         </div>
         <hr>
-        {{-- Customers --}}
+        {{-- Customers
         <div class="row justify-content-center my-3">
             <div class="col-10 table-responsive">
                 <h4>Customers</h4>
@@ -123,7 +123,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> --}}
     </div>
 
 
@@ -272,7 +272,8 @@
                             <div class="col-12">
                                 <select name="role" class="form-select" required>
                                     <option value="1">Admin</option>
-                                    <option value="2">Employee</option>
+                                    <option value="4">Sales Employee</option>
+                                    <option value="5">Purchase Employee</option>
                                     <option value="3">Customer</option>
                                 </select>
                             </div>
@@ -340,7 +341,8 @@
                             <div class="col-12">
                                 <select name="role" id="editRole" class="form-select" required>
                                     <option value="1">Admin</option>
-                                    <option value="2">Employee</option>
+                                    <option value="4">Sales Employee</option>
+                                    <option value="5">Purchase Employee</option>
                                     <option value="3">Customer</option>
                                 </select>
                             </div>

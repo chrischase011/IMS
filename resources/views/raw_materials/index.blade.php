@@ -17,8 +17,8 @@
 
         <div class="row">
             <div class="col-12 d-flex justify-content-end">
-                <button type="button" id="btnAddRaw" class="btn btn-primary me-3" title="Add Raw Material"><i
-                        class="fa fa-plus"></i></button>
+                <a href="{{ route('raw.create') }}" class="btn btn-primary me-3" title="Purchase Raw Material"><i
+                        class="fa fa-plus"></i></a>
             </div>
         </div>
         <div class="row my-3 justify-content-center">

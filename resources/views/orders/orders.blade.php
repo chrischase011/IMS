@@ -109,13 +109,14 @@
             table = $("#table").DataTable({
                 responsive: true,
                 width: '100%',
+                order: [[0, 'desc']],
                 language: {
                     loadingRecords: "Fetching Data... Please Wait!"
                 },
                 columnDefs: [{
                     orderable: false,
                     target: 6
-                }, ]
+                } ]
             });
         });
         var pageTitle = "";

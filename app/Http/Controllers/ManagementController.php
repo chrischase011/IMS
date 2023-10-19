@@ -14,7 +14,7 @@ class ManagementController extends Controller
     {
         $id = Auth::id();
         $admins = User::where('roles', 1)->orderByRaw("id = $id DESC, lastname ASC")->get();
-        $employees = User::where('roles', 2)->orderByRaw("id = $id DESC, lastname ASC")->get();
+        $employees = User::whereIn('roles', [2,4,5])->orderByRaw("id = $id DESC, lastname ASC")->get();
 
 
         return view('management.index', ['admins' => $admins, 'employees' => $employees]);

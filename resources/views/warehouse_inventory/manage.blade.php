@@ -42,14 +42,14 @@
         <div class="row my-3">
             <div class="col-12 d-flex justify-content-end">
 
-                @if ($warehouse->type == 1)
+                {{-- @if ($warehouse->type == 1)
                     <a href="{{ route('raw.index') }}" class="btn btn-warning">Purchase
                         Raw Materials</a>
                 @endif
                 @if ($warehouse->type == 2)
                     <a href="{{ route('orders.index', ['slug' => $slug]) }}" class="btn btn-warning">Manage
                         Orders</a>
-                @endif
+                @endif --}}
 
                 <a href="{{ route('warehouse_inventory.inventory', ['slug' => $slug]) }}" class="btn btn-primary mx-3">View
                     Warehouse Inventory</a>

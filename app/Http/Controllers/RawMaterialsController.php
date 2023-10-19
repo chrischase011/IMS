@@ -24,6 +24,16 @@ class RawMaterialsController extends Controller
         return view('raw_materials.index', ['suppliers' => $suppliers, 'warehouses' => $warehouses]);
     }
 
+    public function create()
+    {
+        $suppliers = Suppliers::all();
+        $warehouses = Warehouse::where(function($query){
+            $query->where('type', 1)
+                ->where('status', 1);
+        })->get();
+        return view('raw_materials.create', ['suppliers' => $suppliers, 'warehouses' => $warehouses]);
+    }
+
     public function getRawMaterials()
     {
         $res = RawMaterials::with(['supplier', 'warehouse'])->orderBy('name', 'asc')->get();
@@ -90,13 +100,13 @@ class RawMaterialsController extends Controller
             $quantityOut = $last_quantity - $request->quantity;
             HandleStockTransaction::writeStockTransaction($id, 'raw', null, $quantityOut, Carbon::now(), 'stock-out', null, $data->warehouse_id);
         }
-        
+
         if($request->quantity > $last_quantity)
         {
             $quantityIn = $request->quantity - $last_quantity;
             HandleStockTransaction::writeStockTransaction($id, 'raw', $quantityIn, null, Carbon::now(), 'stock-in', null, $data->warehouse_id);
         }
-            
+
 
         return back()->with('success', 'Updated Successfully');
     }
@@ -110,7 +120,7 @@ class RawMaterialsController extends Controller
 
         if($data)
         {
-            $data->delete();    
+            $data->delete();
         }
 
         return 1;
