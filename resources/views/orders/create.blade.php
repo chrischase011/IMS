@@ -168,6 +168,8 @@
                                 Half Box: 100 pesos<br>
                                 Minimal: 50 pesos<br>
                                 No design<br>
+
+                                1-5 Colors + Layout Cost: P60
                             </p>
                         </div>
                     </div>

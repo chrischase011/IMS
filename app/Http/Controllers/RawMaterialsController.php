@@ -125,4 +125,11 @@ class RawMaterialsController extends Controller
 
         return 1;
     }
+
+    public function purchaseReport($id)
+    {
+        $report = RawMaterials::with('supplier')->findOrFail($id);
+        // return $report;
+        return view('raw_materials.purchase_report', ['report' => $report]);
+    }
 }

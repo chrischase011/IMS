@@ -67,6 +67,7 @@ Route::group(['middleware' => 'noCustomer'], function(){
         Route::post('/update', [RawMaterialsController::class, 'update'])->name('raw.update');
         Route::post('/delete', [RawMaterialsController::class, 'delete'])->name('raw.delete');
         Route::get('/create', [RawMaterialsController::class, 'create'])->name('raw.create');
+        Route::get('reports/{id}', [RawMaterialsController::class, 'purchaseReport'])->name('raw.reports');
     });
 
 
