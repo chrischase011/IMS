@@ -188,9 +188,9 @@
                                 <td>{{ $product->reorder_level }}</td>
                                 <td>
                                     @if ($product->current_quantity == 0)
-                                        <span class="badge badge-lg bg-danger">Insufficient Stocks</span>
+                                        <span class="badge badge-lg bg-danger">No Stocks</span>
                                     @elseif($product->current_quantity < $product->reorder_level)
-                                        <span class="badge badge-lg bg-warning">Need to Produce</span>
+                                        <span class="badge badge-lg bg-warning">Insufficient Stocks</span>
                                     @else
                                         <span class="badge badge-lg bg-success">Sufficient Stocks</span>
                                     @endif
@@ -229,9 +229,9 @@
                                     <td>{{ $rawMaterial->reorder_level }}</td>
                                     <td>
                                         @if ($rawMaterial->quantity == 0)
-                                            <span class="badge badge-lg bg-danger">Insufficient Stocks</span>
+                                            <span class="badge badge-lg bg-danger">No Stocks</span>
                                         @elseif($rawMaterial->quantity < $rawMaterial->reorder_level)
-                                            <span class="badge badge-lg bg-warning">Need to Produce</span>
+                                            <span class="badge badge-lg bg-warning">Insufficient Stocks</span>
                                         @else
                                             <span class="badge badge-lg bg-success">Sufficient Stocks</span>
                                         @endif
