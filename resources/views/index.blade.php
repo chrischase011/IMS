@@ -27,7 +27,7 @@
             top: -350%;
             left:-100px;
             opacity: 0;
-            animation: dissolve 10s ease infinite;
+            animation: dissolve 5 ease infinite;
             height: 450px;
             width: 450px;
             /* margin-top: -390px; */
@@ -53,15 +53,15 @@
         }
 
         img:nth-child(3) {
-            animation-delay: 4s;
+            animation-delay: 2s;
         }
 
         img:nth-child(4) {
-            animation-delay: 6s;
+            animation-delay: 2s;
         }
 
         img:nth-child(5) {
-            animation-delay: 8s;
+            animation-delay: 2s;
         }
     </style>
 
