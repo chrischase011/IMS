@@ -261,7 +261,7 @@
                                                 aria-expanded="false" href="#warehouseManagement"
                                                 id="navbarDropdown"aria-expanded="true">
                                                 <span class="fa fa-box mr-2" aria-hidden="true"></span>
-                                                Warehouse Management
+                                                Warehouse
                                             </a>
 
                                             <ul class="dropdown-menu " aria-labelledby="navbarDropdown"
@@ -269,7 +269,7 @@
                                                 <li class="">
                                                     <a class="dropdown-item" href="{{ route('warehouse.index') }}">
                                                         <span class="fa fa-warehouse mr-2" aria-hidden="true"></span>
-                                                        Warehouse
+                                                        All Warehouses
                                                     </a>
                                                 </li>
                                                 <li class="">
@@ -285,7 +285,7 @@
                                         </li>
                                     @endif
                                     @if (Auth::user()->roles == 6 || Auth::user()->roles == 1)
-                                        <li class="nav-item dropdown">
+                                        <li class="nav-item dropdown d-none">
                                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false" href="#warehouseManagement"
                                                 id="navbarDropdown"aria-expanded="true">
