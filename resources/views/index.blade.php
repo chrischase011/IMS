@@ -27,12 +27,12 @@
             top: -350%;
             left:-100px;
             opacity: 0;
-            animation: dissolve 5 ease infinite;
+            animation: dissolve 2s ease-in-out;
             height: 450px;
             width: 450px;
             /* margin-top: -390px; */
             border-radius: 50% 50% 0 0;
-            transform: rotate(90deg);
+            
         }
 
         @keyframes dissolve {
@@ -46,6 +46,9 @@
             50% {
                 opacity: 0;
             }
+            25% {
+                opacity: 0;
+            }
         }
 
         img:nth-child(2) {
@@ -53,15 +56,15 @@
         }
 
         img:nth-child(3) {
-            animation-delay: 2s;
+            animation-delay: 4s;
         }
 
         img:nth-child(4) {
-            animation-delay: 2s;
+            animation-delay: 6s;
         }
 
         img:nth-child(5) {
-            animation-delay: 2s;
+            animation-delay: 9s;
         }
     </style>
 
@@ -95,12 +98,14 @@
                         <div class="pic-ctn">
                         <img src="{{ URL::asset('assets/images/image-removebg-preview (19).png') }}"  alt=""
                                 class="pic">
-                                <img src="{{ URL::asset('assets/images/image-removebg-preview (21).png') }}" 
-                                alt="" class="pic">
+                                
                                 <img src="{{ URL::asset('assets/images/image-removebg-preview (23).png') }}"  alt=""
                                 class="pic">
                                 <img src="{{ URL::asset('assets/images/image-removebg-preview (24).png') }}" 
-                                alt="" class="pic">    
+                                alt="" class="pic">
+                                <img src="{{ URL::asset('assets/images/image-removebg-preview (21).png') }}" 
+                                alt="" class="pic">
+                                
                         </div>
                     </div>
                 </div>
