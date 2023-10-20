@@ -147,7 +147,7 @@
                                             <li class="">
                                                 <a class="dropdown-item" href="{{ route('orders.index') }}">
                                                     <span class="fa fa-box mr-2" aria-hidden="true"></span>
-                                                    Manage Order
+                                                    Sales Order
                                                 </a>
                                             </li>
                                             <li class="">
@@ -171,18 +171,12 @@
                                         </a>
 
                                         <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-                                            <li class="">
-                                                <a class="dropdown-item" href="{{ route('raw.index') }}">
-                                                    <span class="fa-solid fa-bars-staggered mr-2"
-                                                        aria-hidden="true"></span>
-                                                    All Raw Materials
-                                                </a>
-                                            </li>
+
                                             <li class="">
                                                 <a class="dropdown-item" href="{{ route('raw.create') }}">
                                                     <span class="fa-solid fa-cart-plus mr-2"
                                                         aria-hidden="true"></span>
-                                                    Purchase Raw Material
+                                                    Purchase Order
                                                 </a>
                                             </li>
                                         </ul>
@@ -197,11 +191,35 @@
                                         </a>
                                     </li>
                                     @if (Auth::user()->roles == 6 || Auth::user()->roles == 1)
-                                        <li class="nav-item">
+                                        {{-- <li class="nav-item">
                                             <a class="nav-link" href="{{ route('inventory.index') }}">
                                                 <span class="fa fa-box-open mr-2" aria-hidden="true"></span>
                                                 Inventory
                                             </a>
+                                        </li> --}}
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                                                aria-expanded="false" href="#business-partners" id="navbarDropdown">
+                                                <span class="fa fa-box-open"></span>
+                                                <span class="ml-2">Inventory</span>
+                                            </a>
+
+                                            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                                <li class="">
+                                                    <a class="dropdown-item" href="{{ route('inventory.index') }}">
+                                                        <span class="fa fa-box mr-2" aria-hidden="true"></span>
+                                                        All Inventory
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a class="dropdown-item" href="{{ route('raw.index') }}">
+                                                        <span class="fa-solid fa-bars-staggered mr-2"
+                                                            aria-hidden="true"></span>
+                                                        All Raw Materials
+                                                    </a>
+                                                </li>
+                                            </ul>
+
                                         </li>
                                     @endif
                                     {{--  --}}
@@ -273,7 +291,7 @@
                                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false" href="#activities" id="navbarDropdown">
                                                 <span class="fa fa-bolt"></span>
-                                                <span class="ml-2">Activities</span>
+                                                <span class="ml-2">Production</span>
                                             </a>
 
                                             <ul class="dropdown-menu " aria-labelledby="navbarDropdown">

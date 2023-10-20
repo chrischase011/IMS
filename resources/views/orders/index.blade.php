@@ -141,7 +141,9 @@
                 dataType: 'json',
                 success: (data) => {
                     pageTitle = "Print " + data.order_number;
-                    $(".order_number").text(data.order_number);
+                    $(".order_number").text("Order No.: "+data.order_number);
+                    var tr = data.transaction_number ? "Transaction No.: "+ data.transaction_number : '';
+                    $(".transaction_number").text(tr);
                     $("#customer_name").val(data.customers.firstname + ' ' + data.customers.lastname);
                     $("#customer_email").val(data.customers.email);
                     $("#customer_phone").val(data.customers.phone);
@@ -225,6 +227,8 @@
                 </div>
                 <div class="modal-body">
                     <h2 class="h5 mb-3 order_number"></h2>
+                    <h2 class="h5 mb-3 transaction_number"></h2>
+                    <hr>
                     <div class="row">
                         <h2 class="h5 mb-3">Customer Information</h2>
                         <div class="col-6">
@@ -264,7 +268,7 @@
                                 </div>
                             </div>
 
-                            <div class="row my-3">
+                            <div class="row my-3 d-none">
                                 <label class="col-12">Warehouse</label>
                                 <div class="col-12">
                                     <input type="text" value="" id="warehouse" class="form-control" readonly>
@@ -311,7 +315,7 @@
                         <h2 class="h5 mb-3">Payment</h2>
                         <div class="col-12">
                             <div class="row">
-                                <label class="col-12">Gross Amount</label>
+                                <label class="col-12">Subtotal</label>
                                 <div class="col-12">
                                     <input type="text" id="gross_amount" class="form-control" readonly>
                                 </div>

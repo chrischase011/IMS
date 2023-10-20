@@ -21,5 +21,6 @@ class RoleSeeder extends Seeder
         Roles::updateOrCreate(['slug' => 'sales-employee'], ['name' => 'Sales Employee']);
         Roles::updateOrCreate(['slug' => 'purchase-employee'], ['name' => 'Purchase Employee']);
         Roles::updateOrCreate(['slug' => 'inventory-employee'], ['name' => 'Inventory Employee']);
+        Roles::updateOrCreate(['slug' => 'warehouse-employee'], ['name' => 'Warehouse Employee']);
     }
 }

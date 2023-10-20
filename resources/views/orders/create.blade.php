@@ -184,7 +184,7 @@
                 <div class="col-6">
                     <div class="row">
                         <div class="col-12">
-                            <label>Gross Amount</label>
+                            <label>Subtotal</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">₱</span><input type="number" name="gross_amount"
                                     id="gross_amount" class="form-control" readonly>
