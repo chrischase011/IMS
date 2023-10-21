@@ -11,11 +11,10 @@
     display: inline-block;
     color: rosybrown;
     text-transform: uppercase;
-    animation: waviy 5s linear infinite; /* Change animation-timing-function to linear */
-    animation-delay: calc(0.05s * var(--i)); /* Adjust the delay time for smoother transition */
+    animation: waviy 1s infinite;
+    animation-delay: calc(2s * var(--i));
     margin-top: 80px;
 }
-
 
 .img-logo {
     width: 250px;
