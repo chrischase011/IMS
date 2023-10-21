@@ -102,7 +102,6 @@ class OrdersController extends Controller
             'order_date' => $request->order_date,
             'customer_id' => $request->customer_id,
             'shipping_address' => $request->shipping_address,
-            'warehouse_id' => $request->warehouse_id,
             'printing_service' => $request->printing_services,
             'gross_amount' => $request->gross_amount,
             'vat' => $request->vat,

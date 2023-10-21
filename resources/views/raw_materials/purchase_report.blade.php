@@ -27,9 +27,11 @@
             <div class="col-6 ">
                 <table class="table table-bordered table-striped text-center">
                     <tr>
+                        <th>Purchase No.</th>
                         <th>Date</th>
                     </tr>
                     <tr>
+                        <td>{{ $purchase_no }}</td>
                         <td>{{ date('m/d/Y') }}</td>
                     </tr>
                 </table>
