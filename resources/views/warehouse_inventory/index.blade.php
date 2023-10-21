@@ -20,7 +20,7 @@
         <div class="col-6">
             <a href="{{ route('warehouse.index') }}" class="btn btn-lg btn-light border btn-inventory d-flex align-items-center justify-content-center"><i class="fa fa-warehouse me-2"></i>Manage Warehouse</a>
         </div>
-        <div class="col-6">
+        <div class="col-6 d-none">
             <a href="{{ route('reports.index') }}" class="btn btn-lg btn-light border btn-inventory d-flex align-items-center justify-content-center"><i class="fa fa-chart-line me-2"></i>Reports</a>
         </div>
     </div>
