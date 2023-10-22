@@ -130,6 +130,7 @@
                         data: 'id',
                         render: (e) => {
                             return `<button type='button' onclick="viewEdit(${e})" class='btn btn-info'>Edit</button>
+                            <a href="/raw-materials/reports/${e}" target="_blank" class='btn btn-success'>Purchase Report</a>
                             <button type='button' onclick="deleteRaw(${e})" class='btn btn-danger mx-1'>Delete</button>`;
                         },
                         orderable: false

@@ -72,7 +72,7 @@
                         </div>
                     </div>
 
-                    <div class="row my-3">
+                    <div class="row my-3 d-none">
                         <label class="col-12">Warehouse</label>
                         <select id="warehouse_id" name="warehouse_id" class="form-control">
                             <option value="">-- Select Warehouse -- </option>
@@ -158,16 +158,16 @@
                             <textarea class="form-control my-2" placeholder="Notes" name="printing_notes" id="printing_notes" rows="3" style="resize: none"></textarea>
                             <p class="alert alert-info mt-2">
                                <span class="fw-bold">Printing Service:</span><br>
-                                1 to 5 colors: 50 pesos<br>
-                                6 to 10 colors: 100 pesos<br>
-                                11+: 200 pesos<br>
-                                Dark Colors: 30 pesos<br>
-                                Light Colors: 40 pesos<br>
-                                Combination: 35 pesos<br>
-                                Full Box: 200 pesos<br>
-                                Half Box: 100 pesos<br>
-                                Minimal: 50 pesos<br>
-                                No design<br>
+                               1 to 5 colors + Layout Cost: 50 pesos<br>
+                               6 to 10 colors + Layout Cost: 100 pesos<br>
+                               11+ colors + Layout Cost: 200 pesos<br>
+                               Dark Colors + Layout Cost: 30 pesos<br>
+                               Light Colors + Layout Cost: 40 pesos<br>
+                               Combination + Layout Cost: 35 pesos<br>
+                               Full Box + Layout Cost: 200 pesos<br>
+                               Half Box + Layout Cost: 100 pesos<br>
+                               Minimal + Layout Cost: 50 pesos<br>
+                               No design
                             </p>
                         </div>
                     </div>
@@ -184,7 +184,7 @@
                 <div class="col-6">
                     <div class="row">
                         <div class="col-12">
-                            <label>Gross Amount</label>
+                            <label>Subtotal</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">₱</span><input type="number" name="gross_amount"
                                     id="gross_amount" class="form-control" readonly>

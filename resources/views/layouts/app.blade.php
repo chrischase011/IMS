@@ -17,12 +17,10 @@
     <link href="https://fonts.googleapis.com/css?family=Fira+Mono:400" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css"
         integrity="sha512-LeCmts7kEi09nKc+DwGJqDV+dNQi/W8/qb0oUSsBLzTYiBwxj0KBlAow2//jV7jwEHwSCPShRN2+IWwWcn1x7Q=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> --}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -109,31 +107,119 @@
                                         </a>
                                     </li>
                                     {{--  --}}
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                                            aria-expanded="false" href="#business-partners" id="navbarDropdown">
-                                            <span class="fa fa-box-open"></span>
-                                            <span class="ml-2">Inventory Management</span>
-                                        </a>
+                                    @if (Auth::user()->roles == 1)
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                                                aria-expanded="false" href="#business-partners" id="navbarDropdown">
+                                                <span class="fa fa-user-group"></span>
+                                                <span class="ml-2">Business Partners</span>
+                                            </a>
 
-                                        <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-                                            <li class="">
-                                                <a class="dropdown-item" href="{{ route('products.index') }}">
-                                                    <span class="fa fa-box-open mr-2" aria-hidden="true"></span>
-                                                    Products
-                                                </a>
-                                            </li>
-                                            @if (Auth::user()->roles !== 3)
+                                            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
                                                 <li class="">
-                                                    <a class="dropdown-item" href="{{ route('inventory.index') }}">
-                                                        <span class="fa fa-box-open mr-2" aria-hidden="true"></span>
-                                                        Inventory
+                                                    <a class="dropdown-item" href="{{ route('suppliers.index') }}">
+                                                        <span class="fa fa-box mr-2" aria-hidden="true"></span>
+                                                        Suppliers
                                                     </a>
                                                 </li>
-                                            @endif
-                                        </ul>
+                                                <li class="">
+                                                    <a class="dropdown-item" href="{{ route('management.customers') }}">
+                                                        <span class="fa fa-user mr-2" aria-hidden="true"></span>
+                                                        Customers
+                                                    </a>
+                                                </li>
+                                            </ul>
 
+                                        </li>
+                                    @endif
+
+                                    @if (Auth::user()->roles == 4 || Auth::user()->roles == 1)
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                                                aria-expanded="false" href="#business-partners" id="navbarDropdown">
+                                                <span class="fa fa-user-group"></span>
+                                                <span class="ml-2">Sales</span>
+                                            </a>
+
+                                            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                                <li class="">
+                                                    <a class="dropdown-item" href="{{ route('orders.index') }}">
+                                                        <span class="fa fa-box mr-2" aria-hidden="true"></span>
+                                                        Sales Order
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a class="dropdown-item" href="{{ route('reports.index') }}">
+                                                        <span class="fa-solid fa-chart-line mr-2"
+                                                            aria-hidden="true"></span>
+                                                        Reports
+                                                    </a>
+                                                </li>
+                                            </ul>
+
+                                        </li>
+                                    @endif
+
+                                    @if (Auth::user()->roles == 5 || Auth::user()->roles == 1)
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                                                aria-expanded="false" href="#business-partners" id="navbarDropdown">
+                                                <span class="fa fa-user-group"></span>
+                                                <span class="ml-2">Purchase</span>
+                                            </a>
+
+                                            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+
+                                                <li class="">
+                                                    <a class="dropdown-item" href="{{ route('raw.create') }}">
+                                                        <span class="fa-solid fa-cart-plus mr-2"
+                                                            aria-hidden="true"></span>
+                                                        Purchase Order
+                                                    </a>
+                                                </li>
+                                            </ul>
+
+                                        </li>
+                                    @endif
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('products.index') }}">
+                                            <span class="fa fa-box-open mr-2" aria-hidden="true"></span>
+                                            Products
+                                        </a>
                                     </li>
+                                    @if (Auth::user()->roles == 6 || Auth::user()->roles == 1)
+                                        {{-- <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('inventory.index') }}">
+                                                <span class="fa fa-box-open mr-2" aria-hidden="true"></span>
+                                                Inventory
+                                            </a>
+                                        </li> --}}
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                                                aria-expanded="false" href="#business-partners" id="navbarDropdown">
+                                                <span class="fa fa-box-open"></span>
+                                                <span class="ml-2">Inventory</span>
+                                            </a>
+
+                                            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                                <li class="">
+                                                    <a class="dropdown-item" href="{{ route('inventory.index') }}">
+                                                        <span class="fa fa-box mr-2" aria-hidden="true"></span>
+                                                        All Inventory
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a class="dropdown-item" href="{{ route('raw.index') }}">
+                                                        <span class="fa-solid fa-bars-staggered mr-2"
+                                                            aria-hidden="true"></span>
+                                                        All Raw Materials
+                                                    </a>
+                                                </li>
+                                            </ul>
+
+                                        </li>
+                                    @endif
                                     {{--  --}}
 
 
@@ -169,9 +255,37 @@
                                         </ul>
 
                                     </li>
-
-                                    @if (Auth::user()->roles !== 3)
+                                    @if (Auth::user()->roles == 7 || Auth::user()->roles == 1)
                                         <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                                                aria-expanded="false" href="#warehouseManagement"
+                                                id="navbarDropdown"aria-expanded="true">
+                                                <span class="fa fa-box mr-2" aria-hidden="true"></span>
+                                                Warehouse
+                                            </a>
+
+                                            <ul class="dropdown-menu " aria-labelledby="navbarDropdown"
+                                                aria-expanded="false">
+                                                <li class="">
+                                                    <a class="dropdown-item" href="{{ route('warehouse.index') }}">
+                                                        <span class="fa fa-warehouse mr-2" aria-hidden="true"></span>
+                                                        All Warehouses
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('warehouse_inventory.index') }}">
+                                                        <span class="fa fa-boxes-stacked mr-2" aria-hidden="true"></span>
+                                                        Warehouse Inventory
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+
+                                        </li>
+                                    @endif
+                                    @if (Auth::user()->roles == 6 || Auth::user()->roles == 1)
+                                        <li class="nav-item dropdown d-none">
                                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false" href="#warehouseManagement"
                                                 id="navbarDropdown"aria-expanded="true">
@@ -203,7 +317,7 @@
                                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false" href="#activities" id="navbarDropdown">
                                                 <span class="fa fa-bolt"></span>
-                                                <span class="ml-2">Activities</span>
+                                                <span class="ml-2">Production</span>
                                             </a>
 
                                             <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
@@ -264,85 +378,9 @@
                                                 </li>
                                             </ul>
                                         </li>
-
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                                                aria-expanded="false" href="#business-partners" id="navbarDropdown">
-                                                <span class="fa fa-user-group"></span>
-                                                <span class="ml-2">Business Partners</span>
-                                            </a>
-
-                                            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-                                                <li class="">
-                                                    <a class="dropdown-item" href="{{ route('suppliers.index') }}">
-                                                        <span class="fa fa-box mr-2" aria-hidden="true"></span>
-                                                        Suppliers
-                                                    </a>
-                                                </li>
-                                                <li class="">
-                                                    <a class="dropdown-item" href="{{ route('management.customers') }}">
-                                                        <span class="fa fa-user mr-2" aria-hidden="true"></span>
-                                                        Customers
-                                                    </a>
-                                                </li>
-                                            </ul>
-
-                                        </li>
                                     @endif
 
-                                    @if(Auth::user()->roles == 4 || Auth::user()->roles == 1)
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                                            aria-expanded="false" href="#business-partners" id="navbarDropdown">
-                                            <span class="fa fa-user-group"></span>
-                                            <span class="ml-2">Sales</span>
-                                        </a>
 
-                                        <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-                                            <li class="">
-                                                <a class="dropdown-item" href="{{ route('orders.index') }}">
-                                                    <span class="fa fa-box mr-2" aria-hidden="true"></span>
-                                                    Manage Order
-                                                </a>
-                                            </li>
-                                            <li class="">
-                                                <a class="dropdown-item" href="{{ route('reports.index') }}">
-                                                    <span class="fa-solid fa-chart-line mr-2" aria-hidden="true"></span>
-                                                    Reports
-                                                </a>
-                                            </li>
-                                        </ul>
-
-                                    </li>
-                                    @endif
-
-                                    @if(Auth::user()->roles == 5 || Auth::user()->roles == 1)
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                                            aria-expanded="false" href="#business-partners" id="navbarDropdown">
-                                            <span class="fa fa-user-group"></span>
-                                            <span class="ml-2">Purchase</span>
-                                        </a>
-
-                                        <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-                                            <li class="">
-                                                <a class="dropdown-item" href="{{ route('raw.index') }}">
-                                                    <span class="fa-solid fa-bars-staggered mr-2"
-                                                        aria-hidden="true"></span>
-                                                    All Raw Materials
-                                                </a>
-                                            </li>
-                                            <li class="">
-                                                <a class="dropdown-item" href="{{ route('raw.create') }}">
-                                                    <span class="fa-solid fa-cart-plus mr-2"
-                                                        aria-hidden="true"></span>
-                                                    Purchase Raw Material
-                                                </a>
-                                            </li>
-                                        </ul>
-
-                                    </li>
-                                    @endif
                                 </ul>
                             </div>
                         @endguest

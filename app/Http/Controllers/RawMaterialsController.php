@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\HandlePurchaseNumber;
 use App\Helpers\HandleStockTransaction;
 use App\Models\RawMaterials;
 use App\Models\Suppliers;
@@ -124,5 +125,13 @@ class RawMaterialsController extends Controller
         }
 
         return 1;
+    }
+
+    public function purchaseReport($id)
+    {
+        $report = RawMaterials::with('supplier')->findOrFail($id);
+        $purchase_no = HandlePurchaseNumber::generate($id);
+        // return $report;
+        return view('raw_materials.purchase_report', ['report' => $report, 'purchase_no' => $purchase_no]);
     }
 }

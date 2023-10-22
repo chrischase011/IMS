@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\HandleInvoiceNumber;
 use App\Helpers\HandleOrderNumber;
+use App\Helpers\HandleTransactionNumber;
 use App\Models\Inventory;
 use App\Models\OrderDetails;
 use App\Models\Orders;
@@ -101,7 +102,6 @@ class OrdersController extends Controller
             'order_date' => $request->order_date,
             'customer_id' => $request->customer_id,
             'shipping_address' => $request->shipping_address,
-            'warehouse_id' => $request->warehouse_id,
             'printing_service' => $request->printing_services,
             'gross_amount' => $request->gross_amount,
             'vat' => $request->vat,
@@ -187,6 +187,12 @@ class OrdersController extends Controller
                 $inventory->current_quantity -= $orderDetail->quantity;
                 $inventory->save();
             }
+        }
+
+        if($request->order_status == 3)
+        {
+            if($order->transaction_number == null)
+                $order->transaction_number = HandleTransactionNumber::generate();
         }
 
 

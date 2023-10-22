@@ -274,6 +274,8 @@
                                     <option value="1">Admin</option>
                                     <option value="4">Sales Employee</option>
                                     <option value="5">Purchase Employee</option>
+                                    <option value="6">Inventory Employee</option>
+                                    <option value="7">Warehouse Employee</option>
                                     <option value="3">Customer</option>
                                 </select>
                             </div>
@@ -343,6 +345,8 @@
                                     <option value="1">Admin</option>
                                     <option value="4">Sales Employee</option>
                                     <option value="5">Purchase Employee</option>
+                                    <option value="6">Inventory Employee</option>
+                                    <option value="7">Warehouse Employee</option>
                                     <option value="3">Customer</option>
                                 </select>
                             </div>

@@ -14,12 +14,14 @@
 
         @include('inc.alert')
 
-        <div class="row">
-            <div class="col-12 d-flex justify-content-end">
-                <button type="button" id="btnAddProduct" class="btn btn-primary me-3" title="Add Product"><i
-                        class="fa fa-plus"></i></button>
+        @if (Auth::user()->roles !== 3)
+            <div class="row">
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="button" id="btnAddProduct" class="btn btn-primary me-3" title="Add Product"><i
+                            class="fa fa-plus"></i></button>
+                </div>
             </div>
-        </div>
+        @endif
 
         <div class="row justify-content-center">
             <div class="col-10 table-responsive">
@@ -99,12 +101,10 @@
                         render: (e) => {
                             var role = '{{ Auth::user()->roles }}';
 
-                            if(role != '3')
-                            {
+                            if (role != '3') {
                                 return `<button type='button' onclick="viewEdit(${e})" class='btn btn-info'>Edit</button>
                                 <button type='button' onclick="deleteProduct(${e})" class='btn btn-danger mx-1'>Delete</button>`;
-                            }
-                            else{
+                            } else {
                                 return '';
                             }
 
@@ -487,13 +487,14 @@
                 text: 'Are you sure you want to delete?',
                 icon: 'question',
                 showCancelButton: true
-            }).then((res)=>{
-                if(res.isConfirmed)
-                {
+            }).then((res) => {
+                if (res.isConfirmed) {
                     $.ajax({
                         url: "{{ route('products.delete') }}",
                         type: 'post',
-                        data: {id:id},
+                        data: {
+                            id: id
+                        },
                         dataType: 'html',
                         success: (data) => {
                             table.ajax.reload(null, false);
