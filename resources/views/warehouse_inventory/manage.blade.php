@@ -58,7 +58,7 @@
         <div class="row justify-content-center my-3 border-end">
 
             <div class="col-6 table-responsive py-3">
-                <table class="table table-light table-striped table-bordered" id="table">
+                <table class="table table-stocks table-light table-striped table-bordered" id="table">
                     <thead>
                         <tr>
                             <th colspan="{{ $warehouse->type == 2 ? '5' : '4' }}" class="text-center in">Stock In</th>
@@ -111,7 +111,7 @@
             </div>
 
             <div class="col-6 table-responsive py-3 border-start">
-                <table class="table table-light table-striped table-bordered" id="table">
+                <table class="table table-stocks table-light table-striped table-bordered" id="table">
                     <thead>
                         <tr>
                             <th colspan="{{ $warehouse->type == 2 ? '5' : '4' }}" class="text-center out">Stock Out</th>
@@ -253,6 +253,19 @@
             table = $(".table").DataTable({
                 responsive: true,
                 width: '100%',
+                language: {
+                    loadingRecords: "Fetching Data... Please Wait!"
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+
+            var table_stocks = $(".table-stocks").DataTable({
+                responsive: true,
+                width: '100%',
+                order: [[0, 'desc']],
                 language: {
                     loadingRecords: "Fetching Data... Please Wait!"
                 },
