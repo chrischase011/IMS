@@ -79,11 +79,10 @@ class ManagementController extends Controller
         $user->phone = $request->phone;
         $user->roles = $request->role;
 
-        if($request->password !== "")
+        if($request->password != "")
         {
             $user->password = Hash::make($request->password);
         }
-
         $user->save();
 
         return back()->with('success', 'User account has been updated.');

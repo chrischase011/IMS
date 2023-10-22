@@ -181,13 +181,14 @@
 
                                         </li>
                                     @endif
-
+                                    @if (Auth::user()->roles != 5 )
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('products.index') }}">
                                             <span class="fa fa-box-open mr-2" aria-hidden="true"></span>
                                             Products
                                         </a>
                                     </li>
+                                    @endif
                                     @if (Auth::user()->roles == 6 || Auth::user()->roles == 5 || Auth::user()->roles == 1)
                                         {{-- <li class="nav-item">
                                             <a class="nav-link" href="{{ route('inventory.index') }}">

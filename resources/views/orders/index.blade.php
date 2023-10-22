@@ -149,7 +149,6 @@
                     $("#customer_phone").val(data.customers.phone);
                     $("#order_date").val(moment(data.order_date).format('MMM. D, YYYY'));
                     $("#shipping_address").val(data.shipping_address);
-                    $("#warehouse").val(data.warehouses.name);
 
                     var html = "";
                     $("#productContainer").html();

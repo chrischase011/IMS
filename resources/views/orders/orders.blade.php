@@ -140,7 +140,7 @@
                     $("#shipping_address").val(data.shipping_address);
 
                     var html = "";
-                    $("#productContainer").html();
+                    $("#productContainer").html("");
                     $.each(data.order_details, (i, e) => {
                         var totalPrice = parseFloat(e.unit_price) * parseFloat(e.quantity);
                         html += `
