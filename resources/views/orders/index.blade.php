@@ -165,27 +165,29 @@
                     });
                     $("#productContainer").append(html);
 
-                    switch (data.printing_service) {
-                        case 0:
-                            $("#printing_category").text("No Design");
-                            $("#printing_cost").text("₱0.00");
-                            break;
+                    // switch (data.printing_service) {
+                    //     case 0:
+                    //         $("#printing_category").text("No Design");
+                    //         $("#printing_cost").text("₱0.00");
+                    //         break;
 
-                        case 1:
-                            $("#printing_category").text("Minimal");
-                            $("#printing_cost").text("₱80.00");
-                            break;
+                    //     case 1:
+                    //         $("#printing_category").text("Minimal");
+                    //         $("#printing_cost").text("₱80.00");
+                    //         break;
 
-                        case 2:
-                            $("#printing_category").text("Half Box");
-                            $("#printing_cost").text("₱120.00");
-                            break;
+                    //     case 2:
+                    //         $("#printing_category").text("Half Box");
+                    //         $("#printing_cost").text("₱120.00");
+                    //         break;
 
-                        case 3:
-                            $("#printing_category").text("Full Box");
-                            $("#printing_cost").text("₱200.00");
-                            break;
-                    }
+                    //     case 3:
+                    //         $("#printing_category").text("Full Box");
+                    //         $("#printing_cost").text("₱200.00");
+                    //         break;
+                    // }
+
+                    $("#printing_cost").text("₱"+data.printing_service.toFixed(2));
 
                     $("#gross_amount").val("₱" + data.gross_amount);
                     $("#vat").val("₱" + data.vat);
