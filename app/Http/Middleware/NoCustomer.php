@@ -16,7 +16,7 @@ class NoCustomer
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check() && in_array(Auth::user()->role->slug, ['admin', 'employee', 'sales_employee', 'purchase_employee', 'warehouse_employee', 'inventory_employee']))
+        if(Auth::check() && in_array(Auth::user()->role->slug, ['admin', 'employee', 'sales-employee', 'purchase-employee', 'warehouse-employee', 'inventory-employee']))
             return $next($request);
         return redirect('/');
     }
