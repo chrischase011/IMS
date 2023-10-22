@@ -212,7 +212,7 @@
                                                     </a>
                                                 </li>
                                                 @endif
-                                                @if (Auth::user()->roles == 5 || Auth::user()->roles == 1)
+                                                @if (Auth::user()->roles == 5 || Auth::user()->roles == 6  || Auth::user()->roles == 1)
                                                 <li class="">
                                                     <a class="dropdown-item" href="{{ route('raw.index') }}">
                                                         <span class="fa-solid fa-bars-staggered mr-2"
