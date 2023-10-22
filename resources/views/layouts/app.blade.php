@@ -188,7 +188,7 @@
                                             Products
                                         </a>
                                     </li>
-                                    @if (Auth::user()->roles == 6 || Auth::user()->roles == 1)
+                                    @if (Auth::user()->roles == 6 || Auth::user()->roles == 5 || Auth::user()->roles == 1)
                                         {{-- <li class="nav-item">
                                             <a class="nav-link" href="{{ route('inventory.index') }}">
                                                 <span class="fa fa-box-open mr-2" aria-hidden="true"></span>
@@ -203,12 +203,15 @@
                                             </a>
 
                                             <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                                @if (Auth::user()->roles == 6 || Auth::user()->roles == 1)
                                                 <li class="">
                                                     <a class="dropdown-item" href="{{ route('inventory.index') }}">
                                                         <span class="fa fa-box mr-2" aria-hidden="true"></span>
                                                         All Inventory
                                                     </a>
                                                 </li>
+                                                @endif
+                                                @if (Auth::user()->roles == 5 || Auth::user()->roles == 1)
                                                 <li class="">
                                                     <a class="dropdown-item" href="{{ route('raw.index') }}">
                                                         <span class="fa-solid fa-bars-staggered mr-2"
@@ -216,6 +219,7 @@
                                                         All Raw Materials
                                                     </a>
                                                 </li>
+                                                @endif
                                             </ul>
 
                                         </li>
@@ -284,7 +288,7 @@
 
                                         </li>
                                     @endif
-                                    @if (Auth::user()->roles == 6 || Auth::user()->roles == 1)
+                                    @if (Auth::user()->roles == 7 || Auth::user()->roles == 1)
                                         <li class="nav-item dropdown d-none">
                                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false" href="#warehouseManagement"
