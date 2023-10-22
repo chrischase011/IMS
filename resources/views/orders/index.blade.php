@@ -188,6 +188,7 @@
                     // }
 
                     $("#printing_cost").text("₱"+data.printing_service.toFixed(2));
+                    $("#printing_notes").text(data.printing_notes);
 
                     $("#gross_amount").val("₱" + data.gross_amount);
                     $("#vat").val("₱" + data.vat);
@@ -307,6 +308,7 @@
                         <div class="col-12">
                             <p class="fw-bold" id="printing_category"></p>
                             <p>Cost: <span class="fw-bold" id="printing_cost"></span></p>
+                            <p>Notes: <span class="fw-bold" id="printing_notes"></span></p>
                         </div>
                     </div>
 
