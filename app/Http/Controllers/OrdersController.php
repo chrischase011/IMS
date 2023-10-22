@@ -87,14 +87,14 @@ class OrdersController extends Controller
     public function submitOrder(Request $request)
     {
         $orderNumber = HandleOrderNumber::generate();
-        $warehouse = Warehouse::find($request->warehouse_id);
+        // $warehouse = Warehouse::find($request->warehouse_id);
 
-        if($request->hasFile('printing_image'))
-        {
-            $printing_image = $request->file('printing_image');
-            $data = file_get_contents($printing_image);
-            $base64 = base64_encode($data);
-        }
+        // if($request->hasFile('printing_image'))
+        // {
+        //     $printing_image = $request->file('printing_image');
+        //     $data = file_get_contents($printing_image);
+        //     $base64 = base64_encode($data);
+        // }
 
 
         $order = Orders::create([
@@ -106,7 +106,6 @@ class OrdersController extends Controller
             'gross_amount' => $request->gross_amount,
             'vat' => $request->vat,
             'total_amount' => $request->total_amount,
-            'printing_image' => $base64,
             'printing_notes' => $request->printing_notes,
         ]);
 
@@ -136,7 +135,7 @@ class OrdersController extends Controller
             }
         }
 
-        return redirect()->route('orders.index', ['slug' => $warehouse->slug])->with('success', "New order <b>$orderNumber</b> has been added.");
+        return redirect()->route('orders.index')->with('success', "New order <b>$orderNumber</b> has been added.");
     }
 
 

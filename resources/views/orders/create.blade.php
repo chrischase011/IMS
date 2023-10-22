@@ -154,7 +154,7 @@
                             </select> --}}
                             <input type="number" class="form-control" min="0" id="printing_services"
                                 name="printing_services" value="0" placeholder="Cost"><br>
-                            <input type="file" name="printing_image" id="printing_image">
+                            {{-- <input type="file" name="printing_image" id="printing_image"> --}}
                             <textarea class="form-control my-2" placeholder="Notes" name="printing_notes" id="printing_notes" rows="3" style="resize: none"></textarea>
                             <p class="alert alert-info mt-2">
                                <span class="fw-bold">Printing Service:</span><br>
