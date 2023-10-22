@@ -166,7 +166,7 @@
         <hr>
         <div class="row my-3 justify-content-center">
             <div class="col-10 table-responsive">
-                <table class="table table-light table-striped table-bordered" id="table">
+                <table class="table table-bal table-light table-striped table-bordered" id="table">
                     <thead>
                         <tr>
                             <th colspan="4" class="text-center bal">Product Stock Balance</th>
@@ -207,7 +207,7 @@
         @if ($warehouse->type == 1)
             <div class="row my-3 justify-content-center">
                 <div class="col-10 table-responsive">
-                    <table class="table table-light table-striped table-bordered" id="table">
+                    <table class="table table-bal table-light table-striped table-bordered" id="table">
                         <thead>
                             <tr>
                                 <th colspan="4" class="text-center rawbal">Raw Materials Stock Balance</th>
@@ -250,7 +250,7 @@
 
     <script>
         $(() => {
-            table = $(".table").DataTable({
+            table = $(".table-bal").DataTable({
                 responsive: true,
                 width: '100%',
                 language: {
