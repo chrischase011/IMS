@@ -80,6 +80,7 @@ Route::group(['middleware' => 'noCustomer'], function(){
         Route::post('store', [SuppliersController::class, 'store'])->name('suppliers.store');
         Route::post('getSupplier', [SuppliersController::class, 'getSupplier'])->name('suppliers.getSupplier');
         Route::post('update', [SuppliersController::class, 'update'])->name('suppliers.update');
+        Route::post('deleteSupplier', [SuppliersController::class, 'deleteSupplier'])->name('suppliers.delete');
     });
 
 
