@@ -148,6 +148,28 @@
 
         }
 
+        var deleteSupplier = (id) => {
+            Swal.fire({
+                title: "Delete?",
+                text: "Are you sure you want to delete this supplier?",
+                icon: 'question',
+                showCancelButton: true
+            }).then((res)=>{
+                if(res.isConfirmed)
+                {
+                    $.ajax({
+                        url: "{{ route('suppliers.delete') }}",
+                        type: 'post',
+                        data: {id:id},
+                        dataType: 'html',
+                        success: (data) =>{
+                            table.ajax.reload(false, null);
+                        }
+                    });
+                }
+            });
+        }
+
 
         $(() => {
 

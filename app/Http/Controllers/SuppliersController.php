@@ -50,4 +50,14 @@ class SuppliersController extends Controller
 
         return back()->with('success', 'Supplier has been updated.');
     }
+
+    public function deleteSupplier(Request $request)
+    {
+        $id = $request->id;
+
+        $data = Suppliers::find($id);
+        $data->delete();
+
+        return 1;
+    }
 }
