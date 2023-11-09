@@ -101,8 +101,8 @@
                             @php
                                 $amount = 0;
                             @endphp
-                            Printing Service:
-                            <span class="fw-bold">
+                            Printing Service
+                            <span class="fw-bold d-none">
                                 @switch($order->printing_service)
                                     @case(0)
                                         No Design
@@ -136,7 +136,7 @@
                                 @endswitch
                             </span>
                         </td>
-                        <td>₱{{ number_format($amount, 2) }}</td>
+                        <td>₱{{ number_format($order->printing_service, 2) }}</td>
                     </tr>
                     <tr>
                         <td colspan="4" class="text-end fw-bold">Subtotal</td>
