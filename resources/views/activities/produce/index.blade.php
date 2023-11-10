@@ -68,7 +68,7 @@
 
                     <div class="row my-3 d-none qp">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary">Produce</button>
+                            <button type="submit" id="btnSubmit" class="btn btn-primary">Produce</button>
                         </div>
                     </div>
 
@@ -87,7 +87,7 @@
                 }
             });
 
-
+            var flag = 0;
             $("#list-products").on('change', () => {
                 var id = $("#list-products").val();
 
@@ -112,15 +112,34 @@
                         var appendToDiv = `<p class="h5 pb-3">Product Requirements:</p>`;
 
                         $.each(product, (i, e) => {
-                            appendToDiv += `
+                            if(e.raw_material.availability == 2)
+                            {
+                                appendToDiv += `
+                            <p class="h6">${e.raw_material.name}: <span class="text-danger">Raw material is unavailable.</span></p>
+                        `;
+                                flag++;
+                            }
+                            else{
+                                appendToDiv += `
                             <p class="h6">${e.raw_material.name}: ${e.quantity}</p>
                         `;
+                            }
+
 
 
 
                         });
 
                         $("#req").append(appendToDiv);
+
+                        if(flag > 0)
+                        {
+                            $("#btnSubmit").attr('disabled', true);
+                        }
+                        else
+                        {
+                            $("#btnSubmit").attr('disabled', false);
+                        }
 
                         $(".qp").removeClass("d-none");
 

@@ -22,7 +22,10 @@ class ManagementController extends Controller
 
     public function customerIndex()
     {
-        $customers = User::where('roles', 3)->orderBy('lastname', 'asc')->get();
+        $customers = User::where(function($query){
+            $query->where('roles', 3)
+                ->whereNotNull('email_verified_at');
+        })->orderBy('lastname', 'asc')->get();
 
         return view('management.customers', ['customers' => $customers]);
     }
@@ -98,4 +101,27 @@ class ManagementController extends Controller
 
         return 1;
     }
+
+    public function disableAccount(Request $request)
+    {
+        $id = $request->id;
+
+        $user = User::find($id);
+        $user->status = 0;
+        $user->save();
+
+        return 1;
+    }
+
+    public function enableAccount(Request $request)
+    {
+        $id = $request->id;
+
+        $user = User::find($id);
+        $user->status = 1;
+        $user->save();
+
+        return 1;
+    }
+
 }

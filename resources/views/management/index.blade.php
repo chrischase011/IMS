@@ -34,6 +34,15 @@
                                 <td>{{ $admin->phone }}</td>
                                 <td>{{ date('F d, Y', strtotime($admin->created_at)) }}</td>
                                 <td>
+                                    @if (Auth::id() != $admin->id)
+                                        @if ($admin->status == 1)
+                                            <button type="button" class="btn btn-warning"
+                                                onclick="disableAccount({{ $admin->id }})">Disable</button>
+                                        @else
+                                            <button type="button" class="btn btn-success"
+                                                onclick="enableAccount({{ $admin->id }})">Enable</button>
+                                        @endif
+                                    @endif
                                     <button type="button" class="btn btn-info"
                                         onclick="viewEdit({{ $admin->id }})">Edit</button>
 
@@ -73,6 +82,16 @@
                                 <td>{{ $employee->phone }}</td>
                                 <td>{{ date('F d, Y', strtotime($employee->created_at)) }}</td>
                                 <td>
+                                    @if (Auth::id() != $employee->id)
+                                        @if ($employee->status == 1)
+                                            <button type="button" class="btn btn-warning"
+                                                onclick="disableAccount({{ $employee->id }})">Disable</button>
+                                        @else
+                                            <button type="button" class="btn btn-success"
+                                                onclick="enableAccount({{ $employee->id }})">Enable</button>
+                                        @endif
+                                    @endif
+
                                     <button type="button" class="btn btn-info"
                                         onclick="viewEdit({{ $employee->id }})">Edit</button>
 
@@ -210,6 +229,57 @@
                     });
                 }
             });
+        }
+
+
+        var disableAccount = (id) => {
+
+            Swal.fire({
+                title: "Disable?",
+                text: "Are you sure you want to disable the account of this user?",
+                icon: 'question',
+                showCancelButton: true
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('management.disableAccount') }}",
+                        type: 'post',
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: (data) => {
+                            window.location.reload();
+                        }
+                    });
+                }
+            });
+
+        }
+
+        var enableAccount = (id) => {
+
+            Swal.fire({
+                title: "Enable?",
+                text: "Are you sure you want to enable the account of this user?",
+                icon: 'question',
+                showCancelButton: true
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('management.enableAccount') }}",
+                        type: 'post',
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: (data) => {
+                            window.location.reload();
+                        }
+                    });
+                }
+            });
+
         }
     </script>
 

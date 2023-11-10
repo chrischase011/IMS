@@ -51,6 +51,13 @@ class LoginController extends Controller
             return back()->with('error', "Please verify your email to login.");
         }
 
+        if($user->status !== 1)
+        {
+            HandleLoginActivity::storeActivity($user->email, $request->ip(), $request->userAgent(), 'Disabled account');
+            Auth::logout();
+            return back()->with('error', "Your account has been disabled.");
+        }
+
         HandleLoginActivity::storeActivity($user->email, $request->ip(), $request->userAgent(), 'Successful Login');
         return redirect($this->redirectTo);
     }

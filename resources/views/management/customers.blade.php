@@ -35,6 +35,13 @@
                                 <td>{{ $customer->phone }}</td>
                                 <td>{{ date('F d, Y', strtotime($customer->created_at)) }}</td>
                                 <td>
+                                    @if ($customer->status == 1)
+                                        <button type="button" class="btn btn-warning"
+                                            onclick="disableAccount({{ $customer->id }})">Disable</button>
+                                    @else
+                                        <button type="button" class="btn btn-success"
+                                            onclick="enableAccount({{ $customer->id }})">Enable</button>
+                                    @endif
                                     <button type="button" class="btn btn-info"
                                         onclick="viewEdit({{ $customer->id }})">Edit</button>
                                     <button type="button" class="btn btn-danger"
@@ -132,6 +139,56 @@
                     });
                 }
             });
+        }
+
+        var disableAccount = (id) => {
+
+            Swal.fire({
+                title: "Disable?",
+                text: "Are you sure you want to disable the account of this user?",
+                icon: 'question',
+                showCancelButton: true
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('management.disableAccount') }}",
+                        type: 'post',
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: (data) => {
+                            window.location.reload();
+                        }
+                    });
+                }
+            });
+
+        }
+
+        var enableAccount = (id) => {
+
+            Swal.fire({
+                title: "Enable?",
+                text: "Are you sure you want to enable the account of this user?",
+                icon: 'question',
+                showCancelButton: true
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('management.enableAccount') }}",
+                        type: 'post',
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: (data) => {
+                            window.location.reload();
+                        }
+                    });
+                }
+            });
+
         }
     </script>
 
