@@ -184,6 +184,30 @@
 
             });
 
+            $("#showPass").on('change', function() {
+                var passwordField = $('#frmPassword');
+                var passwordFieldType = passwordField.attr('type');
+
+                passwordFieldType = (passwordFieldType === 'password') ? 'text' : 'password';
+                passwordField.attr('type', passwordFieldType);
+            });
+
+            $("#showPass2").on('change', function() {
+                var passwordField = $('#frmPasswordConfirm');
+                var passwordFieldType = passwordField.attr('type');
+
+                passwordFieldType = (passwordFieldType === 'password') ? 'text' : 'password';
+                passwordField.attr('type', passwordFieldType);
+            });
+
+            $("#showPass3").on('change', function() {
+                var passwordField = $('#editPassword');
+                var passwordFieldType = passwordField.attr('type');
+
+                passwordFieldType = (passwordFieldType === 'password') ? 'text' : 'password';
+                passwordField.attr('type', passwordFieldType);
+            });
+
         });
 
         var viewEdit = (id) => {
@@ -319,6 +343,7 @@
                             <label class="col-12">Password</label>
                             <div class="col-12">
                                 <input type="password" name="password" id="frmPassword" class="form-control" required>
+                                <label><input type="checkbox" id="showPass"> Show Password</label>
                             </div>
                         </div>
 
@@ -327,6 +352,7 @@
                             <div class="col-12">
                                 <input type="password" name="password_confirmation" id="frmPasswordConfirm"
                                     class="form-control">
+                                    <label><input type="checkbox" id="showPass2"> Show Password</label>
                             </div>
                         </div>
 
@@ -398,6 +424,7 @@
                             <label class="col-12">Password</label>
                             <div class="col-12">
                                 <input type="password" name="password" id="editPassword" class="form-control">
+                                <label><input type="checkbox" id="showPass3"> Show Password</label>
                             </div>
                         </div>
 

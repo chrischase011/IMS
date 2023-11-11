@@ -87,6 +87,7 @@
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         required autocomplete="new-password">
+                                        <label><input type="checkbox" id="showPass"> Show Password</label>
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -115,9 +116,11 @@
                                 <label for="password-confirm"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
+
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
                                         name="password_confirmation" required autocomplete="new-password">
+                                        <label><input type="checkbox" id="showPass2"> Show Password</label>
                                 </div>
                             </div>
 
@@ -150,6 +153,22 @@
                     });
                 }
 
+            });
+
+            $("#showPass").on('change', function() {
+                var passwordField = $('#password');
+                var passwordFieldType = passwordField.attr('type');
+
+                passwordFieldType = (passwordFieldType === 'password') ? 'text' : 'password';
+                passwordField.attr('type', passwordFieldType);
+            });
+
+            $("#showPass2").on('change', function() {
+                var passwordField = $('#password-confirm');
+                var passwordFieldType = passwordField.attr('type');
+
+                passwordFieldType = (passwordFieldType === 'password') ? 'text' : 'password';
+                passwordField.attr('type', passwordFieldType);
             });
         });
     </script>
