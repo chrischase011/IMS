@@ -20,9 +20,49 @@
     width: 250px;
 }
 
-.title1
-{
-    font-family: 'Fira Mono', monospace;
+.title1 {
+    font-family: "Fira Mono", monospace;
     color: sandybrown;
     font-size: 62px;
+}
+
+.title2
+{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: sandybrown;
+    font-size: 40px;
+}
+
+.paragraph1{
+   font-family: 'Courier New', Courier, monospace;
+   font-weight: normal;
+   color: white;
+   font-size: 18px;
+}
+
+.text-orange{
+    color: sandybrown;
+}
+
+@media (min-width: 0px) and (max-width: 576.98px) {
+    .waviy {
+        font-size: 20px;
+    }
+    .title1 {
+        font-size: 30px;
+    }
+
+    .title2 {
+        font-size: 28px;
+    }
+
+    .paragraph1 {
+        font-size: 15px;
+    }
+
+    .navbar-brand
+    {
+        font-size: 24px;
+    }
 }

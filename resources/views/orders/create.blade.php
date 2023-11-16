@@ -26,13 +26,16 @@
                 <div class="col-6">
                     <div class="row">
                         <label class="col-12">Customer Name</label>
-                        <select id="customer_id" name="customer_id" class="form-control">
+                        <div class="col-12">
+                            <input type="text" name="customer_name" class="form-control" id="customer_name" required>
+                        </div>
+                        {{-- <select id="customer_id" name="customer_id" class="form-control">
                             <option value="">-- Select Customer -- </option>
                             @foreach ($customers as $customer)
                                 <option value="{{ $customer->id }}">{{ $customer->firstname . ' ' . $customer->lastname }}
                                 </option>
                             @endforeach
-                        </select>
+                        </select> --}}
                         <script>
                             $(() => {
                                 const choices = new Choices("#customer_id", {
@@ -47,13 +50,13 @@
                     <div class="row my-3">
                         <label class="col-12">Customer Phone Number</label>
                         <div class="col-12">
-                            <input type="text" name="customer_phone" id="customer_phone" class="form-control">
+                            <input type="text" name="customer_phone" id="customer_phone" class="form-control" required>
                         </div>
                     </div>
                     <div class="row my-3">
                         <label class="col-12">Customer Email</label>
                         <div class="col-12">
-                            <input type="email" name="customer_email" id="customer_email" class="form-control">
+                            <input type="email" name="customer_email" id="customer_email" class="form-control" required>
                         </div>
                     </div>
                 </div>
@@ -146,28 +149,36 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="col-6">
-                            {{-- <select class="form-control" id="printing_services" name="printing_services">
+                            <select class="form-control" id="printing_services" name="printing_services">
                                 <option value="0">No Design</option>
-                                <option value="1">Minimal</option>
-                                <option value="2">Half Box</option>
-                                <option value="3">Full Box</option>
-                            </select> --}}
-                            <input type="number" class="form-control" min="0" id="printing_services"
-                                name="printing_services" value="0" placeholder="Cost"><br>
+                                <option value="1">Minimal + Layout Cost: 50 pesos</option>
+                                <option value="2">Half Box + Layout Cost: 100 pesos</option>
+                                <option value="3">Full Box + Layout Cost: 200 pesos</option>
+                                <option value="4">Combination + Layout Cost: 35 pesos</option>
+                                <option value="5">Light Colors + Layout Cost: 40 pesos</option>
+                                <option value="6">Dark Colors + Layout Cost: 30 pesos</option>
+                                <option value="7">11+ colors + Layout Cost: 200 pesos</option>
+                                <option value="8">6 to 10 colors + Layout Cost: 100 pesos</option>
+                                <option value="9">1 to 5 colors + Layout Cost: 50 pesos</option>
+                            </select>
+                            <p class="h5 my-3">Cost: <span id="printing_cost" class="fw-bold">₱0.00</span></p>
+                            {{-- <input type="number" class="form-control" min="0" id="printing_services"
+                                name="printing_services" value="0" placeholder="Cost"><br> --}}
                             {{-- <input type="file" name="printing_image" id="printing_image"> --}}
-                            <textarea class="form-control my-2" placeholder="Notes" name="printing_notes" id="printing_notes" rows="3" style="resize: none"></textarea>
+                            {{-- <textarea class="form-control my-2" placeholder="Notes" name="printing_notes" id="printing_notes" rows="3"
+                                style="resize: none"></textarea> --}}
                             <p class="alert alert-info mt-2">
-                               <span class="fw-bold">Printing Service:</span><br>
-                               1 to 5 colors + Layout Cost: 50 pesos<br>
-                               6 to 10 colors + Layout Cost: 100 pesos<br>
-                               11+ colors + Layout Cost: 200 pesos<br>
-                               Dark Colors + Layout Cost: 30 pesos<br>
-                               Light Colors + Layout Cost: 40 pesos<br>
-                               Combination + Layout Cost: 35 pesos<br>
-                               Full Box + Layout Cost: 200 pesos<br>
-                               Half Box + Layout Cost: 100 pesos<br>
-                               Minimal + Layout Cost: 50 pesos<br>
-                               No design
+                                <span class="fw-bold">Printing Service:</span><br>
+                                1 to 5 colors + Layout Cost: 50 pesos<br>
+                                6 to 10 colors + Layout Cost: 100 pesos<br>
+                                11+ colors + Layout Cost: 200 pesos<br>
+                                Dark Colors + Layout Cost: 30 pesos<br>
+                                Light Colors + Layout Cost: 40 pesos<br>
+                                Combination + Layout Cost: 35 pesos<br>
+                                Full Box + Layout Cost: 200 pesos<br>
+                                Half Box + Layout Cost: 100 pesos<br>
+                                Minimal + Layout Cost: 50 pesos<br>
+                                No design
                             </p>
                         </div>
                     </div>
@@ -619,29 +630,59 @@
                 // Subtract the previous printing_cost
                 totalSum -= previous_printing_cost;
 
-                printing_cost = parseFloat(p);
+                // printing_cost = parseFloat(p);
 
-                // switch (p) {
-                //     case "0":
-                //         $("#printing_cost").text("0.00");
-                //         printing_cost = 0;
-                //         break;
+                switch (p) {
+                    case "0":
+                        $("#printing_cost").text("₱0.00");
+                        printing_cost = 0;
+                        break;
 
-                //     case "1":
-                //         $("#printing_cost").text("80.00");
-                //         printing_cost = 80;
-                //         break;
+                    case "1":
+                        $("#printing_cost").text("₱50.00");
+                        printing_cost = 50;
+                        break;
 
-                //     case "2":
-                //         $("#printing_cost").text("120.00");
-                //         printing_cost = 120;
-                //         break;
+                    case "2":
+                        $("#printing_cost").text("₱100.00");
+                        printing_cost = 100;
+                        break;
 
-                //     case "3":
-                //         $("#printing_cost").text("200.00");
-                //         printing_cost = 200;
-                //         break;
-                // }
+                    case "3":
+                        $("#printing_cost").text("₱200.00");
+                        printing_cost = 200;
+                        break;
+
+                    case "4":
+                        $("#printing_cost").text("₱35.00");
+                        printing_cost = 35;
+                        break;
+
+                    case "5":
+                        $("#printing_cost").text("₱40.00");
+                        printing_cost = 40;
+                        break;
+
+                    case "6":
+                        $("#printing_cost").text("₱30.00");
+                        printing_cost = 30;
+                        break;
+
+                    case "7":
+                        $("#printing_cost").text("₱200.00");
+                        printing_cost = 200;
+                        break;
+
+                    case "8":
+                        $("#printing_cost").text("₱100.00");
+                        printing_cost = 100;
+                        break;
+
+                    case "9":
+                        $("#printing_cost").text("₱50.00");
+                        printing_cost = 50;
+                        break;
+                }
 
                 // Update the previous_printing_cost
                 previous_printing_cost = printing_cost;

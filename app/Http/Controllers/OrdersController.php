@@ -100,7 +100,9 @@ class OrdersController extends Controller
         $order = Orders::create([
             'order_number' => $orderNumber,
             'order_date' => $request->order_date,
-            'customer_id' => $request->customer_id,
+            'customer_name' => $request->customer_name,
+            'customer_phone' => $request->customer_phone,
+            'customer_email' => $request->customer_email,
             'shipping_address' => $request->shipping_address,
             'printing_service' => $request->printing_services,
             'gross_amount' => $request->gross_amount,

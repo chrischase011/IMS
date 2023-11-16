@@ -45,7 +45,7 @@
                         @foreach ($orders as $order)
                             <tr>
                                 <td>{{ $order->order_number }}</td>
-                                <td>{{ $order->customers->firstname . ' ' . $order->customers->lastname }}</td>
+                                <td>{{ $order->customer_name }}</td>
                                 <td>₱{{ $order->total_amount }}</td>
                                 <td>{{ date('F d, Y', strtotime($order->created_at)) }}</td>
 
@@ -96,7 +96,8 @@
                                     <a href="{{ route('orders.generateInvoice', ['orderID' => $order->id]) }}"
                                         target="_blank" class="btn btn-success btn-sm" title="Generate Invoice"><i
                                             class="fa fa-print"></i></a>
-                                    <button type="button" class="btn btn-info btn-sm text-white" onclick="manageOrder({{$order->id}})" title="Manage Order"><i
+                                    <button type="button" class="btn btn-info btn-sm text-white"
+                                        onclick="manageOrder({{ $order->id }})" title="Manage Order"><i
                                             class="fa fa-gear"></i></button>
                                 </td>
                             </tr>
@@ -123,7 +124,9 @@
                 language: {
                     loadingRecords: "Fetching Data... Please Wait!"
                 },
-                order: [[0, 'desc']],
+                order: [
+                    [0, 'desc']
+                ],
                 columnDefs: [{
                     orderable: false,
                     target: 6
@@ -141,12 +144,12 @@
                 dataType: 'json',
                 success: (data) => {
                     pageTitle = "Print " + data.order_number;
-                    $(".order_number").text("Order No.: "+data.order_number);
-                    var tr = data.transaction_number ? "Transaction No.: "+ data.transaction_number : '';
+                    $(".order_number").text("Order No.: " + data.order_number);
+                    var tr = data.transaction_number ? "Transaction No.: " + data.transaction_number : '';
                     $(".transaction_number").text(tr);
-                    $("#customer_name").val(data.customers.firstname + ' ' + data.customers.lastname);
-                    $("#customer_email").val(data.customers.email);
-                    $("#customer_phone").val(data.customers.phone);
+                    $("#customer_name").val(data.customer_name);
+                    $("#customer_email").val(data.customer_email);
+                    $("#customer_phone").val(data.customer_phone);
                     $("#order_date").val(moment(data.order_date).format('MMM. D, YYYY'));
                     $("#shipping_address").val(data.shipping_address);
 
@@ -165,29 +168,59 @@
                     });
                     $("#productContainer").append(html);
 
-                    // switch (data.printing_service) {
-                    //     case 0:
-                    //         $("#printing_category").text("No Design");
-                    //         $("#printing_cost").text("₱0.00");
-                    //         break;
+                    switch (data.printing_service) {
+                        case 0:
+                            $("#printing_category").text("No Design");
+                            $("#printing_cost").text("₱0.00");
+                            break;
 
-                    //     case 1:
-                    //         $("#printing_category").text("Minimal");
-                    //         $("#printing_cost").text("₱80.00");
-                    //         break;
+                        case 1:
+                            $("#printing_category").text("Minimal + Layout Cost");
+                            $("#printing_cost").text("₱50.00");
+                            break;
 
-                    //     case 2:
-                    //         $("#printing_category").text("Half Box");
-                    //         $("#printing_cost").text("₱120.00");
-                    //         break;
+                        case 2:
+                            $("#printing_category").text("Half Box + Layout Cost");
+                            $("#printing_cost").text("₱100.00");
+                            break;
 
-                    //     case 3:
-                    //         $("#printing_category").text("Full Box");
-                    //         $("#printing_cost").text("₱200.00");
-                    //         break;
-                    // }
+                        case 3:
+                            $("#printing_category").text("Full Box + Layout Cost");
+                            $("#printing_cost").text("₱200.00");
+                            break;
 
-                    $("#printing_cost").text("₱"+data.printing_service.toFixed(2));
+                        case 4:
+                            $("#printing_category").text("Combination + Layout Cost");
+                            $("#printing_cost").text("₱35.00");
+                            break;
+
+                        case 5:
+                            $("#printing_category").text("Light Colors + Layout Cost");
+                            $("#printing_cost").text("₱40.00");
+                            break;
+
+                        case 6:
+                            $("#printing_category").text("Dark Colors + Layout Cos");
+                            $("#printing_cost").text("₱30.00");
+                            break;
+
+                        case 7:
+                            $("#printing_category").text("11+ colors + Layout Cost");
+                            $("#printing_cost").text("₱200.00");
+                            break;
+
+                        case 8:
+                            $("#printing_category").text("6 to 10 colors + Layout Cost");
+                            $("#printing_cost").text("₱100.00");
+                            break;
+
+                        case 9:
+                            $("#printing_category").text("1 to 5 colors + Layout Cost");
+                            $("#printing_cost").text("₱50.00");
+                            break;
+                    }
+
+                    // $("#printing_cost").text("₱" + data.printing_service);
                     $("#printing_notes").text(data.printing_notes);
 
                     $("#gross_amount").val("₱" + data.gross_amount);
@@ -275,7 +308,7 @@
                                 <div class="col-12">
                                     <input type="text" value="" id="warehouse" class="form-control" readonly>
                                     {{-- <select name="warehouse" id="warehouse" class="form-select" required>
-                                        @foreach($warehouses as $warehouse)
+                                        @foreach ($warehouses as $warehouse)
                                             <option></option>
                                         @endforeach
                                     </select> --}}
@@ -308,7 +341,7 @@
                         <div class="col-12">
                             <p class="fw-bold" id="printing_category"></p>
                             <p>Cost: <span class="fw-bold" id="printing_cost"></span></p>
-                            <p>Notes: <span class="fw-bold" id="printing_notes"></span></p>
+                            {{-- <p>Notes: <span class="fw-bold" id="printing_notes"></span></p> --}}
                         </div>
                     </div>
 

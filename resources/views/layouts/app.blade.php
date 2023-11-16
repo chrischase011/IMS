@@ -61,52 +61,72 @@
     <div id="app">
         <nav class="navbar navbar-expand-lg bg-transparent">
             <div class="container-fluid">
+                <a class="navbar-brand d-none d-md-block" href="{{ route('index') }}">Century Cardboard Box Factory &
+                    Printing
+                    Inc.</a>
 
-                <div class="row w-100">
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-8">
-                                <a class="navbar-brand" href="{{ route('index') }}">Century Cardboard Box Factory & Printing Inc.</a>
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                    aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                            </div>
-                            <div class="col-4 d-flex flex-columns align-items-xenter justify-content-end">
-                                @guest
-                                    <a href="{{ route('login') }}" type="button" class="btn btn-auth mx-5">Login</a>
-                                    <a href="{{ route('register') }}" type="button" class="btn btn-auth2">Register</a>
-                                @else
-                                    <span class="welcome">Welcome {{ Auth::user()->lastname }}!</span>
-                                    <a class="btn btn-auth mx-5" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                <a class="navbar-brand text-wrap text-center fw-bold d-block d-md-none" href="{{ route('index') }}">Century Cardboard Box
+                    Factory & Printing
+                    Inc.</a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                    {{-- <button type="button" class="btn btn-auth mx-5">Logout</button> --}}
-                                @endguest
+                <div class="w-100 mt-3">
+
+                    @guest
+                        <div class="navbar-nav d-inline-block d-md-block mt-auto mb-2 mb-lg-0 order-md-last w-100">
+                            <div class="d-flex justify-content-center justify-content-md-end">
+                                <a href="{{ route('login') }}" class="btn btn-auth mx-2">Login</a>
+                                <a href="{{ route('register') }}" class="btn btn-auth2 mx-2">Register</a>
                             </div>
                         </div>
+                    @else
+                        <div class="navbar-nav d-inline-block d-md-block mt-auto mb-2 mb-lg-0 order-md-last w-100">
+                            <div class="d-flex justify-content-center justify-content-md-end">
+                                <span class="welcome">Welcome, {{ Auth::user()->lastname }}!</span>
+                                <a class="btn btn-auth mx-2" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
 
-                    </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </div>
+                    @endguest
+                </div>
+            </div>
 
-                    <div class="col-12">
-                        @guest
-                        @else
+        </nav>
+
+
+        {{-- 2nd Nav --}}
+        <nav class="navbar navbar-expand-lg bg-transparent">
+            <div class="container-fluid">
+
+                @guest
+                @else
+                    <button class="navbar-toggler btn bg-light " type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon text-white"></span>
+
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                        <div class="navbar-nav me-auto mb-2 mb-lg-0">
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="navbar-nav mt-auto mb-2 mb-lg-0">
+                                <ul class="navbar-nav mx-auto">
+                                    <!-- Add the part below other menus here -->
+                                    <!-- ... -->
+
                                     <li class="nav-item">
                                         <a class="nav-link nav-color" href="{{ route('index') }}">
                                             <span class="fa fa-home mr-2" aria-hidden="true"></span>
                                             Home
                                         </a>
                                     </li>
-                                    {{--  --}}
+
                                     @if (Auth::user()->roles == 1)
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
@@ -123,7 +143,8 @@
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a class="dropdown-item" href="{{ route('management.customers') }}">
+                                                    <a class="dropdown-item d-none"
+                                                        href="{{ route('management.customers') }}">
                                                         <span class="fa fa-user mr-2" aria-hidden="true"></span>
                                                         Customers
                                                     </a>
@@ -181,13 +202,13 @@
 
                                         </li>
                                     @endif
-                                    @if (Auth::user()->roles != 5 )
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('products.index') }}">
-                                            <span class="fa fa-box-open mr-2" aria-hidden="true"></span>
-                                            Products
-                                        </a>
-                                    </li>
+                                    @if (Auth::user()->roles != 5)
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('products.index') }}">
+                                                <span class="fa fa-box-open mr-2" aria-hidden="true"></span>
+                                                Products
+                                            </a>
+                                        </li>
                                     @endif
                                     @if (Auth::user()->roles == 6 || Auth::user()->roles == 5 || Auth::user()->roles == 1)
                                         {{-- <li class="nav-item">
@@ -205,21 +226,21 @@
 
                                             <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
                                                 @if (Auth::user()->roles == 6 || Auth::user()->roles == 1)
-                                                <li class="">
-                                                    <a class="dropdown-item" href="{{ route('inventory.index') }}">
-                                                        <span class="fa fa-box mr-2" aria-hidden="true"></span>
-                                                        All Inventory
-                                                    </a>
-                                                </li>
+                                                    <li class="">
+                                                        <a class="dropdown-item" href="{{ route('inventory.index') }}">
+                                                            <span class="fa fa-box mr-2" aria-hidden="true"></span>
+                                                            All Inventory
+                                                        </a>
+                                                    </li>
                                                 @endif
-                                                @if (Auth::user()->roles == 5 || Auth::user()->roles == 6  || Auth::user()->roles == 1)
-                                                <li class="">
-                                                    <a class="dropdown-item" href="{{ route('raw.index') }}">
-                                                        <span class="fa-solid fa-bars-staggered mr-2"
-                                                            aria-hidden="true"></span>
-                                                        All Raw Materials
-                                                    </a>
-                                                </li>
+                                                @if (Auth::user()->roles == 5 || Auth::user()->roles == 6 || Auth::user()->roles == 1)
+                                                    <li class="">
+                                                        <a class="dropdown-item" href="{{ route('raw.index') }}">
+                                                            <span class="fa-solid fa-bars-staggered mr-2"
+                                                                aria-hidden="true"></span>
+                                                            All Raw Materials
+                                                        </a>
+                                                    </li>
                                                 @endif
                                             </ul>
 
@@ -349,14 +370,14 @@
                                         </li>
                                     @endif
 
-                                    {{-- @if (Auth::user()->roles == 1)
+                                    @if (Auth::user()->roles == 1)
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('reports.index') }}">
                                                 <span class="fa-solid fa-chart-line mr-2" aria-hidden="true"></span>
                                                 Reports
                                             </a>
                                         </li>
-                                    @endif --}}
+                                    @endif
 
                                     @if (Auth::user()->roles == 1)
                                         <li class="nav-item dropdown">
@@ -385,22 +406,20 @@
                                         </li>
                                     @endif
 
-
                                 </ul>
                             </div>
-                        @endguest
-
-                    </div>
-
+                        </div>
+                    @endguest
                 </div>
-
-
             </div>
+
         </nav>
 
-        <main class="py-3">
-            @yield('content')
-        </main>
+    </div>
+
+    <main class="py-3">
+        @yield('content')
+    </main>
     </div>
 </body>
 

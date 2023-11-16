@@ -47,11 +47,10 @@
                     <tr>
                         <td>
                             <div class="w-50">
-                                <span
-                                    class="fw-bold">{{ $order->customers->firstname . ' ' . $order->customers->lastname }}</span><br>
+                                <span class="fw-bold">{{ $order->customer_name }}</span><br>
                                 {{ $order->shipping_address }}<br>
-                                {{ $order->customers->phone }}<br>
-                                {{ $order->customers->email }}
+                                {{ $order->customer_phone }}<br>
+                                {{ $order->customer_email }}
                             </div>
                         </td>
                         <td>
@@ -101,8 +100,8 @@
                             @php
                                 $amount = 0;
                             @endphp
-                            Printing Service
-                            <span class="fw-bold d-none">
+                            Printing Service:
+                            <span class="fw-bold">
                                 @switch($order->printing_service)
                                     @case(0)
                                         No Design
@@ -112,23 +111,65 @@
                                     @break
 
                                     @case(1)
-                                        Minimal
+                                        Minimal + Layout Cost
                                         @php
-                                            $amount = 80;
+                                            $amount = 50;
                                         @endphp
                                     @break
 
                                     @case(2)
-                                        Half Box
+                                        Half Box + Layout Cost
                                         @php
-                                            $amount = 120;
+                                            $amount = 100;
                                         @endphp
                                     @break
 
                                     @case(3)
-                                        Full Box
+                                        Full Box + Layout Cost
                                         @php
-                                            $amount = 200
+                                            $amount = 200;
+                                        @endphp
+                                    @break
+
+                                    @case(4)
+                                        Combination + Layout Cost
+                                        @php
+                                            $amount = 35;
+                                        @endphp
+                                    @break
+
+                                    @case(5)
+                                        Light Colors + Layout Cost
+                                        @php
+                                            $amount = 40;
+                                        @endphp
+                                    @break
+
+                                    @case(6)
+                                        Dark Colors + Layout Cost
+                                        @php
+                                            $amount = 30;
+                                        @endphp
+                                    @break
+
+                                    @case(7)
+                                        11+ colors + Layout Cost
+                                        @php
+                                            $amount = 200;
+                                        @endphp
+                                    @break
+
+                                    @case(8)
+                                        6 to 10 colors + Layout Cost
+                                        @php
+                                            $amount = 100;
+                                        @endphp
+                                    @break
+
+                                    @case(9)
+                                        1 to 5 colors + Layout Cost
+                                        @php
+                                            $amount = 50;
                                         @endphp
                                     @break
 
@@ -136,7 +177,7 @@
                                 @endswitch
                             </span>
                         </td>
-                        <td>₱{{ number_format($order->printing_service, 2) }}</td>
+                        <td>₱{{ number_format($amount, 2) }}</td>
                     </tr>
                     <tr>
                         <td colspan="4" class="text-end fw-bold">Subtotal</td>
