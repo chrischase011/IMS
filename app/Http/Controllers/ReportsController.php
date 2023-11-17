@@ -115,7 +115,27 @@ class ReportsController extends Controller
             }
         }
 
-        // return $yearlyChartData;
-        return view('reports.index', ['counts' => $counts, 'dailySales' => $dailySales, 'monthlySales' => $monthlySales, 'monthlyChartData' => $monthlyChartData, 'yearlyChartData' => $yearlyChartData, 'totalYearlySales' => $totalYearlySales]);
+        // Weekly
+        $startOfWeek = $currentDate->startOfWeek()->toDateString();
+        $endOfWeek = $currentDate->endOfWeek()->toDateString();
+
+
+        $weeklySales = Orders::select(
+            DB::raw('SUM(total_amount) as total_sales'),
+            DB::raw('YEARWEEK(STR_TO_DATE(order_date, "%m/%d/%Y")) as order_week')
+        )
+            ->whereRaw('STR_TO_DATE(order_date, "%m/%d/%Y") BETWEEN ? AND ?', [$startOfWeek, $endOfWeek])
+            ->groupBy('order_week')
+            ->first();
+
+        return view('reports.index', [
+            'counts' => $counts,
+            'dailySales' => $dailySales,
+            'monthlySales' => $monthlySales,
+            'monthlyChartData' => $monthlyChartData,
+            'yearlyChartData' => $yearlyChartData,
+            'totalYearlySales' => $totalYearlySales,
+            'weeklySales' => $weeklySales,
+        ]);
     }
 }
