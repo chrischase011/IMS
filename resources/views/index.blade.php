@@ -12,7 +12,7 @@
 
         .pic-ctn {
             /* width: 80vw;
-                height: 80px; */
+                                                                height: 80px; */
 
         }
 
@@ -119,13 +119,47 @@
 
             </div>
         </div>
-
+        <style>
+            .card-img-top:hover {
+                transition: .5s ease-in;
+                transform: scale(1.05);
+            }
+        </style>
         <div class="row my-5 p-3">
+            <h3 class="title2 fw-bold text-orange">Featured Products</h3>
+            <div class="col-4">
+                <div class="card bg-transparent">
+                    <img src="{{ URL::asset('assets/images/hopia.png') }}" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="h4 card-title text-orange text-center">Hopia Box</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card bg-transparent">
+                    <img src="{{ URL::asset('assets/images/pizza.png') }}" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="h4 card-title text-orange text-center">Pizza Box</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card bg-transparent">
+                    <img src="{{ URL::asset('assets/images/eggpie.png') }}" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="h4 card-title text-orange text-center">Egg Pie Box</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-3 p-3">
             <h3 class="title2 fw-bold text-orange">About Us</h3>
             <div class="col-12">
                 <p class="paragraph1 text-white fst-italic">
                     Starting in 1981, Century Cardboard Box Factory & Printing Inc. is a
-                    successful business that has been in operation for over four (4) decades and its founder is Hun-Yu Tong.<br><br>
+                    successful business that has been in operation for over four (4) decades and its founder is Hun-Yu
+                    Tong.<br><br>
 
                     The company has been producing paperboard boxes for
                     the past four decades. The company's rapid growth and success are a result of its
@@ -167,7 +201,10 @@
         <div class="row my-3 p-3">
             <h3 class="title2 text-orange">Our Location</h3>
             <div class="col-12">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3789.7489282382053!2d120.98903787917446!3d14.64937764933932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b67de5ac9b41%3A0x1635bebe14eb3d77!2sCentury%20Cardboard%20Box%20Factory%20%26%20Printing%20Inc.!5e1!3m2!1sen!2sph!4v1700015722711!5m2!1sen!2sph" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3789.7489282382053!2d120.98903787917446!3d14.64937764933932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b67de5ac9b41%3A0x1635bebe14eb3d77!2sCentury%20Cardboard%20Box%20Factory%20%26%20Printing%20Inc.!5e1!3m2!1sen!2sph!4v1700015722711!5m2!1sen!2sph"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
 
@@ -176,11 +213,13 @@
             <div class="col-12 text-white text-center">
                 <p class="paragraph1">You may contact us through the following:</p>
                 <label class=""><i class="fa fa-phone me-1"></i> +639 12345 6789</label><br>
-                <label class=""><i class="fa fa-envelope me-1"></i> <a href="mailto:centurycardboard@gmail.com" class="text-white text-decoration-none">centurycardboard@gmail.com</a></label><br>
-                <label class=""><i class="fa-brands fa-facebook me-1"></i> <a href="https://www.facebook.com/profile.php?id=61552260894658" class="text-white text-decoration-none">Century Cardboard Box Factory & Printing Inc.</a>
+                <label class=""><i class="fa fa-envelope me-1"></i> <a href="mailto:centurycardboard@gmail.com"
+                        class="text-white text-decoration-none">centurycardboard@gmail.com</a></label><br>
+                <label class=""><i class="fa-brands fa-facebook me-1"></i> <a
+                        href="https://www.facebook.com/profile.php?id=61552260894658"
+                        class="text-white text-decoration-none">Century Cardboard Box Factory & Printing Inc.</a>
             </div>
         </div>
 
     </div>
-
 @endsection
