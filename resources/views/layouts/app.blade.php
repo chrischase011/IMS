@@ -105,52 +105,54 @@
             <div class="container-fluid">
 
                 @guest
-                    <button class="navbar-toggler btn bg-light " type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon text-white"></span>
+                    @if (request()->path() !== 'login' && request()->path() !== 'register')
+                        <button class="navbar-toggler btn bg-light " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon text-white"></span>
 
-                    </button>
+                        </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                        <div class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="navbar-nav mx-auto">
-                                    <li class="nav-item">
-                                        <a class="nav-link nav-color" href="#">
-                                            <span class="fa fa-home mr-2" aria-hidden="true"></span>
-                                            Home
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link nav-color" href="#featured">
-                                            <span class="fa fa-box mr-2" aria-hidden="true"></span>
-                                            Featured Products
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link nav-color" href="#about-us">
-                                            <span class="fa fa-warehouse mr-2" aria-hidden="true"></span>
-                                            About Us
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link nav-color" href="#our-location">
-                                            <span class="fa fa-map mr-2" aria-hidden="true"></span>
-                                            Our Location
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link nav-color" href="#contact-us">
-                                            <span class="fa fa-phone mr-2" aria-hidden="true"></span>
-                                            Contact Us
-                                        </a>
-                                    </li>
-                                </ul>
+                            <div class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav mx-auto">
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-color" href="#">
+                                                <span class="fa fa-home mr-2" aria-hidden="true"></span>
+                                                Home
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-color" href="#featured">
+                                                <span class="fa fa-box mr-2" aria-hidden="true"></span>
+                                                Featured Products
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-color" href="#about-us">
+                                                <span class="fa fa-warehouse mr-2" aria-hidden="true"></span>
+                                                About Us
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-color" href="#our-location">
+                                                <span class="fa fa-map mr-2" aria-hidden="true"></span>
+                                                Our Location
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-color" href="#contact-us">
+                                                <span class="fa fa-phone mr-2" aria-hidden="true"></span>
+                                                Contact Us
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @else
                     <button class="navbar-toggler btn bg-light " type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

@@ -93,6 +93,9 @@
                                     <button type="button" class="btn btn-primary btn-sm"
                                         onclick="viewOrder({{ $order->id }})" title="View Order"><i
                                             class="fa fa-eye"></i></button>
+                                    <a href="{{ route('orders.generateQuotation', ['orderID' => $order->id]) }}"
+                                        target="_blank" class="btn btn-warning btn-sm" title="Generate Quotation"><i
+                                            class="fa fa-quote-left"></i></a>
                                     <a href="{{ route('orders.generateInvoice', ['orderID' => $order->id]) }}"
                                         target="_blank" class="btn btn-success btn-sm" title="Generate Invoice"><i
                                             class="fa fa-print"></i></a>

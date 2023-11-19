@@ -40,7 +40,7 @@ Route::post('/registerUser', [RegisterController::class, 'registerUser'])->name(
 Route::get('verify/{email}/{token}', [ManagementController::class, 'verifyEmail'])->name('management.verifyEmail');
 
 // For Products
-Route::group(['prefix' => 'products'], function(){
+Route::group(['prefix' => 'products'], function () {
     Route::get('/', [ProductsController::class, 'index'])->name('products.index');
     Route::post('store', [ProductsController::class, 'store'])->name('products.store');
     Route::post('getProducts', [ProductsController::class, 'getProducts'])->name('products.getProducts');
@@ -49,17 +49,17 @@ Route::group(['prefix' => 'products'], function(){
     Route::post('delete', [ProductsController::class, 'deleteProduct'])->name('products.delete');
 });
 
-Route::group(['prefix' => 'orders'], function(){
+Route::group(['prefix' => 'orders'], function () {
     Route::get('/orders/list', [OrdersController::class, 'ordersList'])->name('orders.orders');
     Route::post("viewOrder", [OrdersController::class, 'viewOrder'])->name('orders.viewOrder');
     Route::post('manageOrder', [OrdersController::class, 'manageOrder'])->name('orders.manageOrder');
     Route::post('received', [OrdersController::class, 'orderReceived'])->name('orders.received');
 });
 
-Route::group(['middleware' => 'noCustomer'], function(){
+Route::group(['middleware' => 'noCustomer'], function () {
 
     // For Raw Materials
-    Route::group(['prefix' => 'raw-materials'], function(){
+    Route::group(['prefix' => 'raw-materials'], function () {
         Route::get('/', [RawMaterialsController::class, 'index'])->name('raw.index');
         Route::post('/getRawMaterials', [RawMaterialsController::class, 'getRawMaterials'])->name('raw.getRawMaterials');
         Route::post('/store', [RawMaterialsController::class, 'store'])->name('raw.store');
@@ -74,7 +74,7 @@ Route::group(['middleware' => 'noCustomer'], function(){
 
 
     // For Suppliers
-    Route::group(['prefix' => 'suppliers'], function(){
+    Route::group(['prefix' => 'suppliers'], function () {
         Route::get('/', [SuppliersController::class, 'index'])->name('suppliers.index');
         Route::post('getSuppliers', [SuppliersController::class, 'getSuppliers'])->name('suppliers.getSuppliers');
         Route::post('store', [SuppliersController::class, 'store'])->name('suppliers.store');
@@ -85,25 +85,25 @@ Route::group(['middleware' => 'noCustomer'], function(){
 
 
     // For Inventory
-    Route::group(['prefix' => 'inventory'], function(){
+    Route::group(['prefix' => 'inventory'], function () {
         Route::get('/', [InventoryController::class, 'index'])->name('inventory.index');
         Route::post('getProducts', [InventoryController::class, 'getProducts'])->name('inventory.getProducts');
     });
 
     // For Produce
-    Route::group(['prefix' => 'activities/produce'], function(){
+    Route::group(['prefix' => 'activities/produce'], function () {
         Route::get('/', [ProduceController::class, 'index'])->name('produce.index');
         Route::post('produce', [ProduceController::class, 'produce'])->name('produce.produce');
     });
 
     // For Purchase
-    Route::group(['prefix' => 'activities/purchase'], function(){
+    Route::group(['prefix' => 'activities/purchase'], function () {
         Route::get('/', [PurchaseController::class, 'index'])->name('purchase.index');
     });
 
 
     // For Warehouse
-    Route::group(['prefix' => 'warehouse'], function(){
+    Route::group(['prefix' => 'warehouse'], function () {
         Route::get('/', [WarehouseController::class, 'index'])->name('warehouse.index');
         Route::post('store', [WarehouseController::class, 'store'])->name('warehouse.store');
         Route::post('update', [WarehouseController::class, 'update'])->name('warehouse.update');
@@ -113,7 +113,7 @@ Route::group(['middleware' => 'noCustomer'], function(){
     });
 
     // For Warehouse Inventory
-    Route::group(['prefix' => 'warehouse-inventory'], function(){
+    Route::group(['prefix' => 'warehouse-inventory'], function () {
         Route::get('/', [WarehouseInventoryController::class, 'index'])->name('warehouse_inventory.index');
         Route::get('manage/{slug}', [WarehouseInventoryController::class, 'manage'])->name('warehouse_inventory.manage');
         Route::get('manage/inventory/{slug}', [WarehouseInventoryController::class, 'inventory'])->name('warehouse_inventory.inventory');
@@ -125,7 +125,7 @@ Route::group(['middleware' => 'noCustomer'], function(){
     });
 
     // For Orders
-    Route::group(['prefix' => 'orders'], function(){
+    Route::group(['prefix' => 'orders'], function () {
         Route::get('/{slug?}', [OrdersController::class, 'index'])->name('orders.index');
         Route::get('/create/{slug?}', [OrdersController::class, 'createOrder'])->name('orders.create');
         Route::post('/getCustomer', [OrdersController::class, 'getCustomer'])->name('orders.getCustomer');
@@ -133,16 +133,16 @@ Route::group(['middleware' => 'noCustomer'], function(){
         Route::post('/submitOrder', [OrdersController::class, "submitOrder"])->name('orders.submitOrder');
 
         Route::get('generate/invoice/{orderID}', [OrdersController::class, 'generateInvoice'])->name('orders.generateInvoice');
-
+        Route::get('generate/quotation/{orderID}', [OrdersController::class, 'generateQuotation'])->name('orders.generateQuotation');
     });
 
     // For Reports
-    Route::group(['prefix' => 'reports'], function(){
+    Route::group(['prefix' => 'reports'], function () {
         Route::get('/', [ReportsController::class, 'index'])->name('reports.index');
     });
 
     // For Management
-    Route::group(['prefix' => 'management'], function(){
+    Route::group(['prefix' => 'management'], function () {
         Route::get('user', [ManagementController::class, 'index'])->name('management.index');
         Route::post('store', [ManagementController::class, 'store'])->name('management.store');
         Route::post('getUser', [ManagementController::class, 'getUser'])->name('management.getUser');
@@ -154,7 +154,7 @@ Route::group(['middleware' => 'noCustomer'], function(){
     });
 
     // For Logs
-    Route::group(['prefix' => 'user-log'], function(){
+    Route::group(['prefix' => 'user-log'], function () {
         Route::get('/', [UserLogController::class, 'index'])->name('user_log.index');
     });
 });

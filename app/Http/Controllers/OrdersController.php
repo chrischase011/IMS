@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\HandleInvoiceNumber;
 use App\Helpers\HandleOrderNumber;
+use App\Helpers\HandleQuotationNumber;
 use App\Helpers\HandleTransactionNumber;
 use App\Models\Inventory;
 use App\Models\OrderDetails;
@@ -12,6 +13,7 @@ use App\Models\Products;
 use App\Models\Roles;
 use App\Models\User;
 use App\Models\Warehouse;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -155,10 +157,22 @@ class OrdersController extends Controller
     {
 
         $invoice_number = HandleInvoiceNumber::generate($orderID);
-        $order = Orders::with(['customers', 'orderDetails', 'products'])->find($orderID);
+        $order = Orders::with(['orderDetails', 'products'])->find($orderID);
 
 
         return view("orders.invoice", ['order' => $order, 'invoice_number' => $invoice_number]);
+    }
+
+    public function generateQuotation($orderID)
+    {
+
+        $quotation_number = HandleQuotationNumber::generate($orderID);
+        $order = Orders::with(['orderDetails', 'products'])->find($orderID);
+
+        $currentDate = Carbon::now();
+        $validUntil = $currentDate->addDays(7);
+
+        return view("orders.quotation", ['order' => $order, 'quotation_number' => $quotation_number, 'currentDate' => $currentDate, 'validUntil' => $validUntil]);
     }
 
     public function manageOrder(Request $request)
@@ -190,9 +204,8 @@ class OrdersController extends Controller
             }
         }
 
-        if($request->order_status == 3)
-        {
-            if($order->transaction_number == null)
+        if ($request->order_status == 3) {
+            if ($order->transaction_number == null)
                 $order->transaction_number = HandleTransactionNumber::generate();
         }
 
