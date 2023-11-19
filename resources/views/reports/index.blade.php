@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+        integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         body {
             background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg?cs=srgb&dl=pexels-tiger-lily-4483610.jpg&fm=jpg");
@@ -109,6 +112,59 @@
                     </div>
                 </div>
             </div>
+            <style>
+                .bg-pending {
+                    background-color: #d8ea4f;
+                }
+
+                .bg-shipped {
+                    background-color: #4fddea;
+                }
+
+                .bg-delivered {
+                    background-color: #4fea5c;
+                }
+            </style>
+            <div class="col-4 my-3">
+                <div class="card bg-pending text-white">
+                    <div class="card-header">
+                        <p class="card-title text-center h4 fw-bold">Pending Orders</p>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-center fw-bold h4">{{ $counts['pending'] }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 my-3">
+                <div class="card bg-danger text-white">
+                    <div class="card-header">
+                        <p class="card-title text-center h4 fw-bold">Cancelled Orders</p>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-center fw-bold h4">{{ $counts['cancelled'] }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 my-3">
+                <div class="card bg-shipped text-white">
+                    <div class="card-header">
+                        <p class="card-title text-center h4 fw-bold">Shipped Orders</p>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-center fw-bold h4">{{ $counts['shipped'] }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 my-3">
+                <div class="card bg-delivered text-white">
+                    <div class="card-header">
+                        <p class="card-title text-center h4 fw-bold">Delivered Orders</p>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-center fw-bold h4">{{ $counts['delivered'] }}</p>
+                    </div>
+                </div>
+            </div>
             <div class="col-4 my-3 d-none">
                 <div class="card bg-dark text-white">
                     <div class="card-header">
@@ -124,6 +180,8 @@
         <div class="row justify-content-center my-3">
             <div class="col-12">
                 <h3>Monthly Sales Chart</h3>
+                <button type="button" id="btnDownloadMonthly" class="btn btn-sm btn-primary"
+                    title="Download Monthly Sales Chart"><i class="fa fa-download"></i></button>
                 <canvas id="monthlySalesChart"></canvas>
 
                 <script>
@@ -142,7 +200,7 @@
                     });
 
                     var ctx = document.getElementById('monthlySalesChart').getContext('2d');
-                    var chart = new Chart(ctx, {
+                    var monthlyChart = new Chart(ctx, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -170,6 +228,8 @@
         <div class="row justify-content-center my-3">
             <div class="col-12">
                 <h3>Annual Sales Chart</h3>
+                <button type="button" id="btnDownloadYearly" class="btn btn-sm btn-primary"
+                    title="Download Annual Sales Chart"><i class="fa fa-download"></i></button>
                 <canvas id="yearlySalesChart"></canvas>
 
                 <script>
@@ -188,7 +248,7 @@
                     });
 
                     var ctx = document.getElementById('yearlySalesChart').getContext('2d');
-                    var chart = new Chart(ctx, {
+                    var yearlyChart = new Chart(ctx, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -208,7 +268,85 @@
                                 // }
                             ]
                         }
+
                     });
+
+                    $(() => {
+                        $("#btnDownloadMonthly").on('click', function() {
+                            window.jsPDF = window.jspdf.jsPDF;
+
+                            var pdf = new jsPDF();
+
+                            pdf.text("Monthly Sales Chart", pdf.internal.pageSize.width / 2, 10, {
+                                align: 'center'
+                            });
+
+                            var titleHeight = pdf.getTextDimensions("Monthly Sales Chart", {
+                                fontSize: 12
+                            }).h;
+
+                            // Add a margin at the bottom of the title
+                            var titleMarginBottom = 10;
+                            var titlePosition = titleHeight + titleMarginBottom;
+
+                            var imgData = monthlyChart.toBase64Image();
+
+                            var imageSize = calculateImageSize(monthlyChart);
+
+                            pdf.addImage(imgData, 'PNG', 10, titlePosition, imageSize.width, imageSize.height);
+
+                            pdf.save("monthlysales.pdf");
+                        });
+
+                        $("#btnDownloadYearly").on('click', function() {
+                            window.jsPDF = window.jspdf.jsPDF;
+
+                            var pdf = new jsPDF();
+
+                            pdf.text("Annual Sales Chart", pdf.internal.pageSize.width / 2, 10, {
+                                align: 'center'
+                            });
+
+                            var titleHeight = pdf.getTextDimensions("Annual Sales Chart", {
+                                fontSize: 12
+                            }).h;
+
+                            // Add a margin at the bottom of the title
+                            var titleMarginBottom = 10;
+                            var titlePosition = titleHeight + titleMarginBottom;
+
+                            var imgData = yearlyChart.toBase64Image();
+
+                            var imageSize = calculateImageSize(yearlyChart);
+
+                            pdf.addImage(imgData, 'PNG', 10, titlePosition, imageSize.width, imageSize.height);
+
+                            pdf.save("annualsales.pdf");
+                        });
+                    });
+
+                    function calculateImageSize(chart) {
+                        var maxWidth = 180;
+                        var maxHeight = 120;
+
+                        var chartWidth = chart.width;
+                        var chartHeight = chart.height;
+
+                        var aspectRatio = chartWidth / chartHeight;
+
+                        var newWidth = maxWidth;
+                        var newHeight = newWidth / aspectRatio;
+
+                        if (newHeight > maxHeight) {
+                            newHeight = maxHeight;
+                            newWidth = newHeight * aspectRatio;
+                        }
+
+                        return {
+                            width: newWidth,
+                            height: newHeight
+                        };
+                    }
                 </script>
             </div>
         </div>

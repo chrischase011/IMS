@@ -20,6 +20,10 @@ class ReportsController extends Controller
         $cOrders = Orders::count();
         $cSuppliers = Suppliers::count();
         $cCustomers = User::where('roles', 3)->count();
+        $cPending = Orders::where('order_status', 0)->count();
+        $cCancelled = Orders::where('order_status', 4)->count();
+        $cShipped = Orders::where('order_status', 2)->count();
+        $cDelivered = Orders::where('order_status', 3)->count();
 
         $counts = [
             'products' => $cProducts,
@@ -27,6 +31,10 @@ class ReportsController extends Controller
             'orders' => $cOrders,
             'suppliers' => $cSuppliers,
             'customers' => $cCustomers,
+            'pending' => $cPending,
+            'cancelled' => $cCancelled,
+            'shipped' => $cShipped,
+            'delivered' => $cDelivered
         ];
 
         $currentDate = Carbon::now()->format('m/d/Y');
