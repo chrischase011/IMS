@@ -12,7 +12,7 @@
 
         .pic-ctn {
             /* width: 80vw;
-                                                                height: 80px; */
+                                                                            height: 80px; */
 
         }
 
@@ -125,7 +125,7 @@
                 transform: scale(1.05);
             }
         </style>
-        <div class="row my-5 p-3">
+        <div id="featured" class="row my-5 p-3">
             <h3 class="title2 fw-bold text-orange">Featured Products</h3>
             <div class="col-4">
                 <div class="card bg-transparent">
@@ -153,7 +153,7 @@
             </div>
         </div>
 
-        <div class="row my-3 p-3">
+        <div id="about-us" class="row my-3 p-3">
             <h3 class="title2 fw-bold text-orange">About Us</h3>
             <div class="col-12">
                 <p class="paragraph1 text-white fst-italic">
@@ -198,7 +198,7 @@
             </div>
         </div>
 
-        <div class="row my-3 p-3">
+        <div id="our-location" class="row my-3 p-3">
             <h3 class="title2 text-orange">Our Location</h3>
             <div class="col-12">
                 <iframe
@@ -208,7 +208,7 @@
             </div>
         </div>
 
-        <div class="row mt-3 mb-5 p-3">
+        <div id="contact-us" class="row mt-3 mb-5 p-3">
             <h3 class="title2 text-orange">Contact Us</h3>
             <div class="col-12 text-white text-center">
                 <p class="paragraph1">You may contact us through the following:</p>
