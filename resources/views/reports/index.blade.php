@@ -4,6 +4,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
         integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
         body {
             background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg?cs=srgb&dl=pexels-tiger-lily-4483610.jpg&fm=jpg");
@@ -27,7 +28,7 @@
 
     <div class="container bg-white py-3 ">
         <h3>Reports Dashboard</h3>
-        <div class="row justify-content-center py-3">
+        <div id="reportsDashboard" class="row justify-content-center py-3">
             <div class="col-4">
                 <div class="card bg-daily text-white">
                     <div class="card-header">
@@ -124,6 +125,15 @@
                 .bg-delivered {
                     background-color: #4fea5c;
                 }
+
+                @media print {
+
+                    .bg-pending,
+                    .bg-shipped,
+                    .bg-delivered {
+                        background-color: inherit;
+                    }
+                }
             </style>
             <div class="col-4 my-3">
                 <div class="card bg-pending text-white">
@@ -175,6 +185,11 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+
+        <div class="container text-center">
+            <button type="button" id="btnDownloadDashboard" class="btn btn-link">Download Dashboard Reports</button>
         </div>
 
         <div class="row justify-content-center my-3">
@@ -322,6 +337,28 @@
                             pdf.addImage(imgData, 'PNG', 10, titlePosition, imageSize.width, imageSize.height);
 
                             pdf.save("annualsales.pdf");
+                        });
+
+                        $("#btnDownloadDashboard").on('click', () => {
+                            window.jsPDF = window.jspdf.jsPDF;
+                            var element = document.getElementById('reportsDashboard');
+
+
+                            // Use html2canvas to convert the element to an image
+                            html2canvas(element).then(function(canvas) {
+                                var imgData = canvas.toDataURL('image/png');
+
+                                var pdf = new jsPDF('p', 'mm', 'a4');
+
+                                pdf.text("Dashboard Reports", pdf.internal.pageSize.width / 2, 10, {
+                                    align: 'center'
+                                });
+
+                                pdf.addImage(imgData, 'PNG', 0, 20, 210,
+                                    150);
+
+                                pdf.save('dashboardreports.pdf');
+                            });
                         });
                     });
 
