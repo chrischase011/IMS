@@ -34,8 +34,20 @@
                     <div class="card-header">
                         <p class="card-title text-center h4 fw-bold">Daily Sales</p>
                     </div>
-                    <div class="card-body">
+                    <div id="dsBody" class="card-body">
                         <p class="text-center fw-bold h4">₱{{ number_format($dailySales->total_sales, 2) }}</p>
+
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" id="btnDailySales" title="Print"
+                            class="btn btn-link text-white float-end"><i class="fa fa-print"></i></button>
+                        <script>
+                            $("#btnDailySales").on('click', () => {
+                                $("#dsBody").printThis({
+                                    header: "<h3 style='text-align:center'>Daily Sales</h3>"
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -44,12 +56,23 @@
                     <div class="card-header">
                         <p class="card-title text-center h4 fw-bold">Weekly Sales</p>
                     </div>
-                    <div class="card-body">
+                    <div id="wsBody" class="card-body">
                         @if ($weeklySales)
                             <p class="text-center fw-bold h4">₱{{ number_format($weeklySales->total_sales, 2) }}</p>
                         @else
                             <p class="text-center fw-bold h4">₱0.00</p>
                         @endif
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" id="btnWeeklySales" title="Print"
+                            class="btn btn-link text-white float-end"><i class="fa fa-print"></i></button>
+                        <script>
+                            $("#btnWeeklySales").on('click', () => {
+                                $("#wsBody").printThis({
+                                    header: "<h3 style='text-align:center'>Weekly Sales</h3>"
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -58,8 +81,19 @@
                     <div class="card-header">
                         <p class="card-title text-center h4 fw-bold">Monthly Sales</p>
                     </div>
-                    <div class="card-body">
+                    <div id="msBody" class="card-body">
                         <p class="text-center fw-bold h4">₱{{ number_format($monthlySales->total_sales, 2) }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" id="btnMonthlySales" title="Print"
+                            class="btn btn-link text-white float-end"><i class="fa fa-print"></i></button>
+                        <script>
+                            $("#btnMonthlySales").on('click', () => {
+                                $("#msBody").printThis({
+                                    header: "<h3 style='text-align:center'>Monthly Sales</h3>"
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -68,8 +102,19 @@
                     <div class="card-header">
                         <p class="card-title text-center h4 fw-bold">Annual Sales</p>
                     </div>
-                    <div class="card-body">
+                    <div id="asBody" class="card-body">
                         <p class="text-center fw-bold h4">₱{{ number_format($totalYearlySales, 2) }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" id="btnAnnualSales" title="Print"
+                            class="btn btn-link text-white float-end"><i class="fa fa-print"></i></button>
+                        <script>
+                            $("#btnAnnualSales").on('click', () => {
+                                $("#asBody").printThis({
+                                    header: "<h3 style='text-align:center'>Annual Sales</h3>"
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -78,8 +123,19 @@
                     <div class="card-header">
                         <p class="card-title text-center h4 fw-bold">Products</p>
                     </div>
-                    <div class="card-body">
+                    <div id="prBody" class="card-body">
                         <p class="text-center fw-bold h4">{{ $counts['products'] }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" id="btnProductCount" title="Print"
+                            class="btn btn-link text-white float-end"><i class="fa fa-print"></i></button>
+                        <script>
+                            $("#btnProductCount").on('click', () => {
+                                $("#prBody").printThis({
+                                    header: "<h3 style='text-align:center'>Product Count</h3>"
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -88,8 +144,19 @@
                     <div class="card-header">
                         <p class="card-title text-center h4 fw-bold">Raw Materials</p>
                     </div>
-                    <div class="card-body">
+                    <div id="rmBody" class="card-body">
                         <p class="text-center fw-bold h4">{{ $counts['raw_materials'] }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" id="btnRawCount" title="Print" class="btn btn-link text-white float-end"><i
+                                class="fa fa-print"></i></button>
+                        <script>
+                            $("#btnRawCount").on('click', () => {
+                                $("#rmBody").printThis({
+                                    header: "<h3 style='text-align:center'>Raw Materials Count</h3>"
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -98,8 +165,19 @@
                     <div class="card-header">
                         <p class="card-title text-center h4 fw-bold">Orders</p>
                     </div>
-                    <div class="card-body">
+                    <div id="oBody" class="card-body">
                         <p class="text-center fw-bold h4">{{ $counts['orders'] }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" id="btnOrdersCount" title="Print"
+                            class="btn btn-link text-white float-end"><i class="fa fa-print"></i></button>
+                        <script>
+                            $("#btnOrdersCount").on('click', () => {
+                                $("#oBody").printThis({
+                                    header: "<h3 style='text-align:center'>Orders Count</h3>"
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -108,8 +186,19 @@
                     <div class="card-header">
                         <p class="card-title text-center h4 fw-bold">Suppliers</p>
                     </div>
-                    <div class="card-body">
+                    <div id="sBody" class="card-body">
                         <p class="text-center fw-bold h4">{{ $counts['suppliers'] }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" id="btnSuppliersCount" title="Print"
+                            class="btn btn-link text-white float-end"><i class="fa fa-print"></i></button>
+                        <script>
+                            $("#btnSuppliersCount").on('click', () => {
+                                $("#sBody").printThis({
+                                    header: "<h3 style='text-align:center'>Suppliers Count</h3>"
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -140,8 +229,19 @@
                     <div class="card-header">
                         <p class="card-title text-center h4 fw-bold">Pending Orders</p>
                     </div>
-                    <div class="card-body">
+                    <div id="poBody" class="card-body">
                         <p class="text-center fw-bold h4">{{ $counts['pending'] }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" id="btnPendingCount" title="Print"
+                            class="btn btn-link text-white float-end"><i class="fa fa-print"></i></button>
+                        <script>
+                            $("#btnPendingCount").on('click', () => {
+                                $("#poBody").printThis({
+                                    header: "<h3 style='text-align:center'>Pending Orders Count</h3>"
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -150,8 +250,19 @@
                     <div class="card-header">
                         <p class="card-title text-center h4 fw-bold">Cancelled Orders</p>
                     </div>
-                    <div class="card-body">
+                    <div id="cBody" class="card-body">
                         <p class="text-center fw-bold h4">{{ $counts['cancelled'] }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" id="btnCancelledCount" title="Print"
+                            class="btn btn-link text-white float-end"><i class="fa fa-print"></i></button>
+                        <script>
+                            $("#btnCancelledCount").on('click', () => {
+                                $("#cBody").printThis({
+                                    header: "<h3 style='text-align:center'>Cancelled Orders Count</h3>"
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -160,8 +271,19 @@
                     <div class="card-header">
                         <p class="card-title text-center h4 fw-bold">Shipped Orders</p>
                     </div>
-                    <div class="card-body">
+                    <div id="shBody" class="card-body">
                         <p class="text-center fw-bold h4">{{ $counts['shipped'] }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" id="btnShippedCount" title="Print"
+                            class="btn btn-link text-white float-end"><i class="fa fa-print"></i></button>
+                        <script>
+                            $("#btnShippedCount").on('click', () => {
+                                $("#shBody").printThis({
+                                    header: "<h3 style='text-align:center'>Shipped Orders Count</h3>"
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -170,8 +292,19 @@
                     <div class="card-header">
                         <p class="card-title text-center h4 fw-bold">Delivered Orders</p>
                     </div>
-                    <div class="card-body">
+                    <div id="dBody" class="card-body">
                         <p class="text-center fw-bold h4">{{ $counts['delivered'] }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" id="btnDeliveredCount" title="Print"
+                            class="btn btn-link text-white float-end"><i class="fa fa-print"></i></button>
+                        <script>
+                            $("#btnDeliveredCount").on('click', () => {
+                                $("#dBody").printThis({
+                                    header: "<h3 style='text-align:center'>Delivered Orders Count</h3>"
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>

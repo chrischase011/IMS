@@ -136,6 +136,7 @@ class ReportsController extends Controller
             ->groupBy('order_week')
             ->first();
 
+
         return view('reports.index', [
             'counts' => $counts,
             'dailySales' => $dailySales,
