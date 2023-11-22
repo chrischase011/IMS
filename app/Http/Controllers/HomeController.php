@@ -25,4 +25,14 @@ class HomeController extends Controller
     {
         return view('index');
     }
+
+
+    public function product($id)
+    {
+        if ($id > 3) {
+            abort(404);
+        }
+
+        return view('product', ['id' => $id]);
+    }
 }

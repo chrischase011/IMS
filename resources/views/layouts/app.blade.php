@@ -76,7 +76,7 @@
                         <div class="navbar-nav d-inline-block d-md-block mt-auto mb-2 mb-lg-0 order-md-last w-100">
                             <div class="d-flex justify-content-center justify-content-md-end">
                                 <a href="{{ route('login') }}" class="btn btn-auth mx-2">Login</a>
-                                <a href="{{ route('register') }}" class="btn btn-auth2 mx-2">Register</a>
+                                <a href="{{ route('register') }}" class="btn btn-auth2 d-none mx-2">Register</a>
                             </div>
                         </div>
                     @else
@@ -119,31 +119,31 @@
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav mx-auto">
                                         <li class="nav-item">
-                                            <a class="nav-link nav-color" href="#">
+                                            <a class="nav-link nav-color" href="{{ route('index') }}">
                                                 <span class="fa fa-home mr-2" aria-hidden="true"></span>
                                                 Home
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link nav-color" href="#featured">
+                                            <a class="nav-link nav-color" href="{{ route('index') }}#featured">
                                                 <span class="fa fa-box mr-2" aria-hidden="true"></span>
                                                 Featured Products
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link nav-color" href="#about-us">
+                                            <a class="nav-link nav-color" href="{{ route('index') }}#about-us">
                                                 <span class="fa fa-warehouse mr-2" aria-hidden="true"></span>
                                                 About Us
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link nav-color" href="#our-location">
+                                            <a class="nav-link nav-color" href="{{ route('index') }}#our-location">
                                                 <span class="fa fa-map mr-2" aria-hidden="true"></span>
                                                 Our Location
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link nav-color" href="#contact-us">
+                                            <a class="nav-link nav-color" href="{{ route('index') }}#contact-us">
                                                 <span class="fa fa-phone mr-2" aria-hidden="true"></span>
                                                 Contact Us
                                             </a>

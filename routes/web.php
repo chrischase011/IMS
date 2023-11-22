@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\OrdersController;
@@ -36,6 +37,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('in
 Auth::routes();
 
 Route::post('/registerUser', [RegisterController::class, 'registerUser'])->name("auth.registerUser");
+Route::get('/product/{id}', [HomeController::class, 'product'])->name('product');
 
 Route::get('verify/{email}/{token}', [ManagementController::class, 'verifyEmail'])->name('management.verifyEmail');
 

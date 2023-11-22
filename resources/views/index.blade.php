@@ -12,7 +12,7 @@
 
         .pic-ctn {
             /* width: 80vw;
-                                                                            height: 80px; */
+                                                                                                    height: 80px; */
 
         }
 
@@ -129,26 +129,32 @@
             <h3 class="title2 fw-bold text-orange">Featured Products</h3>
             <div class="col-4">
                 <div class="card bg-transparent">
-                    <img src="{{ URL::asset('assets/images/hopia.png') }}" alt="" class="card-img-top">
-                    <div class="card-body">
-                        <h4 class="h4 card-title text-orange text-center">Hopia Box</h4>
-                    </div>
+                    <a href="{{ route('product', ['id' => 1]) }}" class="text-decoration-none">
+                        <img src="{{ URL::asset('assets/images/hopia.png') }}" alt="" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="h4 card-title text-orange text-center">Hopia Box</h4>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="col-4">
                 <div class="card bg-transparent">
-                    <img src="{{ URL::asset('assets/images/pizza.png') }}" alt="" class="card-img-top">
-                    <div class="card-body">
-                        <h4 class="h4 card-title text-orange text-center">Pizza Box</h4>
-                    </div>
+                    <a href="{{ route('product', ['id' => 2]) }}" class="text-decoration-none">
+                        <img src="{{ URL::asset('assets/images/pizza.png') }}" alt="" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="h4 card-title text-orange text-center">Pizza Box</h4>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="col-4">
                 <div class="card bg-transparent">
-                    <img src="{{ URL::asset('assets/images/eggpie.png') }}" alt="" class="card-img-top">
-                    <div class="card-body">
-                        <h4 class="h4 card-title text-orange text-center">Egg Pie Box</h4>
-                    </div>
+                    <a href="{{ route('product', ['id' => 3]) }}" class="text-decoration-none">
+                        <img src="{{ URL::asset('assets/images/eggpie.png') }}" alt="" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="h4 card-title text-orange text-center">Egg Pie Box</h4>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
