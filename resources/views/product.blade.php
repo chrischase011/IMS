@@ -12,7 +12,7 @@
 
         .p-img {
             width: 100%;
-            height: 400px;
+            max-height: 450px;
         }
     </style>
 
