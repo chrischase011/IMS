@@ -3,7 +3,7 @@
 @section('content')
     <style>
         body {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg?cs=srgb&dl=pexels-tiger-lily-4483610.jpg&fm=jpg");
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://www.extensiv.com/hubfs/Skubana/Blog%20Pages/Imported_Blog_Media/boxes%20in%20a%20warehouse-1-Oct-12-2022-05-50-27-23-PM.jpg");
             background-size: cover;
             background-position: center;
             font-family: 'Montserrat', sans-serif;
@@ -89,7 +89,7 @@
                     {
                         data: 'warehouse',
                         render: (e) => {
-                            if(e == null || typeof e == undefined)
+                            if (e == null || typeof e == undefined)
                                 return 'No Warehouse';
 
                             return e.name;
@@ -223,14 +223,16 @@
                         <div class="row my-3">
                             <label class="col-12">Quantity</label>
                             <div class="col-12">
-                                <input type="number" name="quantity" id="quantity" min="1" class="form-control" required>
+                                <input type="number" name="quantity" id="quantity" min="1" class="form-control"
+                                    required>
                             </div>
                         </div>
 
                         <div class="row my-3">
                             <label class="col-12">Price</label>
                             <div class="col-12">
-                                <input type="number" name="price" id="price" min="1" class="form-control" required>
+                                <input type="number" name="price" id="price" min="1" class="form-control"
+                                    required>
                             </div>
                         </div>
 
@@ -313,14 +315,16 @@
                         <div class="row my-3">
                             <label class="col-12">Quantity</label>
                             <div class="col-12">
-                                <input type="number" name="quantity" id="editQuantity" min="1" class="form-control" required>
+                                <input type="number" name="quantity" id="editQuantity" min="1"
+                                    class="form-control" required>
                             </div>
                         </div>
 
                         <div class="row my-3">
                             <label class="col-12">Price</label>
                             <div class="col-12">
-                                <input type="number" name="price" id="editPrice" min="1" class="form-control" required>
+                                <input type="number" name="price" id="editPrice" min="1" class="form-control"
+                                    required>
                             </div>
                         </div>
 
@@ -334,7 +338,8 @@
                         <div class="row my-3">
                             <label class="col-12">Reorder Level</label>
                             <div class="col-12">
-                                <input type="number" name="reorder_level" id="editReorderLevel" class="form-control" required>
+                                <input type="number" name="reorder_level" id="editReorderLevel" class="form-control"
+                                    required>
                             </div>
                         </div>
 

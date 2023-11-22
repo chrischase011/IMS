@@ -3,7 +3,7 @@
 @section('content')
     <style>
         body {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg?cs=srgb&dl=pexels-tiger-lily-4483610.jpg&fm=jpg");
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://png.pngtree.com/thumb_back/fh260/background/20231005/pngtree-d-illustration-of-a-warehouse-or-storage-facility-with-shelves-and-image_13559015.png");
             background-size: cover;
             background-position: center;
             font-family: 'Montserrat', sans-serif;
@@ -118,13 +118,13 @@
 
                             switch (e.warehouse.type) {
                                 case 1:
-                                    return `<button type='button' onclick="manageInventory(${e.id})" class='btn btn-info'>Manage</button> 
-                                    <button type='button' onclick="moveWarehouse(${e.id})" class='btn btn-warning'>Move to Logistic Warehouse</button> 
+                                    return `<button type='button' onclick="manageInventory(${e.id})" class='btn btn-info'>Manage</button>
+                                    <button type='button' onclick="moveWarehouse(${e.id})" class='btn btn-warning'>Move to Logistic Warehouse</button>
                                     <button type='button' onclick="deleteInventory(${e.id})" class='btn btn-danger mx-1'>Delete</button>`;
                                     break;
 
                                 case 2:
-                                    return `<button type='button' onclick="manageInventory(${e.id})" class='btn btn-info'>Manage</button> 
+                                    return `<button type='button' onclick="manageInventory(${e.id})" class='btn btn-info'>Manage</button>
                                 <button type='button' onclick="deleteInventory(${e.id})" class='btn btn-danger mx-1'>Delete</button>`;
                                     break
                             }

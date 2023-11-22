@@ -3,7 +3,7 @@
 @section('content')
     <style>
         body {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg?cs=srgb&dl=pexels-tiger-lily-4483610.jpg&fm=jpg");
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://www.extensiv.com/hubfs/Skubana/Blog%20Pages/Imported_Blog_Media/boxes%20in%20a%20warehouse-1-Oct-12-2022-05-50-27-23-PM.jpg");
             background-size: cover;
             background-position: center;
             font-family: 'Montserrat', sans-serif;

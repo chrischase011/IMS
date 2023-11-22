@@ -3,8 +3,8 @@
 @section('content')
     <style>
         body {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg?cs=srgb&dl=pexels-tiger-lily-4483610.jpg&fm=jpg");
-            background-size: cover;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://png.pngtree.com/thumb_back/fw800/background/20230618/pngtree-fully-stocked-warehouse-rack-3d-rendering-of-cardboard-box-inventory-image_3638745.jpg");
+            background-size: 100% 100%;
             background-position: center;
             font-family: 'Montserrat', sans-serif;
         }
@@ -65,16 +65,15 @@
                     url: "{{ route('inventory.getProducts') }}",
                     type: 'post',
                 },
-                columns: [
-                    {
+                columns: [{
                         data: 'product.name'
                     },
                     {
                         data: 'warehouse.name',
                         render: (e) => {
-                            if(e === null || typeof e === undefined)
+                            if (e === null || typeof e === undefined)
                                 return "No warehouse available";
-                            
+
                             return e;
                         }
                     },
@@ -105,7 +104,7 @@
                         data: 'id',
                         render: (e) => {
                             return '';
-                            return `<button type='button' onclick="moveWarehouse(${e})" class='btn btn-info'>Move to Warehouse</button> 
+                            return `<button type='button' onclick="moveWarehouse(${e})" class='btn btn-info'>Move to Warehouse</button>
                             <button type='button' onclick="deleteRaw(${e})" class='btn btn-danger mx-1'>Delete</button>`;
                         },
                         orderable: false

@@ -3,7 +3,7 @@
 @section('content')
     <style>
         body {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg?cs=srgb&dl=pexels-tiger-lily-4483610.jpg&fm=jpg");
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://png.pngtree.com/background/20231017/original/pngtree-3d-illustration-of-a-forklift-operating-inside-a-warehouse-picture-image_5585931.jpg");
             background-size: cover;
             background-position: center;
             font-family: 'Montserrat', sans-serif;
@@ -109,14 +109,16 @@
             table = $("#table").DataTable({
                 responsive: true,
                 width: '100%',
-                order: [[0, 'desc']],
+                order: [
+                    [0, 'desc']
+                ],
                 language: {
                     loadingRecords: "Fetching Data... Please Wait!"
                 },
                 columnDefs: [{
                     orderable: false,
                     target: 6
-                } ]
+                }]
             });
         });
         var pageTitle = "";
@@ -131,7 +133,7 @@
                 success: (data) => {
                     pageTitle = "Print " + data.order_number;
                     $(".order_number").text(data.order_number);
-                    var tr = data.transaction_number ? "Transaction No.: "+ data.transaction_number : '';
+                    var tr = data.transaction_number ? "Transaction No.: " + data.transaction_number : '';
                     $(".transaction_number").text(tr);
                     $("#customer_name").val(data.customers.firstname + ' ' + data.customers.lastname);
                     $("#customer_email").val(data.customers.email);
@@ -176,7 +178,7 @@
                     //         break;
                     // }
 
-                    $("#printing_cost").text("₱"+data.printing_service.toFixed(2));
+                    $("#printing_cost").text("₱" + data.printing_service.toFixed(2));
                     $("#printing_notes").text(data.printing_notes);
 
                     $("#gross_amount").val("₱" + data.gross_amount);

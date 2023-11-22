@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    body {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://png.pngtree.com/thumb_back/fh260/background/20231005/pngtree-d-illustration-of-a-warehouse-or-storage-facility-with-shelves-and-image_13559015.png");
+        background-size: 100% 100%;
+        background-position: center center;
+        font-family: 'Montserrat', sans-serif;
+        overflow-y: auto;
+    }
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

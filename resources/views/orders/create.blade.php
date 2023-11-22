@@ -3,7 +3,7 @@
 @section('content')
     <style>
         body {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg?cs=srgb&dl=pexels-tiger-lily-4483610.jpg&fm=jpg");
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://png.pngtree.com/background/20231017/original/pngtree-3d-illustration-of-a-forklift-operating-inside-a-warehouse-picture-image_5585931.jpg");
             background-size: cover;
             background-position: center;
             font-family: 'Montserrat', sans-serif;
