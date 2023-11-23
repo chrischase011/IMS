@@ -157,9 +157,11 @@
                     $("#shipping_address").val(data.shipping_address);
 
                     var html = "";
+                    var quantity = 0;
                     $("#productContainer").html("");
                     $.each(data.order_details, (i, e) => {
                         var totalPrice = parseFloat(e.unit_price) * parseFloat(e.quantity);
+                        quantity += parseInt(e.quantity);
                         html += `
                             <tr>
                                 <td>${data.products[i].name}</td>
@@ -171,57 +173,60 @@
                     });
                     $("#productContainer").append(html);
 
+                    var printing_cost = 0;
                     switch (data.printing_service) {
                         case 0:
                             $("#printing_category").text("No Design");
-                            $("#printing_cost").text("₱0.00");
+                            printing_cost = 0 * quantity;
                             break;
 
                         case 1:
-                            $("#printing_category").text("Minimal + Layout Cost");
-                            $("#printing_cost").text("₱50.00");
+                            $("#printing_category").text("Minimal + Layout Cost: 50 pesos");
+                            printing_cost = 50 * quantity;
                             break;
 
                         case 2:
-                            $("#printing_category").text("Half Box + Layout Cost");
-                            $("#printing_cost").text("₱100.00");
+                            $("#printing_category").text("Half Box + Layout Cost: 100 pesos");
+                            printing_cost = 100 * quantity;
                             break;
 
                         case 3:
-                            $("#printing_category").text("Full Box + Layout Cost");
-                            $("#printing_cost").text("₱200.00");
+                            $("#printing_category").text("Full Box + Layout Cost: 200 pesos");
+                            printing_cost = 200 * quantity;
                             break;
 
                         case 4:
-                            $("#printing_category").text("Combination + Layout Cost");
-                            $("#printing_cost").text("₱35.00");
+                            $("#printing_category").text("Combination + Layout Cost: 35 pesos");
+                            printing_cost = 35 * quantity;
                             break;
 
                         case 5:
-                            $("#printing_category").text("Light Colors + Layout Cost");
-                            $("#printing_cost").text("₱40.00");
+                            $("#printing_category").text("Light Colors + Layout Cost: 40 pesos");
+                            printing_cost = 40 * quantity;
                             break;
 
                         case 6:
-                            $("#printing_category").text("Dark Colors + Layout Cos");
-                            $("#printing_cost").text("₱30.00");
+                            $("#printing_category").text("Dark Colors + Layout Cost: 30 pesos");
+                            printing_cost = 30 * quantity;
                             break;
 
                         case 7:
-                            $("#printing_category").text("11+ colors + Layout Cost");
-                            $("#printing_cost").text("₱200.00");
+                            $("#printing_category").text("11+ colors + Layout Cost: 200 pesos");
+                            printing_cost = 200 * quantity;
                             break;
 
                         case 8:
-                            $("#printing_category").text("6 to 10 colors + Layout Cost");
-                            $("#printing_cost").text("₱100.00");
+                            $("#printing_category").text("6 to 10 colors + Layout Cost: 100 pesos");
+                            printing_cost = 100 * quantity;
                             break;
 
                         case 9:
-                            $("#printing_category").text("1 to 5 colors + Layout Cost");
-                            $("#printing_cost").text("₱50.00");
+                            $("#printing_category").text("1 to 5 colors + Layout Cost: 50 pesos");
+                            printing_cost = 50 * quantity;
                             break;
                     }
+
+                    $("#printing_cost").text("₱" + printing_cost.toFixed(2));
 
                     // $("#printing_cost").text("₱" + data.printing_service);
                     $("#printing_notes").text(data.printing_notes);

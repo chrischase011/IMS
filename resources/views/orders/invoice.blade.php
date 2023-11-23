@@ -77,9 +77,11 @@
                     @php
                         $i = 0;
                         $n = 1;
+                        $q = 0;
                     @endphp
 
                     @foreach ($order->orderDetails as $detail)
+                        @php $q += $detail->quantity @endphp
                         <tr>
                             <td>{{ $n++ }}</td>
                             <td>{{ $order->products[$i]->name }}</td>
@@ -177,7 +179,7 @@
                                 @endswitch
                             </span>
                         </td>
-                        <td>₱{{ number_format($amount, 2) }}</td>
+                        <td>₱{{ number_format($amount * $q, 2) }}</td>
                     </tr>
                     <tr>
                         <td colspan="4" class="text-end fw-bold">Subtotal</td>

@@ -240,29 +240,82 @@
                     var vat = 0;
                     var totalAmount = 0;
                     var totalQuantity = 0;
+                    var p = 0;
 
                     function calculate() {
                         totalSum = 0; // Reset totalSum before recalculating
                         totalQuantity = 0;
+                        p = 0;
                         $(".total_price").each(function() {
                             var price = parseFloat($(this).val());
                             totalSum += price;
                         });
 
-
                         $('.quantity').each(function() {
                             totalQuantity += parseInt($(this).val()) || 0;
                         });
+                        // Printing cost
+                        var pr = $("#printing_services").val();
+
+                        if (pr == "")
+                            pr = 0;
+
+                        switch (pr) {
+                            case "0":
+                                printing_cost = 0 * parseInt(totalQuantity);
+                                break;
+
+                            case "1":
+                                printing_cost = 50 * parseInt(totalQuantity);
+                                break;
+
+                            case "2":
+                                printing_cost = 100 * parseInt(totalQuantity);
+                                break;
+
+                            case "3":
+                                printing_cost = 200 * parseInt(totalQuantity);
+                                break;
+
+                            case "4":
+                                printing_cost = 35 * parseInt(totalQuantity);
+                                break;
+
+                            case "5":
+                                printing_cost = 40 * parseInt(totalQuantity);
+                                break;
+
+                            case "6":
+                                printing_cost = 30 * parseInt(totalQuantity);
+                                break;
+
+                            case "7":
+                                printing_cost = 200 * parseInt(totalQuantity);
+                                break;
+
+                            case "8":
+                                printing_cost = 100 * parseInt(totalQuantity);
+                                break;
+
+                            case "9":
+
+                                printing_cost = 50 * parseInt(totalQuantity);
+                                break;
+                        }
 
 
-                        totalSum += (printing_cost * totalQuantity);
+                        $("#printing_cost").text("₱" + printing_cost.toFixed(2));
+
+                        totalSum += (printing_cost);
+
 
                         vat = totalSum * 0.12;
                         totalAmount = totalSum + vat;
 
                         $("#gross_amount").val(totalSum.toFixed(2));
                         $("#vat").val(vat.toFixed(2));
-                        $("#total_amount").val(totalAmount.toFixed(2));
+                        $("#total_amount").val(
+                            totalAmount.toFixed(2));
                     }
 
                     $(() => {
@@ -650,57 +703,48 @@
 
                 switch (p) {
                     case "0":
-                        $("#printing_cost").text("₱0.00");
                         printing_cost = 0 * parseInt(totalQuantity);
                         break;
 
                     case "1":
-                        $("#printing_cost").text("₱50.00");
                         printing_cost = 50 * parseInt(totalQuantity);
                         break;
 
                     case "2":
-                        $("#printing_cost").text("₱100.00");
                         printing_cost = 100 * parseInt(totalQuantity);
                         break;
 
                     case "3":
-                        $("#printing_cost").text("₱200.00");
                         printing_cost = 200 * parseInt(totalQuantity);
                         break;
 
                     case "4":
-                        $("#printing_cost").text("₱35.00");
                         printing_cost = 35 * parseInt(totalQuantity);
                         break;
 
                     case "5":
-                        $("#printing_cost").text("₱40.00");
                         printing_cost = 40 * parseInt(totalQuantity);
                         break;
 
                     case "6":
-                        $("#printing_cost").text("₱30.00");
                         printing_cost = 30 * parseInt(totalQuantity);
                         break;
 
                     case "7":
-                        $("#printing_cost").text("₱200.00");
                         printing_cost = 200 * parseInt(totalQuantity);
                         break;
 
                     case "8":
-                        $("#printing_cost").text("₱100.00");
                         printing_cost = 100 * parseInt(totalQuantity);
                         break;
 
                     case "9":
-                        $("#printing_cost").text("₱50.00");
+
                         printing_cost = 50 * parseInt(totalQuantity);
                         break;
                 }
 
-
+                $("#printing_cost").text("₱" + printing_cost.toFixed(2));
 
                 // Update the previous_printing_cost
                 previous_printing_cost = printing_cost;
