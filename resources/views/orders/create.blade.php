@@ -167,7 +167,7 @@
                             {{-- <input type="file" name="printing_image" id="printing_image"> --}}
                             {{-- <textarea class="form-control my-2" placeholder="Notes" name="printing_notes" id="printing_notes" rows="3"
                                 style="resize: none"></textarea> --}}
-                            <p class="alert alert-info mt-2">
+                            <p class="d-none alert alert-info mt-2">
                                 <span class="fw-bold">Printing Service:</span><br>
                                 1 to 5 colors + Layout Cost: 50 pesos<br>
                                 6 to 10 colors + Layout Cost: 100 pesos<br>
@@ -239,15 +239,23 @@
                     var totalSum = 0;
                     var vat = 0;
                     var totalAmount = 0;
+                    var totalQuantity = 0;
 
                     function calculate() {
                         totalSum = 0; // Reset totalSum before recalculating
+                        totalQuantity = 0;
                         $(".total_price").each(function() {
                             var price = parseFloat($(this).val());
                             totalSum += price;
                         });
 
-                        totalSum += printing_cost;
+
+                        $('.quantity').each(function() {
+                            totalQuantity += parseInt($(this).val()) || 0;
+                        });
+
+
+                        totalSum += (printing_cost * totalQuantity);
 
                         vat = totalSum * 0.12;
                         totalAmount = totalSum + vat;
@@ -630,59 +638,69 @@
                 // Subtract the previous printing_cost
                 totalSum -= previous_printing_cost;
 
+                totalQuantity = 0;
+
+                $('.quantity').each(function() {
+                    totalQuantity += parseInt($(this).val()) || 0;
+                });
+
+                console.log(totalQuantity);
+
                 // printing_cost = parseFloat(p);
 
                 switch (p) {
                     case "0":
                         $("#printing_cost").text("₱0.00");
-                        printing_cost = 0;
+                        printing_cost = 0 * parseInt(totalQuantity);
                         break;
 
                     case "1":
                         $("#printing_cost").text("₱50.00");
-                        printing_cost = 50;
+                        printing_cost = 50 * parseInt(totalQuantity);
                         break;
 
                     case "2":
                         $("#printing_cost").text("₱100.00");
-                        printing_cost = 100;
+                        printing_cost = 100 * parseInt(totalQuantity);
                         break;
 
                     case "3":
                         $("#printing_cost").text("₱200.00");
-                        printing_cost = 200;
+                        printing_cost = 200 * parseInt(totalQuantity);
                         break;
 
                     case "4":
                         $("#printing_cost").text("₱35.00");
-                        printing_cost = 35;
+                        printing_cost = 35 * parseInt(totalQuantity);
                         break;
 
                     case "5":
                         $("#printing_cost").text("₱40.00");
-                        printing_cost = 40;
+                        printing_cost = 40 * parseInt(totalQuantity);
                         break;
 
                     case "6":
                         $("#printing_cost").text("₱30.00");
-                        printing_cost = 30;
+                        printing_cost = 30 * parseInt(totalQuantity);
                         break;
 
                     case "7":
                         $("#printing_cost").text("₱200.00");
-                        printing_cost = 200;
+                        printing_cost = 200 * parseInt(totalQuantity);
                         break;
 
                     case "8":
                         $("#printing_cost").text("₱100.00");
-                        printing_cost = 100;
+                        printing_cost = 100 * parseInt(totalQuantity);
                         break;
 
                     case "9":
                         $("#printing_cost").text("₱50.00");
-                        printing_cost = 50;
+                        printing_cost = 50 * parseInt(totalQuantity);
                         break;
                 }
+
+
 
                 // Update the previous_printing_cost
                 previous_printing_cost = printing_cost;
