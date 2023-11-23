@@ -47,7 +47,7 @@
                                 <td>{{ $order->order_number }}</td>
                                 <td>{{ $order->customer_name }}</td>
                                 <td>₱{{ $order->total_amount }}</td>
-                                <td>{{ date('F d, Y', strtotime($order->created_at)) }}</td>
+                                <td>{{ date('F d, Y', strtotime($order->order_date)) }}</td>
 
 
                                 <td>
