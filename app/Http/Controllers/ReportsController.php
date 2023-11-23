@@ -43,7 +43,7 @@ class ReportsController extends Controller
             DB::raw('SUM(total_amount) as total_sales'),
             DB::raw('COUNT(*) as sales_count')
         )
-            ->where('order_date', $currentDate) // Filter by the current date
+            ->where('order_date', $currentDate)->where('is_paid', 1) // Filter by the current date
             ->first();
 
         $currentDate = now();
@@ -56,7 +56,7 @@ class ReportsController extends Controller
         )
             ->whereRaw("SUBSTRING_INDEX(order_date, '/', -1) = ?", [$year]) // Compare the year part
             ->whereRaw("SUBSTRING_INDEX(order_date, '/', 1) = ?", [$month])   // Compare the month part
-            ->first();
+            ->where('is_paid', 1)->first();
 
         $monthNames = [
             '01' => "January",
@@ -80,7 +80,7 @@ class ReportsController extends Controller
             DB::raw('COUNT(*) as sales_count'),
             DB::raw('SUBSTRING_INDEX(order_date, \'/\', 1) as order_month')
         )
-            ->whereRaw("SUBSTRING_INDEX(order_date, '/', -1) = ?", [$currentYear])
+            ->whereRaw("SUBSTRING_INDEX(order_date, '/', -1) = ?", [$currentYear])->where('is_paid', 1)
             ->groupBy('order_month')
             ->get();
 
@@ -101,7 +101,7 @@ class ReportsController extends Controller
             DB::raw('SUM(total_amount) as total_sales'),
             DB::raw('COUNT(*) as sales_count'),
             DB::raw('SUBSTRING_INDEX(SUBSTRING_INDEX(order_date, \'/\', -1), \' \', -1) as order_year')
-        )
+        )->where('is_paid', 1)
             ->groupBy('order_year')
             ->get();
 
@@ -133,6 +133,7 @@ class ReportsController extends Controller
             DB::raw('YEARWEEK(STR_TO_DATE(order_date, "%m/%d/%Y")) as order_week')
         )
             ->whereRaw('STR_TO_DATE(order_date, "%m/%d/%Y") BETWEEN ? AND ?', [$startOfWeek, $endOfWeek])
+            ->where('is_paid', 1)
             ->groupBy('order_week')
             ->first();
 
